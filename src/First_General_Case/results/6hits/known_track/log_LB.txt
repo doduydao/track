@@ -1,0 +1,139 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/First_General_Case/LP_CPLEX_LB.py
+layers: [0, 2, 4, 6, 8, 10, 12, 14, 0]
+K= 8
+---First constraints---
+---Second, Third and Fourth constraints---
+--- Fifth constraints---
+Model: Track
+ - number of variables: 1327
+   - binary=1296, integer=0, continuous=31
+ - number of constraints: 7648
+   - linear=7648
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 6495 rows and 1081 columns.
+MIP Presolve modified 30384 coefficients.
+Reduced MIP has 1153 rows, 246 columns, and 4062 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (20.84 ticks)
+Found incumbent of value 48.885019 after 0.01 sec. (21.70 ticks)
+Probing time = 0.00 sec. (0.59 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 1153 rows, 246 columns, and 4062 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.33 ticks)
+Probing time = 0.00 sec. (0.59 ticks)
+Clique table members: 36.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (11.08 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           48.8850        0.0000           100.00%
+*     0+    0                           14.5179        0.0000           100.00%
+      0     0        0.0316    97       14.5179        0.0316      364   99.78%
+      0     0        0.0316   100       14.5179      Cuts: 20      434   99.78%
+*     0+    0                            5.7725        0.0316            99.45%
+      0     0        0.0316    82        5.7725      Cuts: 19      523   99.45%
+      0     0        0.0316    89        5.7725       Cuts: 3      567   99.45%
+*     0+    0                            5.4329        0.0316            99.42%
+Detecting symmetries...
+      0     2        0.0316    89        5.4329        0.0316      567   99.42%
+Elapsed time = 0.17 sec. (232.28 ticks, tree = 0.02 MB, solutions = 4)
+*     2+    2                            3.2050        0.0316            99.01%
+*     4+    2                            3.1160        0.0316            98.99%
+*    30+    6                            3.1160        0.0316            98.99%
+   1130   814        cutoff              3.1160        0.0316    29897   98.99%
+*  1370+  960                            0.0326        0.0316             3.09%
+
+Flow cuts applied:  1
+Mixed integer rounding cuts applied:  3
+Lift and project cuts applied:  4
+Gomory fractional cuts applied:  6
+
+Root node processing (before b&c):
+  Real time             =    0.17 sec. (231.91 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.22 sec. (316.95 ticks)
+  Sync time (average)   =    0.06 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.39 sec. (548.86 ticks)
+JobSolveStatus.OPTIMAL_SOLUTION
+var: phi_1_2_1_1 -- value: 1
+var: phi_1_2_2_2 -- value: 1
+var: phi_1_2_3_3 -- value: 1
+var: phi_1_2_4_5 -- value: 1
+var: phi_1_2_5_4 -- value: 1
+var: phi_1_2_6_6 -- value: 1
+var: phi_2_3_1_1 -- value: 1
+var: phi_2_3_2_2 -- value: 1
+var: phi_2_3_3_3 -- value: 1
+var: phi_2_3_4_4 -- value: 1
+var: phi_2_3_5_5 -- value: 1
+var: phi_2_3_6_6 -- value: 1
+var: phi_3_4_1_1 -- value: 1
+var: phi_3_4_2_2 -- value: 1
+var: phi_3_4_3_3 -- value: 1
+var: phi_3_4_4_5 -- value: 1
+var: phi_3_4_5_4 -- value: 1
+var: phi_3_4_6_6 -- value: 1
+var: phi_4_5_1_1 -- value: 1
+var: phi_4_5_2_2 -- value: 1
+var: phi_4_5_3_3 -- value: 1
+var: phi_4_5_4_5 -- value: 1
+var: phi_4_5_5_4 -- value: 1
+var: phi_4_5_6_6 -- value: 1
+var: phi_5_6_1_1 -- value: 1
+var: phi_5_6_2_2 -- value: 1
+var: phi_5_6_3_3 -- value: 1
+var: phi_5_6_4_5 -- value: 1
+var: phi_5_6_5_4 -- value: 1
+var: phi_5_6_6_6 -- value: 1
+var: phi_6_7_1_1 -- value: 1
+var: phi_6_7_2_2 -- value: 1
+var: phi_6_7_3_3 -- value: 1
+var: phi_6_7_4_5 -- value: 1
+var: phi_6_7_5_4 -- value: 1
+var: phi_6_7_6_6 -- value: 1
+var: c_1_1 -- value: 0
+var: c_1_2 -- value: 0
+var: c_1_3 -- value: 0
+var: c_1_4 -- value: 0
+var: c_1_5 -- value: 0
+var: c_1_6 -- value: 0
+var: c_2_1 -- value: 0
+var: c_2_2 -- value: 0
+var: c_2_3 -- value: 0
+var: c_2_4 -- value: 0
+var: c_2_5 -- value: 0
+var: c_2_6 -- value: 0
+var: c_3_1 -- value: 0
+var: c_3_2 -- value: 0
+var: c_3_3 -- value: 0
+var: c_3_4 -- value: 0
+var: c_3_5 -- value: 0
+var: c_3_6 -- value: 0
+var: c_4_1 -- value: 0
+var: c_4_2 -- value: 0
+var: c_4_3 -- value: 0
+var: c_4_4 -- value: 0
+var: c_4_5 -- value: 0
+var: c_4_6 -- value: 0
+var: c_5_1 -- value: 0
+var: c_5_2 -- value: 0
+var: c_5_3 -- value: 0
+var: c_5_4 -- value: 0
+var: c_5_5 -- value: 0
+var: c_5_6 -- value: 0
+var: ob -- value: 0
+
+Process finished with exit code 0

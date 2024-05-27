@@ -1,0 +1,314 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/LP_CPLEX_F2_dao_3.py
+Volume id: 9
+No_layers: 7
+layers: [0, 2, 4, 6, 8, 10, 12, 14, 0]
+K= 8
+---Third constraints---
+---Fourth, Fifth and Sixth constraints---
+--- Seventh and Eighth constraints---
+Model: Track
+ - number of variables: 3183
+   - binary=3135, integer=0, continuous=48
+ - number of constraints: 25240
+   - linear=25240
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 5447 rows and 1728 columns.
+MIP Presolve modified 99776 coefficients.
+Reduced MIP has 19793 rows, 1455 columns, and 65650 nonzeros.
+Reduced MIP has 1408 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (52.71 ticks)
+Found incumbent of value 39649.081985 after 0.05 sec. (78.59 ticks)
+Probing time = 0.00 sec. (4.39 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 19793 rows, 1455 columns, and 65650 nonzeros.
+Reduced MIP has 1408 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (44.24 ticks)
+Probing time = 0.00 sec. (4.39 ticks)
+Clique table members: 55.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.03 sec. (59.80 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                        39649.0820      276.3666            99.30%
+      0     0      276.3666   105    39649.0820      276.3666      413   99.30%
+*     0+    0                         5642.4453      276.3666            95.10%
+      0     0      276.3666    91     5642.4453      Cuts: 22      493   95.10%
+*     0+    0                         4020.1990      276.3666            93.13%
+      0     0      276.3666   101     4020.1990      Cuts: 22      843   93.13%
+*     0+    0                         2718.4582      276.3666            89.83%
+*     0+    0                         2596.7316      276.3666            89.36%
+*     0+    0                         1956.4403      276.3666            85.87%
+*     0+    0                         1933.1865      276.3666            85.70%
+*     0+    0                         1913.1553      276.3666            85.55%
+      0     0  -1.00000e+75     0     1913.1553      276.3666      843   85.55%
+*     0+    0                         1784.7733      276.3666            84.52%
+      0     2      276.3666   101     1784.7733      276.3666      843   84.52%
+Elapsed time = 1.37 sec. (2415.24 ticks, tree = 0.02 MB, solutions = 9)
+*    18+    5                         1601.3716      276.3666            82.74%
+*    26+    5                         1590.5848      276.3666            82.62%
+*    30+    7                         1554.1996      276.3666            82.22%
+     30     7     1031.3544    88     1554.1996      276.3666     1206   82.22%
+*    82+    6                         1551.5230      276.3666            82.19%
+    142   102     1344.0973    89     1551.5230      276.3666     5082   82.19%
+    298   230      350.3973    91     1551.5230      276.3666    11743   82.19%
+    423   329      512.0426    69     1551.5230      276.3666    17415   82.19%
+    544   428      350.3973    87     1551.5230      276.3666    23182   82.19%
+    631   509      276.3666    69     1551.5230      276.3666    28592   82.19%
+*   632+  523                         1543.4128      276.3666            82.09%
+*   643+  466                         1101.3789      276.3666            74.91%
+    727   481      370.9723    63     1101.3789      276.3666    34183   74.91%
+    800   563      832.0059    87     1101.3789      276.3666    39354   74.91%
+*   851+  563                         1092.8548      276.3666            74.71%
+*   873+  563                         1034.7487      276.3666            73.29%
+    897   593     1076.3711    74     1034.7487      276.3666    42757   73.29%
+*   909+  598                         1022.8434      276.3666            72.98%
+*   910+  598                         1008.5176      276.3666            72.60%
+*   936+  611                         1008.5176      276.3666            72.60%
+*   999   644      integral     0      276.3666      276.3666    57339    0.00%
+
+Mixed integer rounding cuts applied:  1
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  14
+
+Root node processing (before b&c):
+  Real time             =    1.36 sec. (2409.50 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    1.91 sec. (3114.95 ticks)
+  Sync time (average)   =    0.40 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    3.27 sec. (5524.45 ticks)
+JobSolveStatus.OPTIMAL_SOLUTION
+var: phi_1_2_1_1 -- value: 1
+var: phi_1_2_1_2 -- value: 0
+var: phi_1_2_1_3 -- value: 0
+var: phi_1_2_1_4 -- value: 0
+var: phi_1_2_1_5 -- value: 0
+var: phi_1_2_2_2 -- value: 1
+var: phi_1_2_2_3 -- value: 0
+var: phi_1_2_2_4 -- value: 0
+var: phi_1_2_2_5 -- value: 0
+var: phi_1_2_2_7 -- value: 0
+var: phi_1_2_3_4 -- value: 1
+var: phi_1_2_3_5 -- value: 0
+var: phi_1_2_4_3 -- value: 1
+var: phi_1_2_4_4 -- value: 0
+var: phi_1_2_4_5 -- value: 0
+var: phi_1_2_5_2 -- value: 0
+var: phi_1_2_5_3 -- value: 0
+var: phi_1_2_5_4 -- value: 0
+var: phi_1_2_5_5 -- value: 1
+var: phi_1_2_5_8 -- value: 0
+var: phi_1_2_6_1 -- value: 0
+var: phi_1_2_6_2 -- value: 0
+var: phi_1_2_6_3 -- value: 0
+var: phi_1_2_6_4 -- value: 0
+var: phi_1_2_6_6 -- value: 1
+var: phi_1_2_7_2 -- value: 0
+var: phi_1_2_7_3 -- value: 0
+var: phi_1_2_7_4 -- value: 0
+var: phi_1_2_8_2 -- value: 0
+var: phi_1_2_8_3 -- value: 0
+var: phi_1_2_8_4 -- value: 0
+var: phi_1_3_2_6 -- value: 0
+var: phi_1_5_2_6 -- value: 0
+var: phi_1_5_6_6 -- value: 0
+var: phi_2_3_1_1 -- value: 1
+var: phi_2_3_1_2 -- value: 0
+var: phi_2_3_1_4 -- value: 0
+var: phi_2_3_1_6 -- value: 0
+var: phi_2_3_2_2 -- value: 1
+var: phi_2_3_2_4 -- value: 0
+var: phi_2_3_3_2 -- value: 0
+var: phi_2_3_3_3 -- value: 1
+var: phi_2_3_3_4 -- value: 0
+var: phi_2_3_3_6 -- value: 0
+var: phi_2_3_4_1 -- value: 0
+var: phi_2_3_4_2 -- value: 0
+var: phi_2_3_4_3 -- value: 0
+var: phi_2_3_4_4 -- value: 1
+var: phi_2_3_4_5 -- value: 0
+var: phi_2_3_4_6 -- value: 0
+var: phi_2_3_4_7 -- value: 0
+var: phi_2_3_4_10 -- value: 0
+var: phi_2_3_4_11 -- value: 0
+var: phi_2_3_5_2 -- value: 0
+var: phi_2_3_5_5 -- value: 1
+var: phi_2_3_5_6 -- value: 0
+var: phi_2_3_6_1 -- value: 0
+var: phi_2_3_6_2 -- value: 0
+var: phi_2_3_6_4 -- value: 0
+var: phi_2_3_6_6 -- value: 1
+var: phi_2_3_7_1 -- value: 0
+var: phi_2_3_7_4 -- value: 0
+var: phi_2_3_7_5 -- value: 0
+var: phi_2_3_7_6 -- value: 0
+var: phi_2_3_7_8 -- value: 0
+var: phi_2_3_7_9 -- value: 0
+var: phi_2_3_7_12 -- value: 0
+var: phi_2_3_8_1 -- value: 0
+var: phi_2_3_8_2 -- value: 0
+var: phi_2_3_8_4 -- value: 0
+var: phi_2_3_8_5 -- value: 0
+var: phi_2_3_8_6 -- value: 0
+var: phi_2_4_7_6 -- value: 0
+var: phi_2_5_6_6 -- value: 0
+var: phi_3_4_1_1 -- value: 0
+var: phi_3_4_1_2 -- value: 1
+var: phi_3_4_2_1 -- value: 1
+var: phi_3_4_2_2 -- value: 0
+var: phi_3_4_2_3 -- value: 0
+var: phi_3_4_2_5 -- value: 0
+var: phi_3_4_3_1 -- value: 0
+var: phi_3_4_3_2 -- value: 0
+var: phi_3_4_3_4 -- value: 1
+var: phi_3_4_3_5 -- value: 0
+var: phi_3_4_4_1 -- value: 0
+var: phi_3_4_4_2 -- value: 0
+var: phi_3_4_4_3 -- value: 1
+var: phi_3_4_4_5 -- value: 0
+var: phi_3_4_5_2 -- value: 0
+var: phi_3_4_5_5 -- value: 1
+var: phi_3_4_6_2 -- value: 0
+var: phi_3_4_6_6 -- value: 1
+var: phi_3_4_7_1 -- value: 0
+var: phi_3_4_7_2 -- value: 0
+var: phi_3_4_7_3 -- value: 0
+var: phi_3_4_7_5 -- value: 0
+var: phi_3_4_8_1 -- value: 0
+var: phi_3_4_8_2 -- value: 0
+var: phi_3_4_8_3 -- value: 0
+var: phi_3_4_8_5 -- value: 0
+var: phi_3_4_9_1 -- value: 0
+var: phi_3_4_9_2 -- value: 0
+var: phi_3_4_9_3 -- value: 0
+var: phi_3_4_9_5 -- value: 0
+var: phi_3_4_10_1 -- value: 0
+var: phi_3_4_10_2 -- value: 0
+var: phi_3_4_10_3 -- value: 0
+var: phi_3_4_10_5 -- value: 0
+var: phi_3_4_10_8 -- value: 0
+var: phi_3_4_10_9 -- value: 0
+var: phi_3_4_10_10 -- value: 0
+var: phi_3_4_11_1 -- value: 0
+var: phi_3_4_11_2 -- value: 0
+var: phi_3_4_11_3 -- value: 0
+var: phi_3_4_11_5 -- value: 0
+var: phi_3_4_12_1 -- value: 0
+var: phi_3_4_12_2 -- value: 0
+var: phi_3_4_12_3 -- value: 0
+var: phi_3_4_12_5 -- value: 0
+var: phi_3_5_6_6 -- value: 0
+var: phi_4_5_1_1 -- value: 1
+var: phi_4_5_1_4 -- value: 0
+var: phi_4_5_2_1 -- value: 0
+var: phi_4_5_2_2 -- value: 1
+var: phi_4_5_3_1 -- value: 0
+var: phi_4_5_3_4 -- value: 1
+var: phi_4_5_4_3 -- value: 1
+var: phi_4_5_4_4 -- value: 0
+var: phi_4_5_5_1 -- value: 0
+var: phi_4_5_5_5 -- value: 1
+var: phi_4_5_6_2 -- value: 0
+var: phi_4_5_6_5 -- value: 0
+var: phi_4_5_6_6 -- value: 1
+var: phi_4_5_8_1 -- value: 0
+var: phi_4_5_8_4 -- value: 0
+var: phi_4_5_9_7 -- value: 0
+var: phi_4_5_9_8 -- value: 0
+var: phi_4_5_10_1 -- value: 0
+var: phi_4_5_10_4 -- value: 0
+var: phi_4_6_4_3 -- value: 0
+var: phi_4_6_4_4 -- value: 0
+var: phi_5_6_1_2 -- value: 1
+var: phi_5_6_1_7 -- value: 0
+var: phi_5_6_2_1 -- value: 1
+var: phi_5_6_3_2 -- value: 0
+var: phi_5_6_3_3 -- value: 0
+var: phi_5_6_3_4 -- value: 1
+var: phi_5_6_3_7 -- value: 0
+var: phi_5_6_3_8 -- value: 0
+var: phi_5_6_3_9 -- value: 0
+var: phi_5_6_3_10 -- value: 0
+var: phi_5_6_4_2 -- value: 0
+var: phi_5_6_4_3 -- value: 1
+var: phi_5_6_5_5 -- value: 1
+var: phi_5_6_6_6 -- value: 1
+var: phi_5_6_7_2 -- value: 0
+var: phi_5_6_7_3 -- value: 0
+var: phi_5_6_7_4 -- value: 0
+var: phi_5_6_8_2 -- value: 0
+var: phi_5_6_8_3 -- value: 0
+var: phi_6_7_1_1 -- value: 1
+var: phi_6_7_2_2 -- value: 1
+var: phi_6_7_3_3 -- value: 1
+var: phi_6_7_3_4 -- value: 0
+var: phi_6_7_4_2 -- value: 0
+var: phi_6_7_4_3 -- value: 0
+var: phi_6_7_4_4 -- value: 1
+var: phi_6_7_5_5 -- value: 1
+var: phi_6_7_6_6 -- value: 1
+var: phi_6_7_7_3 -- value: 0
+var: phi_6_7_8_3 -- value: 0
+var: phi_6_7_9_3 -- value: 0
+var: phi_6_7_10_3 -- value: 0
+var: c_1_1 -- value: 0
+var: c_1_2 -- value: 0
+var: c_1_3 -- value: 0
+var: c_1_4 -- value: 0
+var: c_1_5 -- value: 0
+var: c_1_6 -- value: 0
+var: c_1_7 -- value: 3
+var: c_1_8 -- value: 3
+var: c_2_1 -- value: 0
+var: c_2_2 -- value: 1
+var: c_2_3 -- value: 0
+var: c_2_4 -- value: 0
+var: c_2_5 -- value: 0
+var: c_2_6 -- value: 0
+var: c_2_7 -- value: 0
+var: c_2_8 -- value: 23
+var: c_3_1 -- value: 1
+var: c_3_2 -- value: 1
+var: c_3_3 -- value: 0
+var: c_3_4 -- value: 0
+var: c_3_5 -- value: 0
+var: c_3_6 -- value: 0
+var: c_3_7 -- value: 0
+var: c_3_8 -- value: 0
+var: c_3_9 -- value: 0
+var: c_3_10 -- value: 0
+var: c_3_11 -- value: 0
+var: c_3_12 -- value: 0
+var: c_4_1 -- value: 1
+var: c_4_2 -- value: 1
+var: c_4_3 -- value: 0
+var: c_4_4 -- value: 0
+var: c_4_5 -- value: 0
+var: c_4_6 -- value: 0
+var: c_4_7 -- value: 0
+var: c_4_8 -- value: 41
+var: c_4_9 -- value: 0
+var: c_4_10 -- value: 41
+var: c_5_1 -- value: 1
+var: c_5_2 -- value: 1
+var: c_5_3 -- value: 0
+var: c_5_4 -- value: 0
+var: c_5_5 -- value: 0
+var: c_5_6 -- value: 0
+var: c_5_7 -- value: 60
+var: c_5_8 -- value: 60
+var: c_5_9 -- value: 34
+var: ob -- value: 276
+
+Process finished with exit code 0

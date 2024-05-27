@@ -1,0 +1,138 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/Second_Formulation/LP_CPLEX_F2_LB_dist.py
+layers: [2, 4, 6, 8, 10, 12, 14]
+7 6
+---First constraints---
+Number of first constraints: 36
+---Second constraints---
+Number of second constraints: 36
+---Addition constraints---
+Number of addition constraints: 4320
+Model: Track
+ - number of variables: 1296
+   - binary=216, integer=0, continuous=1080
+ - number of constraints: 4393
+   - linear=4393
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Found incumbent of value 163.660710 after 0.00 sec. (0.22 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 1080 rows and 0 columns.
+Reduced MIP has 3313 rows, 1296 columns, and 9072 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (4.39 ticks)
+Probing time = 0.00 sec. (3.46 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 3313 rows, 1296 columns, and 9072 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (5.31 ticks)
+Probing time = 0.00 sec. (3.46 ticks)
+Clique table members: 72.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (9.55 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                          163.6607        0.0000           100.00%
+      0     0        2.7367    95      163.6607        2.7367      146   98.33%
+*     0+    0                          120.8406        2.7367            97.74%
+      0     0        2.7367    92      120.8406   LiftProj: 5      156   97.74%
+      0     0        2.7367   106      120.8406     Cuts: 190      353   97.74%
+*     0+    0                            9.9617        2.7367            72.53%
+Detecting symmetries...
+
+Repeating presolve.
+Tried aggregator 1 time.
+MIP Presolve eliminated 3152 rows and 1268 columns.
+MIP Presolve modified 2145 coefficients.
+Reduced MIP has 68 rows, 28 columns, and 148 nonzeros.
+Reduced MIP has 12 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (4.04 ticks)
+Probing changed sense of 24 constraints.
+Probing time = 0.00 sec. (0.16 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 60 rows and 21 columns.
+MIP Presolve modified 4 coefficients.
+Reduced MIP has 8 rows, 7 columns, and 24 nonzeros.
+Reduced MIP has 7 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.07 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 8 rows and 4 columns.
+MIP Presolve added 2 rows and 2 columns.
+Reduced MIP has 2 rows, 5 columns, and 6 nonzeros.
+Reduced MIP has 5 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 2 rows and 2 columns.
+MIP Presolve added 2 rows and 2 columns.
+Reduced MIP has 2 rows, 5 columns, and 6 nonzeros.
+Reduced MIP has 5 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.00 ticks)
+Represolve time = 0.00 sec. (6.53 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Clique table members: 2.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.00 sec. (0.00 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                            9.9617        8.4632            15.04%
+      0     0        cutoff              9.9617                    388    0.00%
+
+Root node processing (before b&c):
+  Real time             =    0.11 sec. (185.26 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.11 sec. (185.26 ticks)
+{'index': '0', 'name': 'f_1_1_1', 'value': '1.0'}
+{'index': '7', 'name': 'f_1_2_2', 'value': '1.0'}
+{'index': '14', 'name': 'f_1_3_3', 'value': '1.0'}
+{'index': '22', 'name': 'f_1_4_5', 'value': '1.0'}
+{'index': '27', 'name': 'f_1_5_4', 'value': '1.0'}
+{'index': '35', 'name': 'f_1_6_6', 'value': '1.0'}
+{'index': '36', 'name': 'f_2_1_1', 'value': '1.0'}
+{'index': '43', 'name': 'f_2_2_2', 'value': '1.0'}
+{'index': '50', 'name': 'f_2_3_3', 'value': '1.0'}
+{'index': '57', 'name': 'f_2_4_4', 'value': '1.0'}
+{'index': '64', 'name': 'f_2_5_5', 'value': '1.0'}
+{'index': '71', 'name': 'f_2_6_6', 'value': '1.0'}
+{'index': '72', 'name': 'f_3_1_1', 'value': '1.0'}
+{'index': '79', 'name': 'f_3_2_2', 'value': '1.0'}
+{'index': '86', 'name': 'f_3_3_3', 'value': '1.0'}
+{'index': '94', 'name': 'f_3_4_5', 'value': '1.0'}
+{'index': '99', 'name': 'f_3_5_4', 'value': '1.0'}
+{'index': '107', 'name': 'f_3_6_6', 'value': '1.0'}
+{'index': '108', 'name': 'f_4_1_1', 'value': '1.0'}
+{'index': '115', 'name': 'f_4_2_2', 'value': '1.0'}
+{'index': '122', 'name': 'f_4_3_3', 'value': '1.0'}
+{'index': '130', 'name': 'f_4_4_5', 'value': '1.0'}
+{'index': '135', 'name': 'f_4_5_4', 'value': '1.0'}
+{'index': '143', 'name': 'f_4_6_6', 'value': '1.0'}
+{'index': '144', 'name': 'f_5_1_1', 'value': '1.0'}
+{'index': '151', 'name': 'f_5_2_2', 'value': '1.0'}
+{'index': '158', 'name': 'f_5_3_3', 'value': '1.0'}
+{'index': '166', 'name': 'f_5_4_5', 'value': '1.0'}
+{'index': '171', 'name': 'f_5_5_4', 'value': '1.0'}
+{'index': '179', 'name': 'f_5_6_6', 'value': '1.0'}
+{'index': '180', 'name': 'f_6_1_1', 'value': '1.0'}
+{'index': '187', 'name': 'f_6_2_2', 'value': '1.0'}
+{'index': '194', 'name': 'f_6_3_3', 'value': '1.0'}
+{'index': '202', 'name': 'f_6_4_5', 'value': '1.0'}
+{'index': '207', 'name': 'f_6_5_4', 'value': '1.0'}
+{'index': '215', 'name': 'f_6_6_6', 'value': '1.0'}
+
+Process finished with exit code 0

@@ -1,0 +1,144 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/First_General_Case/LB_CPLEX_LB_new.py
+---First and second constraints---
+---Third and fourth constraints---
+---Fifth constraints---
+---Sixth constraints---
+---Seventth constraints---
+--- Eighth constraints---
+Model: Track
+ - number of variables: 787
+   - binary=756, integer=0, continuous=31
+ - number of constraints: 7688
+   - linear=7688
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 6498 rows and 541 columns.
+MIP Presolve modified 30456 coefficients.
+Reduced MIP has 1189 rows, 246 columns, and 4278 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (22.15 ticks)
+Found incumbent of value 48.885019 after 0.01 sec. (23.04 ticks)
+Probing time = 0.00 sec. (1.04 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 1189 rows, 246 columns, and 4278 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.50 ticks)
+Probing time = 0.00 sec. (1.04 ticks)
+Clique table members: 72.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (13.46 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           48.8850        0.0000           100.00%
+*     0+    0                           15.0989        0.0000           100.00%
+      0     0        0.0084    94       15.0989        0.0084      441   99.94%
+*     0+    0                           13.5059        0.0084            99.94%
+      0     0        0.0084    78       13.5059      Cuts: 42      503   99.94%
+      0     0        0.0084    72       13.5059      Cuts: 25      547   99.94%
+*     0+    0                            8.3262        0.0084            99.90%
+*     0+    0                            8.3262        0.0084            99.90%
+Detecting symmetries...
+      0     2        0.0084    72        8.3262        0.0084      547   99.90%
+Elapsed time = 0.17 sec. (222.74 ticks, tree = 0.02 MB, solutions = 4)
+*    49+    6                            7.3683        0.0084            99.89%
+*   495+  311                            7.2846        0.0084            99.88%
+*   602+  453                            5.0819        0.0084            99.83%
+*   625+  448                            3.7439        0.0084            99.77%
+    904   318        2.9712    88        3.7439        0.0084    33832   99.77%
+*   943+  323                            3.6080        0.0084            99.77%
+*  1483+  746                            3.4370        0.0084            99.75%
+*  1521+  746                            3.2354        0.0084            99.74%
+   1588   769        2.3135   101        3.2354        0.0084    78380   99.74%
+*  1762+  877                            2.7530        0.0084            99.69%
+*  1773+  828                            1.2981        0.0084            99.35%
+*  1987+  380                            0.1675        0.0084            94.96%
+*  2094+  388                            0.0326        0.0084            74.13%
+
+Lift and project cuts applied:  7
+Gomory fractional cuts applied:  15
+
+Root node processing (before b&c):
+  Real time             =    0.17 sec. (222.38 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.51 sec. (657.96 ticks)
+  Sync time (average)   =    0.14 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.67 sec. (880.34 ticks)
+JobSolveStatus.OPTIMAL_SOLUTION
+{'index': '0', 'name': 'phi_1_2_1_1', 'value': '1.0'}
+{'index': '7', 'name': 'phi_1_2_2_2', 'value': '1.0'}
+{'index': '14', 'name': 'phi_1_2_3_3', 'value': '1.0'}
+{'index': '22', 'name': 'phi_1_2_4_5', 'value': '1.0'}
+{'index': '27', 'name': 'phi_1_2_5_4', 'value': '1.0'}
+{'index': '35', 'name': 'phi_1_2_6_6', 'value': '1.0'}
+{'index': '216', 'name': 'phi_2_3_1_1', 'value': '1.0'}
+{'index': '223', 'name': 'phi_2_3_2_2', 'value': '1.0'}
+{'index': '230', 'name': 'phi_2_3_3_3', 'value': '1.0'}
+{'index': '237', 'name': 'phi_2_3_4_4', 'value': '1.0'}
+{'index': '244', 'name': 'phi_2_3_5_5', 'value': '1.0'}
+{'index': '251', 'name': 'phi_2_3_6_6', 'value': '1.0'}
+{'index': '396', 'name': 'phi_3_4_1_1', 'value': '1.0'}
+{'index': '403', 'name': 'phi_3_4_2_2', 'value': '1.0'}
+{'index': '410', 'name': 'phi_3_4_3_3', 'value': '1.0'}
+{'index': '418', 'name': 'phi_3_4_4_5', 'value': '1.0'}
+{'index': '423', 'name': 'phi_3_4_5_4', 'value': '1.0'}
+{'index': '431', 'name': 'phi_3_4_6_6', 'value': '1.0'}
+{'index': '540', 'name': 'phi_4_5_1_1', 'value': '1.0'}
+{'index': '547', 'name': 'phi_4_5_2_2', 'value': '1.0'}
+{'index': '554', 'name': 'phi_4_5_3_3', 'value': '1.0'}
+{'index': '562', 'name': 'phi_4_5_4_5', 'value': '1.0'}
+{'index': '567', 'name': 'phi_4_5_5_4', 'value': '1.0'}
+{'index': '575', 'name': 'phi_4_5_6_6', 'value': '1.0'}
+{'index': '648', 'name': 'phi_5_6_1_1', 'value': '1.0'}
+{'index': '655', 'name': 'phi_5_6_2_2', 'value': '1.0'}
+{'index': '662', 'name': 'phi_5_6_3_3', 'value': '1.0'}
+{'index': '670', 'name': 'phi_5_6_4_5', 'value': '1.0'}
+{'index': '675', 'name': 'phi_5_6_5_4', 'value': '1.0'}
+{'index': '683', 'name': 'phi_5_6_6_6', 'value': '1.0'}
+{'index': '720', 'name': 'phi_6_7_1_1', 'value': '1.0'}
+{'index': '727', 'name': 'phi_6_7_2_2', 'value': '1.0'}
+{'index': '734', 'name': 'phi_6_7_3_3', 'value': '1.0'}
+{'index': '742', 'name': 'phi_6_7_4_5', 'value': '1.0'}
+{'index': '747', 'name': 'phi_6_7_5_4', 'value': '1.0'}
+{'index': '755', 'name': 'phi_6_7_6_6', 'value': '1.0'}
+{'index': '756', 'name': 'c_1_1', 'value': '0.0005387455857999157'}
+{'index': '757', 'name': 'c_1_2', 'value': '0.0011943891331611667'}
+{'index': '758', 'name': 'c_1_3', 'value': '0.0007470035379810724'}
+{'index': '759', 'name': 'c_1_4', 'value': '0.0005080119553895202'}
+{'index': '760', 'name': 'c_1_5', 'value': '0.0014082516900089104'}
+{'index': '761', 'name': 'c_1_6', 'value': '0.0010027230237028562'}
+{'index': '762', 'name': 'c_2_1', 'value': '0.0001863617289927788'}
+{'index': '763', 'name': 'c_2_2', 'value': '0.0008336208957189228'}
+{'index': '764', 'name': 'c_2_3', 'value': '0.000894870790943969'}
+{'index': '765', 'name': 'c_2_4', 'value': '0.0030235940175771248'}
+{'index': '766', 'name': 'c_2_5', 'value': '0.0010964491411868948'}
+{'index': '767', 'name': 'c_2_6', 'value': '0.001093114202376455'}
+{'index': '768', 'name': 'c_3_1', 'value': '0.0004159927448199596'}
+{'index': '769', 'name': 'c_3_2', 'value': '0.00035662923619383946'}
+{'index': '770', 'name': 'c_3_3', 'value': '0.0010767476123874076'}
+{'index': '771', 'name': 'c_3_4', 'value': '0.002493705920642242'}
+{'index': '772', 'name': 'c_3_5', 'value': '0.00037931016777292825'}
+{'index': '773', 'name': 'c_3_6', 'value': '0.0009983316849684343'}
+{'index': '774', 'name': 'c_4_1', 'value': '0.0002774319327727426'}
+{'index': '775', 'name': 'c_4_2', 'value': '0.0004251671016390901'}
+{'index': '776', 'name': 'c_4_3', 'value': '0.0008639961524750106'}
+{'index': '777', 'name': 'c_4_4', 'value': '0.001830164939747192'}
+{'index': '778', 'name': 'c_4_5', 'value': '0.002742889144428773'}
+{'index': '779', 'name': 'c_4_6', 'value': '0.0016277714239549823'}
+{'index': '780', 'name': 'c_5_1', 'value': '0.0005051542320870794'}
+{'index': '781', 'name': 'c_5_2', 'value': '0.0002518730179872364'}
+{'index': '782', 'name': 'c_5_3', 'value': '0.0007464724476449192'}
+{'index': '783', 'name': 'c_5_4', 'value': '0.002348369231185643'}
+{'index': '784', 'name': 'c_5_5', 'value': '0.0009362183154735249'}
+{'index': '785', 'name': 'c_5_6', 'value': '0.0018094176448357757'}
+{'index': '786', 'name': 'ob', 'value': '0.03261277865385637'}

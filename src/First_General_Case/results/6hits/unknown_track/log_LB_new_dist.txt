@@ -1,0 +1,152 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/First_General_Case/LB_CPLEX_LB_new_dist.py
+---First and second constraints---
+---Third and fourth constraints---
+---Fifth constraints---
+---Sixth constraints---
+---Seventth constraints---
+--- Eighth constraints---
+Model: Track
+ - number of variables: 1193
+   - binary=1153, integer=0, continuous=40
+ - number of constraints: 14292
+   - linear=14292
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 5915 rows and 415 columns.
+MIP Presolve modified 56536 coefficients.
+Reduced MIP has 8377 rows, 778 columns, and 28446 nonzeros.
+Reduced MIP has 739 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (27.97 ticks)
+Found incumbent of value 41046.630881 after 0.01 sec. (31.47 ticks)
+Probing time = 0.00 sec. (3.94 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 8377 rows, 778 columns, and 28446 nonzeros.
+Reduced MIP has 739 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (15.39 ticks)
+Probing time = 0.00 sec. (3.94 ticks)
+Clique table members: 92.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.02 sec. (34.24 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                        41046.6309        0.0000           100.00%
+      0     0        4.0095    97    41046.6309        4.0095      426   99.99%
+*     0+    0                         8846.5914        4.0095            99.95%
+*     0+    0                          366.7842        4.0095            98.91%
+      0     0        4.0095    95      366.7842      Cuts: 27      540   98.91%
+      0     0        4.0095    97      366.7842      Cuts: 19      722   98.91%
+      0     0        4.0095   108      366.7842      Cuts: 60     1058   98.91%
+Detecting symmetries...
+      0     2        4.0095   100      366.7842        4.0095     1357   98.91%
+Elapsed time = 0.74 sec. (1358.29 ticks, tree = 0.02 MB, solutions = 3)
+     21     4      254.6843    92      366.7842        4.0095     3242   98.91%
+     64     5      254.6843    80      366.7842        4.0095     7144   98.91%
+    193    29        4.0095    82      366.7842        4.0095    10006   98.91%
+    336   204        4.0095    88      366.7842        4.0095    16930   98.91%
+    469   331       20.1548    98      366.7842        4.0095    23096   98.91%
+    571   407      366.5935   102      366.7842        4.0095    34675   98.91%
+    691   488      112.5279   101      366.7842        4.0095    43605   98.91%
+    828   547      239.7412    90      366.7842        4.0095    54242   98.91%
+    970   673    infeasible            366.7842        4.0095    64547   98.91%
+   1603  1071      128.2251   100      366.7842        4.0095   110345   98.91%
+Elapsed time = 2.68 sec. (4502.60 ticks, tree = 13.72 MB, solutions = 3)
+*  1912+ 1196                          314.9766        4.0095            98.73%
+*  2212+ 1199                           77.8013        4.0095            94.85%
+*  2500+  138                           13.6140        4.0095            70.55%
+   2532    44       13.4821    65       13.6140        4.0095   172260   70.55%
+   2567   257      257.9586    99       13.6140        4.0095    41263   70.55%
+
+Clique cuts applied:  1
+Implied bound cuts applied:  5
+Zero-half cuts applied:  3
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  2
+
+Root node processing (before b&c):
+  Real time             =    0.73 sec. (1355.62 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    3.27 sec. (5788.92 ticks)
+  Sync time (average)   =    1.10 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    4.00 sec. (7144.53 ticks)
+JobSolveStatus.OPTIMAL_SOLUTION
+{'index': '0', 'name': 'phi_1_2_1_1', 'value': '1.0'}
+{'index': '11', 'name': 'phi_1_2_2_2', 'value': '1.0'}
+{'index': '23', 'name': 'phi_1_2_3_4', 'value': '1.0'}
+{'index': '32', 'name': 'phi_1_2_4_3', 'value': '1.0'}
+{'index': '44', 'name': 'phi_1_2_5_5', 'value': '1.0'}
+{'index': '55', 'name': 'phi_1_2_6_6', 'value': '1.0'}
+{'index': '276', 'name': 'phi_2_3_1_1', 'value': '1.0'}
+{'index': '284', 'name': 'phi_2_3_2_2', 'value': '1.0'}
+{'index': '292', 'name': 'phi_2_3_3_3', 'value': '1.0'}
+{'index': '300', 'name': 'phi_2_3_4_4', 'value': '1.0'}
+{'index': '308', 'name': 'phi_2_3_5_5', 'value': '1.0'}
+{'index': '316', 'name': 'phi_2_3_6_6', 'value': '1.0'}
+{'index': '332', 'name': 'phi_2_3_9_1', 'value': '9.08362841779963e-14'}
+{'index': '636', 'name': 'phi_3_4_1_1', 'value': '1.0'}
+{'index': '645', 'name': 'phi_3_4_2_2', 'value': '1.0'}
+{'index': '655', 'name': 'phi_3_4_3_4', 'value': '1.0'}
+{'index': '662', 'name': 'phi_3_4_4_3', 'value': '1.0'}
+{'index': '672', 'name': 'phi_3_4_5_5', 'value': '1.0'}
+{'index': '681', 'name': 'phi_3_4_6_6', 'value': '1.0'}
+{'index': '839', 'name': 'phi_4_5_1_1', 'value': '1.0'}
+{'index': '848', 'name': 'phi_4_5_2_2', 'value': '1.0'}
+{'index': '858', 'name': 'phi_4_5_3_4', 'value': '1.0'}
+{'index': '865', 'name': 'phi_4_5_4_3', 'value': '1.0'}
+{'index': '875', 'name': 'phi_4_5_5_5', 'value': '1.0'}
+{'index': '884', 'name': 'phi_4_5_6_6', 'value': '1.0'}
+{'index': '1007', 'name': 'phi_5_6_1_1', 'value': '1.0'}
+{'index': '1015', 'name': 'phi_5_6_2_2', 'value': '1.0'}
+{'index': '1023', 'name': 'phi_5_6_3_3', 'value': '1.0'}
+{'index': '1031', 'name': 'phi_5_6_4_4', 'value': '1.0'}
+{'index': '1039', 'name': 'phi_5_6_5_5', 'value': '1.0'}
+{'index': '1047', 'name': 'phi_5_6_6_6', 'value': '1.0'}
+{'index': '1111', 'name': 'phi_6_7_1_1', 'value': '1.0'}
+{'index': '1118', 'name': 'phi_6_7_2_2', 'value': '1.0'}
+{'index': '1125', 'name': 'phi_6_7_3_3', 'value': '1.0'}
+{'index': '1132', 'name': 'phi_6_7_4_4', 'value': '1.0'}
+{'index': '1139', 'name': 'phi_6_7_5_5', 'value': '1.0'}
+{'index': '1146', 'name': 'phi_6_7_6_6', 'value': '1.0'}
+{'index': '1153', 'name': 'c_1_1', 'value': '0.10043866894193343'}
+{'index': '1154', 'name': 'c_1_2', 'value': '0.21463167795081972'}
+{'index': '1155', 'name': 'c_1_3', 'value': '0.3269075416501437'}
+{'index': '1156', 'name': 'c_1_4', 'value': '0.1523432188296283'}
+{'index': '1157', 'name': 'c_1_5', 'value': '0.5869216366372711'}
+{'index': '1158', 'name': 'c_1_6', 'value': '0.22095522370000253'}
+{'index': '1159', 'name': 'c_2_1', 'value': '0.038066077599069104'}
+{'index': '1160', 'name': 'c_2_2', 'value': '0.45536991659901105'}
+{'index': '1161', 'name': 'c_2_3', 'value': '0.04641473976880661'}
+{'index': '1162', 'name': 'c_2_4', 'value': '0.5303972651636286'}
+{'index': '1163', 'name': 'c_2_5', 'value': '0.5350712961953832'}
+{'index': '1164', 'name': 'c_2_6', 'value': '0.12718970125570195'}
+{'index': '1169', 'name': 'c_3_1', 'value': '0.22931020957548753'}
+{'index': '1170', 'name': 'c_3_2', 'value': '0.6138534057390643'}
+{'index': '1171', 'name': 'c_3_3', 'value': '0.2000028883740015'}
+{'index': '1172', 'name': 'c_3_4', 'value': '0.4288882433465915'}
+{'index': '1173', 'name': 'c_3_5', 'value': '0.306229008223454'}
+{'index': '1174', 'name': 'c_3_6', 'value': '0.22944283779361285'}
+{'index': '1176', 'name': 'c_4_1', 'value': '0.13681798588004312'}
+{'index': '1177', 'name': 'c_4_2', 'value': '1.3150318035623059'}
+{'index': '1178', 'name': 'c_4_3', 'value': '0.611514177871868'}
+{'index': '1179', 'name': 'c_4_4', 'value': '0.17600564442909672'}
+{'index': '1180', 'name': 'c_4_5', 'value': '1.153127335372119'}
+{'index': '1181', 'name': 'c_4_6', 'value': '0.3229952950969164'}
+{'index': '1184', 'name': 'c_5_1', 'value': '0.3001250640190847'}
+{'index': '1185', 'name': 'c_5_2', 'value': '1.4307449097141216'}
+{'index': '1186', 'name': 'c_5_3', 'value': '0.2017059401186998'}
+{'index': '1187', 'name': 'c_5_4', 'value': '1.2320023087777372'}
+{'index': '1188', 'name': 'c_5_5', 'value': '0.9327290257024288'}
+{'index': '1189', 'name': 'c_5_6', 'value': '0.45877877046950744'}
+{'index': '1192', 'name': 'ob', 'value': '13.61401181835754'}
+
+Process finished with exit code 0

@@ -1,0 +1,100 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/Second_Formulation/LP_CPLEX_F2_strong_LB.py
+layers: [2, 4, 6, 8, 10, 12, 14]
+7 6
+---First constraints---
+Number of first constraints: 36
+---Second constraints---
+Number of second constraints: 36
+---Addition constraints---
+Number of addition constraints: 4320
+Model: Track
+ - number of variables: 1296
+   - binary=216, integer=0, continuous=1080
+ - number of constraints: 4393
+   - linear=4393
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Found incumbent of value 0.520039 after 0.00 sec. (0.22 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 1080 rows and 0 columns.
+Reduced MIP has 3313 rows, 1296 columns, and 9072 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (4.39 ticks)
+Probing time = 0.00 sec. (3.46 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 3313 rows, 1296 columns, and 9072 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (5.33 ticks)
+Probing time = 0.00 sec. (3.46 ticks)
+Clique table members: 72.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (9.93 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                            0.5200        0.0000           100.00%
+      0     0        0.0326    91        0.5200        0.0326      156   93.73%
+      0     0        0.0326    84        0.5200      Cuts: 27      218   93.73%
+      0     0        0.0326    92        0.5200     Cuts: 182      421   93.73%
+*     0+    0                            0.0326        0.0326             0.00%
+      0     0        cutoff              0.0326        0.0326      524    0.00%
+Elapsed time = 0.10 sec. (175.85 ticks, tree = 0.01 MB, solutions = 2)
+
+Implied bound cuts applied:  58
+Zero-half cuts applied:  18
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  2
+
+Root node processing (before b&c):
+  Real time             =    0.10 sec. (175.93 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.10 sec. (175.93 ticks)
+{'index': '0', 'name': 'f_1_1_1', 'value': '1.0'}
+{'index': '7', 'name': 'f_1_2_2', 'value': '1.0'}
+{'index': '14', 'name': 'f_1_3_3', 'value': '1.0'}
+{'index': '22', 'name': 'f_1_4_5', 'value': '1.0'}
+{'index': '27', 'name': 'f_1_5_4', 'value': '1.0'}
+{'index': '35', 'name': 'f_1_6_6', 'value': '1.0'}
+{'index': '36', 'name': 'f_2_1_1', 'value': '1.0'}
+{'index': '43', 'name': 'f_2_2_2', 'value': '1.0'}
+{'index': '50', 'name': 'f_2_3_3', 'value': '1.0'}
+{'index': '57', 'name': 'f_2_4_4', 'value': '1.0'}
+{'index': '64', 'name': 'f_2_5_5', 'value': '1.0'}
+{'index': '71', 'name': 'f_2_6_6', 'value': '1.0'}
+{'index': '72', 'name': 'f_3_1_1', 'value': '1.0'}
+{'index': '79', 'name': 'f_3_2_2', 'value': '1.0'}
+{'index': '86', 'name': 'f_3_3_3', 'value': '1.0'}
+{'index': '94', 'name': 'f_3_4_5', 'value': '1.0'}
+{'index': '99', 'name': 'f_3_5_4', 'value': '1.0'}
+{'index': '107', 'name': 'f_3_6_6', 'value': '1.0'}
+{'index': '108', 'name': 'f_4_1_1', 'value': '1.0'}
+{'index': '115', 'name': 'f_4_2_2', 'value': '1.0'}
+{'index': '122', 'name': 'f_4_3_3', 'value': '1.0'}
+{'index': '130', 'name': 'f_4_4_5', 'value': '1.0'}
+{'index': '135', 'name': 'f_4_5_4', 'value': '1.0'}
+{'index': '143', 'name': 'f_4_6_6', 'value': '1.0'}
+{'index': '144', 'name': 'f_5_1_1', 'value': '1.0'}
+{'index': '151', 'name': 'f_5_2_2', 'value': '1.0'}
+{'index': '158', 'name': 'f_5_3_3', 'value': '1.0'}
+{'index': '166', 'name': 'f_5_4_5', 'value': '1.0'}
+{'index': '171', 'name': 'f_5_5_4', 'value': '1.0'}
+{'index': '179', 'name': 'f_5_6_6', 'value': '1.0'}
+{'index': '180', 'name': 'f_6_1_1', 'value': '1.0'}
+{'index': '187', 'name': 'f_6_2_2', 'value': '1.0'}
+{'index': '194', 'name': 'f_6_3_3', 'value': '1.0'}
+{'index': '202', 'name': 'f_6_4_5', 'value': '1.0'}
+{'index': '207', 'name': 'f_6_5_4', 'value': '1.0'}
+{'index': '215', 'name': 'f_6_6_6', 'value': '1.0'}
+
+Process finished with exit code 0

@@ -1,0 +1,136 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/First_General_Case/LB_CPLEX_LB_new_dist.py
+---First and second constraints---
+---Third and fourth constraints---
+---Fifth constraints---
+---Sixth constraints---
+---Seventth constraints---
+--- Eighth constraints---
+Model: Track
+ - number of variables: 787
+   - binary=756, integer=0, continuous=31
+ - number of constraints: 7688
+   - linear=7688
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 6498 rows and 541 columns.
+MIP Presolve modified 30456 coefficients.
+Reduced MIP has 1189 rows, 246 columns, and 4278 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (22.15 ticks)
+Found incumbent of value 22082.187032 after 0.01 sec. (23.05 ticks)
+Probing time = 0.00 sec. (1.04 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 1189 rows, 246 columns, and 4278 nonzeros.
+Reduced MIP has 216 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.51 ticks)
+Probing time = 0.00 sec. (1.04 ticks)
+Clique table members: 72.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (9.80 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                        22082.1870        0.0000           100.00%
+      0     0        2.7367    73    22082.1870        2.7367      347   99.99%
+*     0+    0                         9390.8040        2.7367            99.97%
+      0     0        2.7367    79     9390.8040      Cuts: 27      409   99.97%
+*     0+    0                         8921.0911        2.7367            99.97%
+*     0+    0                          163.6607        2.7367            98.33%
+      0     0        2.7367    77      163.6607      Cuts: 18      468   98.33%
+      0     0        2.7367    96      163.6607      Cuts: 91      671   98.33%
+*     0+    0                            9.9617        2.7367            72.53%
+      0     0        cutoff              9.9617        9.9617      842    0.00%
+Elapsed time = 0.15 sec. (265.38 ticks, tree = 0.01 MB, solutions = 5)
+
+Clique cuts applied:  1
+Implied bound cuts applied:  7
+Zero-half cuts applied:  11
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  1
+
+Root node processing (before b&c):
+  Real time             =    0.15 sec. (265.44 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.15 sec. (265.44 ticks)
+JobSolveStatus.OPTIMAL_SOLUTION
+{'index': '0', 'name': 'phi_1_2_1_1', 'value': '1.0'}
+{'index': '7', 'name': 'phi_1_2_2_2', 'value': '1.0'}
+{'index': '14', 'name': 'phi_1_2_3_3', 'value': '1.0'}
+{'index': '22', 'name': 'phi_1_2_4_5', 'value': '1.0'}
+{'index': '27', 'name': 'phi_1_2_5_4', 'value': '1.0'}
+{'index': '35', 'name': 'phi_1_2_6_6', 'value': '1.0'}
+{'index': '216', 'name': 'phi_2_3_1_1', 'value': '1.0'}
+{'index': '223', 'name': 'phi_2_3_2_2', 'value': '1.0'}
+{'index': '230', 'name': 'phi_2_3_3_3', 'value': '1.0'}
+{'index': '237', 'name': 'phi_2_3_4_4', 'value': '1.0'}
+{'index': '244', 'name': 'phi_2_3_5_5', 'value': '1.0'}
+{'index': '251', 'name': 'phi_2_3_6_6', 'value': '1.0'}
+{'index': '396', 'name': 'phi_3_4_1_1', 'value': '1.0'}
+{'index': '403', 'name': 'phi_3_4_2_2', 'value': '1.0'}
+{'index': '410', 'name': 'phi_3_4_3_3', 'value': '1.0'}
+{'index': '418', 'name': 'phi_3_4_4_5', 'value': '1.0'}
+{'index': '423', 'name': 'phi_3_4_5_4', 'value': '1.0'}
+{'index': '431', 'name': 'phi_3_4_6_6', 'value': '1.0'}
+{'index': '540', 'name': 'phi_4_5_1_1', 'value': '1.0'}
+{'index': '547', 'name': 'phi_4_5_2_2', 'value': '1.0'}
+{'index': '554', 'name': 'phi_4_5_3_3', 'value': '1.0'}
+{'index': '562', 'name': 'phi_4_5_4_5', 'value': '1.0'}
+{'index': '567', 'name': 'phi_4_5_5_4', 'value': '1.0'}
+{'index': '575', 'name': 'phi_4_5_6_6', 'value': '1.0'}
+{'index': '648', 'name': 'phi_5_6_1_1', 'value': '1.0'}
+{'index': '655', 'name': 'phi_5_6_2_2', 'value': '1.0'}
+{'index': '662', 'name': 'phi_5_6_3_3', 'value': '1.0'}
+{'index': '670', 'name': 'phi_5_6_4_5', 'value': '1.0'}
+{'index': '675', 'name': 'phi_5_6_5_4', 'value': '1.0'}
+{'index': '683', 'name': 'phi_5_6_6_6', 'value': '1.0'}
+{'index': '720', 'name': 'phi_6_7_1_1', 'value': '1.0'}
+{'index': '727', 'name': 'phi_6_7_2_2', 'value': '1.0'}
+{'index': '734', 'name': 'phi_6_7_3_3', 'value': '1.0'}
+{'index': '742', 'name': 'phi_6_7_4_5', 'value': '1.0'}
+{'index': '747', 'name': 'phi_6_7_5_4', 'value': '1.0'}
+{'index': '755', 'name': 'phi_6_7_6_6', 'value': '1.0'}
+{'index': '756', 'name': 'c_1_1', 'value': '0.1187918106552388'}
+{'index': '757', 'name': 'c_1_2', 'value': '0.26310411896702135'}
+{'index': '758', 'name': 'c_1_3', 'value': '0.16510800124524394'}
+{'index': '759', 'name': 'c_1_4', 'value': '0.11215428769719438'}
+{'index': '760', 'name': 'c_1_5', 'value': '0.31102421346804476'}
+{'index': '761', 'name': 'c_1_6', 'value': '0.22176803607362672'}
+{'index': '762', 'name': 'c_2_1', 'value': '0.04856412128719967'}
+{'index': '763', 'name': 'c_2_2', 'value': '0.21702599818672752'}
+{'index': '764', 'name': 'c_2_3', 'value': '0.2337530594159034'}
+{'index': '765', 'name': 'c_2_4', 'value': '0.7892519304332382'}
+{'index': '766', 'name': 'c_2_5', 'value': '0.28607547124192934'}
+{'index': '767', 'name': 'c_2_6', 'value': '0.2857129813382926'}
+{'index': '768', 'name': 'c_3_1', 'value': '0.11674149456302985'}
+{'index': '769', 'name': 'c_3_2', 'value': '0.0999874388326134'}
+{'index': '770', 'name': 'c_3_3', 'value': '0.3028954381697986'}
+{'index': '771', 'name': 'c_3_4', 'value': '0.7010197945674008'}
+{'index': '772', 'name': 'c_3_5', 'value': '0.10657790148616186'}
+{'index': '773', 'name': 'c_3_6', 'value': '0.28100246096073533'}
+{'index': '774', 'name': 'c_4_1', 'value': '0.09453890239092289'}
+{'index': '775', 'name': 'c_4_2', 'value': '0.14474528780920082'}
+{'index': '776', 'name': 'c_4_3', 'value': '0.29512142958992627'}
+{'index': '777', 'name': 'c_4_4', 'value': '0.6244153883526451'}
+{'index': '778', 'name': 'c_4_5', 'value': '0.936280787231226'}
+{'index': '779', 'name': 'c_4_6', 'value': '0.5563381289903191'}
+{'index': '780', 'name': 'c_5_1', 'value': '0.2025154701586871'}
+{'index': '781', 'name': 'c_5_2', 'value': '0.1008797394715657'}
+{'index': '782', 'name': 'c_5_3', 'value': '0.29997140918203513'}
+{'index': '783', 'name': 'c_5_4', 'value': '0.9430014517784002'}
+{'index': '784', 'name': 'c_5_5', 'value': '0.3757818677840987'}
+{'index': '785', 'name': 'c_5_6', 'value': '0.7275156630603306'}
+{'index': '786', 'name': 'ob', 'value': '9.961664084388758'}
+
+Process finished with exit code 0

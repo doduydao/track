@@ -1,8 +1,7 @@
 import matplotlib
-import networkx as nx
 import dimod
 from docplex.mp.model import Model
-from dwave.system import LeapHybridCQMSampler, LeapHybridBQMSampler
+from dwave.system import LeapHybridCQMSampler
 import json
 
 from data import *
@@ -23,13 +22,13 @@ def distance(h1, h2):
 def build_model(hits, model_path_out):
     model = Model(name="Track")
     layers = list(hits.keys())
-
-    L = len(layers) + 1
-    no_hits = len(list(hits.values())[0]) + 1
+    layers = [0] + layers
+    L = len(layers)
+    no_hits = len(list(hits.values())[1]) + 1
     print(L, no_hits)
 
     f = model.binary_var_dict(
-        [(p, i, j) for p in range(1, L) for i in range(1, no_hits) for j in range(1, no_hits)],
+        [(p, i, j) for p in range(1, L - 1) for i in range(1, no_hits) for j in range(1, no_hits)],
         name="f")
 
     objective = 0
@@ -79,7 +78,6 @@ def build_model(hits, model_path_out):
             count_constraint += 1
             model.add_constraint(tmp == 1, ctname=constraint_name)
     print("Number of second constraints:", count_constraint)
-
 
     model.print_information()
     model.export_as_lp(model_path_out)
@@ -165,18 +163,19 @@ if __name__ == "__main__":
     with open(solution_path, 'r', encoding='utf-8') as f:
         result = json.load(f)
 
-    layers = list(hits.keys())
+    layers = [0] + list(hits.keys())
     segments = []
     for var, value in result.items():
-        f_p_i_j = var.split('_')
-        if value == 0:
-            continue
-        print(var)
-        p = int(f_p_i_j[1])
-        i = int(f_p_i_j[2])
-        j = int(f_p_i_j[3])
-        h_1 = hits[layers[p - 1]][i - 1]
-        h_2 = hits[layers[p]][j - 1]
-        segments.append([h_1, h_2])
 
+        f_p_i_j = var.split('_')
+
+        if 'f' in f_p_i_j[0] and value == 1.0:
+            print(var, value)
+            p = int(f_p_i_j[1])
+            i = int(f_p_i_j[2])
+            j = int(f_p_i_j[3])
+            h_1 = hits[layers[p]][i - 1]
+            h_2 = hits[layers[p + 1]][j - 1]
+
+            segments.append([h_1, h_2])
     display(hits, segments, out)

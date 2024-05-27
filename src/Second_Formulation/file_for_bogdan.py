@@ -200,7 +200,7 @@ def read_hits(path):
 
 
 if __name__ == '__main__':
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
+    src_path = '../../src/data_selected'
     data_path = src_path + '/20hits/known_track/hits.csv'
 
     hits = read_hits(data_path)[9] # volume 9

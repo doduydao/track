@@ -1,6 +1,4 @@
 import matplotlib
-import networkx as nx
-import dimod
 from docplex.mp.model import Model
 from dwave.system import LeapHybridCQMSampler, LeapHybridBQMSampler
 import json

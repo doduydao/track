@@ -10,7 +10,6 @@ def distance(h1, h2):
     return distance
 
 
-
 def run(hits, model_path_out, solution_path_out, figure_path_out):
     model = Model(name="Track")
     layers = list(hits.keys())
@@ -42,13 +41,16 @@ def run(hits, model_path_out, solution_path_out, figure_path_out):
                     h_k = hits[layers[p + 1]][k - 1]
                     seg_1 = Segment(h_j, h_i)
                     seg_2 = Segment(h_j, h_k)
-                    beta = Angle(seg_1=seg_1, seg_2=seg_2).angle * (distance(h_i, h_j)//100 + distance(h_j, h_k)//100)
+                    beta = Angle(seg_1=seg_1, seg_2=seg_2).angle * (
+                                distance(h_i, h_j) + distance(h_j, h_k))
                     betas.append(beta)
                     if min_beta > beta:
                         min_beta = beta
                     objective += z[p, i, j, k] * beta
+
         LB += min_beta
-    beta_upper = sum(betas)/len(betas)
+
+    beta_upper = sum(betas) / len(betas)
 
     for p in range(1, no_layer - 1):
         for i in range(1, no_hits + 1):
@@ -114,26 +116,26 @@ def run(hits, model_path_out, solution_path_out, figure_path_out):
 
     model.export_as_lp(model_path_out)
     model.solution.export(solution_path_out)
-    f = open(solution_path_out)
-    result = json.load(f)
-    f.close()
+    # f = open(solution_path_out)
+    # result = json.load(f)
+    # f.close()
 
-    result = result['CPLEXSolution']['variables']
+    # result = result['CPLEXSolution']['variables']
+    #
+    # segments = []
+    #
+    # for var in result:
+    #     print(var)
+    #     f_p_i_j = var['name'].split('_')
+    #     if 'f' in f_p_i_j[0]:
+    #         p = int(f_p_i_j[1])
+    #         i = int(f_p_i_j[2])
+    #         j = int(f_p_i_j[3])
+    #         h_1 = hits[layers[p - 1]][i - 1]
+    #         h_2 = hits[layers[p]][j - 1]
+    #         segments.append([h_1, h_2])
 
-    segments = []
-
-    for var in result:
-        print(var)
-        f_p_i_j = var['name'].split('_')
-        if 'f' in f_p_i_j[0]:
-            p = int(f_p_i_j[1])
-            i = int(f_p_i_j[2])
-            j = int(f_p_i_j[3])
-            h_1 = hits[layers[p - 1]][i - 1]
-            h_2 = hits[layers[p]][j - 1]
-            segments.append([h_1, h_2])
-
-    display(hits, segments, figure_path_out)
+    # display(hits, segments, figure_path_out)
 
 
 def display(hits, segments, out=""):
@@ -166,13 +168,30 @@ def display(hits, segments, out=""):
 
 
 if __name__ == '__main__':
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
-    data_path = src_path + '/20hits/known_track/hits.csv'
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Data files')
+
+    parser.add_argument(dest='data_file',
+                        help='arranges the integers in ascending order')
+
+    args = parser.parse_args()
+
+
+
+    src_path = '../../src/data_selected'
+
+
+    # list_data = ['20hits', '25hits', '30hits', '50hits', '75hits', '100hits', '131hits']
+    # for d in list_data:
+    d = args.data_file
+
+    data_path = src_path + "/" + d + "/" + '/known_track/hits.csv'
     hits_volume = read_hits(data_path)
     hits = hits_volume[9]
 
-    model_path_out = "results/20hits/known_track/model_docplex_strong_LB_dist.lp"
-    solution_path_out = "results/20hits/known_track/solution_strong_LB_dist.json"
-    figure_path_out = "results/20hits/known_track/result_strong_LB_dist.PNG"
+    model_path_out = "results/" + d + "/known_track/model_docplex_strong_LB_dist.lp"
+    solution_path_out = "results/" + d + "/known_track/solution_strong_LB_dist.json"
+    figure_path_out = "results/" + d + "/known_track/result_strong_LB_dist.PNG"
 
     result = run(hits, model_path_out, solution_path_out, figure_path_out)

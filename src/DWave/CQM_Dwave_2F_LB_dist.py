@@ -1,5 +1,4 @@
 import matplotlib
-import dimod
 from docplex.mp.model import Model
 from dwave.system import LeapHybridCQMSampler
 import json

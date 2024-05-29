@@ -1,0 +1,16 @@
+layers: [2, 4, 6, 8, 10, 12, 14]
+7 25
+---First constraints---
+Number of first constraints: 150
+---Second constraints---
+Number of second constraints: 150
+---Addition constraints---
+Number of addition constraints: 312500
+Model: Track
+ - number of variables: 81875
+   - binary=3750, integer=0, continuous=78125
+ - number of constraints: 390926
+   - linear=390926
+ - parameters: defaults
+ - objective: minimize
+-- cannot find parameters matching version: , using: 22.1.1.0

@@ -42,12 +42,14 @@ def run(hits, model_path_out, solution_path_out, figure_path_out):
                     seg_1 = Segment(h_j, h_i)
                     seg_2 = Segment(h_j, h_k)
                     beta = Angle(seg_1=seg_1, seg_2=seg_2).angle * (
-                                distance(h_i, h_j) // 100 + distance(h_j, h_k) // 100)
+                                distance(h_i, h_j) + distance(h_j, h_k))
                     betas.append(beta)
                     if min_beta > beta:
                         min_beta = beta
                     objective += z[p, i, j, k] * beta
+
         LB += min_beta
+
     beta_upper = sum(betas) / len(betas)
 
     for p in range(1, no_layer - 1):

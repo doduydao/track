@@ -1,0 +1,7 @@
+layers: [2, 4, 6, 8, 10, 12, 14]
+7 30
+---First constraints---
+Number of first constraints: 180
+---Second constraints---
+Number of second constraints: 180
+---Addition constraints---

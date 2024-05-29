@@ -1,0 +1,24 @@
+layers: [2, 4, 6, 8, 10, 12, 14]
+7 75
+---First constraints---
+Number of first constraints: 450
+---Second constraints---
+Number of second constraints: 450
+---Addition constraints---
+Number of addition constraints: 8437500
+Model: Track
+ - number of variables: 2143125
+   - binary=33750, integer=0, continuous=2109375
+ - number of constraints: 8438401
+   - linear=8438401
+ - parameters: defaults
+ - objective: minimize
+ - problem type is: MILP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Found incumbent of value 21075.964540 after 0.50 sec. (384.54 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 2109375 rows and 0 columns.
+Reduced MIP has 6329026 rows, 2143125 columns, and 16942500 nonzeros.
+Reduced MIP has 33750 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 12.97 sec. (8905.92 ticks)

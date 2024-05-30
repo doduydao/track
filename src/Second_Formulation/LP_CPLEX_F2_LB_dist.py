@@ -106,28 +106,29 @@ def run(hits, model_path_out, solution_path_out, figure_path_out):
 
     model.export_as_lp(model_path_out)
     model.solution.export(solution_path_out)
-    f = open(solution_path_out)
-    result = json.load(f)
-    f.close()
 
-    result = result['CPLEXSolution']['variables']
-
-    segments = []
-
-    for var in result:
-        print(var)
-        f_p_i_j = var['name'].split('_')
-        if 'f' in f_p_i_j[0]:
-
-            p = int(f_p_i_j[1])
-            i = int(f_p_i_j[2])
-            j = int(f_p_i_j[3])
-
-            h_1 = hits[layers[p - 1]][i - 1]
-            h_2 = hits[layers[p]][j - 1]
-            segments.append([h_1, h_2])
-
-    display(hits, segments, figure_path_out)
+    # f = open(solution_path_out)
+    # result = json.load(f)
+    # f.close()
+    #
+    # result = result['CPLEXSolution']['variables']
+    #
+    # segments = []
+    #
+    # for var in result:
+    #     print(var)
+    #     f_p_i_j = var['name'].split('_')
+    #     if 'f' in f_p_i_j[0]:
+    #
+    #         p = int(f_p_i_j[1])
+    #         i = int(f_p_i_j[2])
+    #         j = int(f_p_i_j[3])
+    #
+    #         h_1 = hits[layers[p - 1]][i - 1]
+    #         h_2 = hits[layers[p]][j - 1]
+    #         segments.append([h_1, h_2])
+    #
+    # display(hits, segments, figure_path_out)
 
 
 def display(hits, segments, out=""):
@@ -160,12 +161,25 @@ def display(hits, segments, out=""):
 
 
 if __name__ == '__main__':
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
-    data_path = src_path + '/20hits/known_track/hits.csv'
-    hits = read_hits(data_path)[9]
+    import argparse
 
-    model_path_out = "results/20hits/known_track/model_docplex_LB_dist.lp"
-    solution_path_out = "results/20hits/known_track/solution_LB_dist.json"
-    figure_path_out = "results/20hits/known_track/result_LB_dist.PNG"
+    parser = argparse.ArgumentParser(description='Data files')
+
+    parser.add_argument(dest='data_file',
+                        help='arranges the integers in ascending order')
+
+    args = parser.parse_args()
+
+    src_path = '../../src/data_selected'
+
+    d = args.data_file
+
+    data_path = src_path + "/" + d + "/" + '/known_track/hits.csv'
+    hits_volume = read_hits(data_path)
+    hits = hits_volume[9]
+
+    model_path_out = "results/" + d + "/known_track/model_docplex_LB_dist.lp"
+    solution_path_out = "results/" + d + "/known_track/solution_LB_dist.json"
+    figure_path_out = "results/" + d + "/known_track/result_LB_dist.PNG"
 
     result = run(hits, model_path_out, solution_path_out, figure_path_out)

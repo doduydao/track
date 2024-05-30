@@ -1,0 +1,53 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/DWave/CQM_Dwave_2F_LB_no_dist.py
+8 7
+---First constraints---
+Number of first constraints: 36
+---Second constraints---
+Number of second constraints: 36
+Model: Track
+ - number of variables: 216
+   - binary=216, integer=0, continuous=0
+ - number of constraints: 73
+   - linear=72, quadratic=1
+ - parameters: defaults
+ - objective: minimize quadratic
+ - problem type is: MIQCP
+Wrote model
+Run time: 5.110708
+Objective value: 0.032612778651499995
+f_1_1_1 1.0
+f_1_2_2 1.0
+f_1_3_3 1.0
+f_1_4_5 1.0
+f_1_5_4 1.0
+f_1_6_6 1.0
+f_2_1_1 1.0
+f_2_2_2 1.0
+f_2_3_3 1.0
+f_2_4_4 1.0
+f_2_5_5 1.0
+f_2_6_6 1.0
+f_3_1_1 1.0
+f_3_2_2 1.0
+f_3_3_3 1.0
+f_3_4_5 1.0
+f_3_5_4 1.0
+f_3_6_6 1.0
+f_4_1_1 1.0
+f_4_2_2 1.0
+f_4_3_3 1.0
+f_4_4_5 1.0
+f_4_5_4 1.0
+f_4_6_6 1.0
+f_5_1_1 1.0
+f_5_2_2 1.0
+f_5_3_3 1.0
+f_5_4_5 1.0
+f_5_5_4 1.0
+f_5_6_6 1.0
+f_6_1_1 1.0
+f_6_2_2 1.0
+f_6_3_3 1.0
+f_6_4_5 1.0
+f_6_5_4 1.0
+f_6_6_6 1.0

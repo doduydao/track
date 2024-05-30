@@ -21,21 +21,10 @@ def create_variables(model, hits):
     phi = model.binary_var_dict(v, name="phi")
 
     v = []
-    # for p_1 in range(0, K - 1):
-    #     n_p_1 = len(hits[layers[p_1]]) + 1
-    #     for i in range(1, n_p_1):
-    #         for p_2 in range(p_1 + 1, K):
-    #             n_p_2 = len(hits[layers[p_2]]) + 1
-    #             for j in range(1, n_p_2):
-    #                 for p_3 in range(p_2 + 1, K + 1):
-    #                     n_p_3 = len(hits[layers[p_3]]) + 1
-    #                     for k in range(1, n_p_3):
-    #                         v.append((p_1, p_2, p_3, i, j, k))
-    for p_1 in range(0, K - 1):
-        n_p_1 = len(hits[layers[p_1]]) + 1
-        for i in range(1, n_p_1):
-            v.append((p_1, i))
-
+    for p_2 in range(1, K):
+        n_p_2 = len(hits[layers[p_2]]) + 1
+        for j in range(1, n_p_2):
+            v.append((p_2, j))
     c = model.continuous_var_dict(v, name="c", lb=0)
 
     ob = model.continuous_var(name="ob")
@@ -56,70 +45,36 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
 
     # create_variables
     ob, phi, c, nt, cp = create_variables(model, hits)
-    nt = 6
+    # nt = NT
+    model.add_constraint(nt == NT)
 
-    tracks = [[[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]],
-              [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2]],
-              [[1, 3], [2, 4], [3, 4], [4, 3], [5, 4], [6, 4], [7, 4]],
-              [[1, 4], [2, 3], [3, 3], [4, 4], [5, 3], [6, 3], [7, 3]],
-              [[1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]],
-              [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]]
-
-    first_layer = [t[0] for t in tracks]
-    for t in first_layer:
-        p_2 = t[0]
-        j = t[1]
-        model.add_constraint(phi[0, p_2, 1, j] == 1)
-
-    last_layer = [t[-1] for t in tracks]
-    for t in first_layer:
-        p_1 = t[0]
-        i = t[1]
-        model.add_constraint(phi[p_1, 8, i, 1] == 1)
-
-    for track in tracks:
-        for id in range(len(track)-1):
-            p_1 = track[id][0]
-            i = track[id][1]
-            p_2 = track[id+1][0]
-            j = track[id+1][1]
-            model.add_constraint(phi[p_1, p_2, i, j] == 1)
-
-
-    # n_p_2 = len(hits[layers[1]]) + 1
-    # for j in range(3, 4):
-    #     model.add_constraint(phi[0, 1, 1, j] == 1)
-    #     # print('hit =', hits[layers[1]][1].hit_id)
-    #     print('hit =', hits[layers[1]][j].hit_id)
-    #     print(0, 1, 1, j)
+    # tracks = [[[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]],
+    #           [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2]],
+    #           [[1, 3], [2, 4], [3, 4], [4, 3], [5, 4], [6, 4], [7, 4]],
+    #           [[1, 4], [2, 3], [3, 3], [4, 4], [5, 3], [6, 3], [7, 3]],
+    #           [[1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]],
+    #           [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]]
     #
-    # for p_1 in range(1, K-1):
-    #     n_p_1 = len(hits[layers[p_1]]) + 1
-    #     n_p_2 = len(hits[layers[p_1 + 1]]) + 1
-    #     for i in range(1, n_p_1):
-    #         for j in range(3, 4):
-    #             if i == j:
-    #                 model.add_constraint(phi[p_1, p_1 + 1, i, j] == 1)
-    #                 print('hit =', hits[layers[p_1]][i].hit_id)
-    #                 print('hit =', hits[layers[p_1 +1]][j].hit_id)
-    #                 print(p_1, p_1 + 1, i, j)
+    # first_layer = [t[0] for t in tracks]
+    # for t in first_layer:
+    #     p_2 = t[0]
+    #     j = t[1]
+    #     model.add_constraint(phi[0, p_2, 1, j] == 1)
     #
-    # n_p_1 = len(hits[layers[7]]) + 1
-    # for i in range(3, 4):
-    #     model.add_constraint(phi[7, 8, i, 1] == 1)
-    #     print('hit =', hits[layers[7]][i].hit_id)
-    #     # print('hit =', hits[layers[8]][1].hit_id)
-    #     print(7, 8, i, 1)
-    # phi[1, 2, 3, 3] = 1
-    # phi[2, 3, 3, 3] = 1
-    # phi[3, 4, 3, 3] = 1
-    # phi[4, 5, 3, 3] = 1
-    # phi[1, 2, 4, 4] = 1
-    # phi[2, 3, 4, 4] = 1
-    # phi[3, 4, 4, 4] = 1
-    # phi[4, 5, 4, 4] = 1
-    # for k, v in phi.items():
-    #     print(k, v)
+    # last_layer = [t[-1] for t in tracks]
+    # for t in last_layer:
+    #     p_1 = t[0]
+    #     i = t[1]
+    #     model.add_constraint(phi[p_1, 8, i, 1] == 1)
+    #
+    # for track in tracks:
+    #     for id in range(len(track)-1):
+    #         p_1 = track[id][0]
+    #         i = track[id][1]
+    #         p_2 = track[id+1][0]
+    #         j = track[id+1][1]
+    #         model.add_constraint(phi[p_1, p_2, i, j] == 1)
+
     print("---First constraints---")
     tmp = 0
     cc_1 = 0
@@ -145,9 +100,7 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
 
     # Third constraints:
     print("---Third constraints---")
-    print("---Fourth constraints---")
     cc_3 = 0
-    cc_4 = 0
     for p_1 in range(1, K):
         n_p_1 = len(hits[layers[p_1]]) + 1
         for i in range(1, n_p_1):
@@ -166,6 +119,16 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
             cn = "TC_" + str(cc_3)
             model.add_constraint(t_1 == t_2, ctname=cn)
 
+    print("---Fourth constraints---")
+    cc_4 = 0
+    for p_1 in range(1, K):
+        n_p_1 = len(hits[layers[p_1]]) + 1
+        for i in range(1, n_p_1):
+            t_1 = 0
+            for p_2 in range(0, p_1):
+                n_p_2 = len(hits[layers[p_2]]) + 1
+                for j in range(1, n_p_2):
+                    t_1 += phi[p_2, p_1, j, i]
             cc_4 += 1
             cn = "FoC_" + str(cc_4)
             model.add_constraint(t_1 <= 1, ctname=cn)
@@ -176,7 +139,7 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
     min_cost = 0
     for p_1 in range(0, K - 1):
         n_p_1 = len(hits[layers[p_1]]) + 1
-        min_beta = 1000000000
+        min_beta = 100000
         for i in range(1, n_p_1):
             for p_2 in range(p_1 + 1, K):
                 n_p_2 = len(hits[layers[p_2]]) + 1
@@ -189,52 +152,40 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
                             h_k = hits[layers[p_3]][k - 1]
                             seg_1 = Segment(h_j, h_i)
                             seg_2 = Segment(h_j, h_k)
-                            angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
-                            dist = distance(h_i, h_j) // 100 + distance(h_j, h_k) // 100
-                            beta = angle * dist
+
+                            beta = Angle(seg_1=seg_1, seg_2=seg_2).angle * (distance(h_i, h_j)+ distance(h_j, h_k))/1000
                             betas.append(beta)
 
-                            if beta < min_beta:
-                                min_beta = beta
                             cc_5 += 1
                             cn = "FiC_" + str(cc_5)
                             model.add_constraint(
-                                beta <= c[p_1, i] + ((2 - phi[p_1, p_2, i, j] - phi[p_2, p_3, j, k]) * M),
-                                ctname=cn)
+                                beta <= c[p_2, j] + (2 - phi[p_1, p_2, i, j] - phi[p_2, p_3, j, k]) * M, ctname=cn)
+
+                            if beta < min_beta:
+                                min_beta = beta
         min_cost += min_beta
 
-    beta_upper = sum(betas) / len(betas)
-    print("beta upper =", beta_upper)
+    # beta_upper = sum(betas) / len(betas)
+    # print("beta upper =", beta_upper)
 
     cp_tmp = 0
-    # for p_1 in range(0, K - 1):
-    #     n_p_1 = len(hits[layers[p_1]]) + 1
-    #     for i in range(1, n_p_1):
-    #         for p_2 in range(p_1 + 1, K):
-    #             n_p_2 = len(hits[layers[p_2]]) + 1
-    #             for j in range(1, n_p_2):
-    #                 for p_3 in range(p_2 + 1, K + 1):
-    #                     n_p_3 = len(hits[layers[p_3]]) + 1
-    #                     for k in range(1, n_p_3):
-    #                         if p_1 != 0 and p_1 != K - 2:
-    #                             model.add_constraint(c[p_1, p_2, p_3, i, j, k] <= beta_upper)
-    #                         cp_tmp += c[p_1, p_2, p_3, i, j, k]
-    for p_1 in range(0, K - 1):
-        n_p_1 = len(hits[layers[p_1]]) + 1
-        for i in range(1, n_p_1):
-            # if p_1 != 0 and p_1 != K - 2:
-            #     model.add_constraint(c[p_1, i] <= beta_upper)
-            cp_tmp += c[p_1, i]
-    total_hits = sum(len(hits[layers[p]]) for p in range(1, K))
-    print("total_hits:", total_hits)
+    for p_2 in range(1, K):
+        n_p_2 = len(hits[layers[p_2]]) + 1
+        for j in range(1, n_p_2):
+            cp_tmp += c[p_2, j]
+            # if p_2 != 1 and p_2 != K - 1:
+            #     model.add_constraint(c[p_2, j] <= beta_upper)
 
+    # total_hits = sum(len(hits[layers[p]]) for p in range(1, K))
+    # print("total_hits:", total_hits)
+    #
     # objective = alpha * (total_hits - nt) + gamma * cp
-    objective = cp
+    # objective = cp
 
-    # model.add_constraint(cp >= min_cost * nt)
-    model.add_constraint(cp >= cp_tmp)
+    model.add_constraint(cp_tmp >= min_cost * nt)
+    # model.add_constraint(cp >= cp_tmp)
 
-    model.add_constraint(ob >= objective)
+    model.add_constraint(ob >= cp_tmp)
     model.set_objective('min', ob)
 
     model.print_information()
@@ -248,7 +199,8 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
         for var in result:
             print(var)
             phi_p_p_i_j = var['name'].split('_')
-            if "phi" in phi_p_p_i_j[0]:
+            phi_p_p_i_j_value = round(float(var['value']))
+            if "phi" in phi_p_p_i_j[0] and phi_p_p_i_j_value == 1.0:
                 p_1 = int(phi_p_p_i_j[1])
                 p_2 = int(phi_p_p_i_j[2])
                 i = int(phi_p_p_i_j[3])
@@ -336,7 +288,7 @@ if __name__ == '__main__':
     figure_path_out = "results/6hits/unknown_track/result_LB_dist_ss_test.PNG"
 
     M = 10000
-    alpha = 10000
+    alpha = 0
     gamma = 1
     NT = 6
     run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_path_out)

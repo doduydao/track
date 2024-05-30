@@ -52,7 +52,7 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
 
     # create_variables
     ob, phi, c, nt, cp = create_variables(model, hits)
-    nt = NT
+    model.add_constraint(nt == NT)
 
     # first constraints:
     print("---First constraints---")
@@ -260,8 +260,8 @@ if __name__ == '__main__':
     src_path = '../data_selected'
     data_path = src_path + '/6hits/unknown_track/hits.csv'
 
-    hits_volume = read_hits(data_path)
-    hits = hits_volume[9]
+    hits = read_hits(data_path)
+    # hits = hits_volume[9]
     source, sink = create_source_sink(hits)
     hits[0] = [source]
     hits[16] = [sink]

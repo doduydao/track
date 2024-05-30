@@ -44,7 +44,7 @@ def build_model(hits, model_path_out):
                     seg_2 = Segment(h_j, h_k)
                     angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
                     dist = distance(h_i, h_j) + distance(h_j, h_k)
-                    beta = angle
+                    beta = angle * dist
                     if angle < beta_lb:
                         beta_lb = angle
                     objective += f[p, i, j] * f[p + 1, j, k] * beta
@@ -138,12 +138,12 @@ def display(hits, segments, out=""):
 # ------- Main program -------
 if __name__ == "__main__":
     src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
-    folder = '/25hits/'
+    folder = '/6hits/'
 
     data_path = src_path + folder + 'known_track/hits.csv'
-    model_path_out = "result" + folder + "known_track/model_docplex_CQM_LB_no_dist.lp"
-    solution_path = "result" + folder + "known_track/solution_dwave_LB_no_dist.json"
-    out = "result" + folder + "known_track/result_dwave_LB_no_dist.PNG"
+    model_path_out = "result" + folder + "known_track/model_docplex_CQM_LB_dist.lp"
+    solution_path = "result" + folder + "known_track/solution_dwave_LB_dist.json"
+    out = "result" + folder + "known_track/result_dwave_LB_dist.PNG"
     hits = read_hits(data_path)[9]
 
     build_model(hits, model_path_out)

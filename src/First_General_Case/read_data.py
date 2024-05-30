@@ -6,7 +6,6 @@ import random
 def read_hits(path):
     df = pd.read_csv(path)
     list_df = [row.tolist() for index, row in df.iterrows()]
-    # volumes = dict()
     hits = dict()
     for i in list_df:
         hit = Hit(
@@ -23,12 +22,6 @@ def read_hits(path):
             hits[layer_id] = [hit]
         else:
             hits[layer_id] += [hit]
-
-    # for p, hp in hits.items():
-    #     hp_sorted = sorted(hp, key=lambda h: [h.x, h.y, h.z])
-    #     hits[p] = hp_sorted
-    # print(hits)
-
     return hits
 
 

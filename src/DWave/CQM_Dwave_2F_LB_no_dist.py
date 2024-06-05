@@ -89,11 +89,12 @@ def run_hybrid_solver(cqm):
 
     # Initialize the CQM solver
     sampler = LeapHybridCQMSampler()
-    # sampler = LeapHybridBQMSampler
-
+    # print(sampler.properties["minimum_time_limit_s"])
+    sampler.properties["minimum_time_limit_s"] = 10
+    print(sampler.min_time_limit(cqm))
     # Solve the problem using the CQM solver
+
     sampleset = sampler.sample_cqm(cqm, label='Track finding')
-    # sampleset = sampler.sample_qubo(cqm, label='Track finding BQO - QUBO')
     feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
 
     try:
@@ -147,7 +148,7 @@ if __name__ == "__main__":
     out = "result" + folder + "known_track/result_dwave_LB_no_dist.PNG"
     hits = read_hits(data_path)[9]
 
-    build_model(hits, model_path_out)
+    # build_model(hits, model_path_out)
 
     with open(model_path_out, 'rb') as f:
         cqm = dimod.lp.load(f)

@@ -15,31 +15,48 @@ class Hit:
         self.module_id = module_id
         self.selected = selected
         self.track = None
+        self.index = None
+
+    def set_index(self, index):
+        self.index = index
 
 
 class Segment:
     def __init__(self, hit_1, hit_2):
+        self.id = (hit_1.index, hit_2.index)
+        self.hit_1 = hit_1
+        self.hit_2 = hit_2
         self.x = hit_2.x - hit_1.x
         self.y = hit_2.y - hit_1.y
         self.z = hit_2.z - hit_1.z
 
 
-class Angle:
+class Cost:
     def __init__(self, seg_1, seg_2):
-        self.angle = self.calculate_angle(seg_1, seg_2)
+        self.id = (seg_1.id, seg_2.id)
+        self.seg_1 = seg_1
+        self.seg_2 = seg_2
+        self.hit_1 = seg_1.hit_1
+        self.hit_2 = seg_1.hit_2
+        self.hit_3 = seg_2.hit_2
+        self.cos_beta = self.calculate_cos_beta()
+        self.sum_distance = self.calculate_distance()
 
-    def calculate_angle(self, seg_1, seg_2):
-        v1 = np.array([seg_1.x, seg_1.y, seg_1.z])
-        v2 = np.array([seg_2.x, seg_2.y, seg_2.z])
-
+    def calculate_cos_beta(self):
+        v1 = np.array([self.seg_1.x, self.seg_1.y, self.seg_1.z])
+        v2 = np.array([self.seg_2.x, self.seg_2.y, self.seg_2.z])
         dot_product = np.dot(v1, v2)
-        magnitude1 = np.linalg.norm(v1)
-        magnitude2 = np.linalg.norm(v2)
-        return math.pi - np.arccos(dot_product / (magnitude1 * magnitude2))
+        norm_v1 = np.linalg.norm(v1)
+        norm_v2 = np.linalg.norm(v2)
+        return dot_product / (norm_v1 * norm_v2)
+
+    def calculate_distance(self):
+        distance_seg_1 = math.sqrt(self.seg_1.x ** 2 + self.seg_1.y ** 2 + self.seg_1.z ** 2)
+        distance_seg_2 = math.sqrt(self.seg_2.x ** 2 + self.seg_2.y ** 2 + self.seg_2.z ** 2)
+        return distance_seg_1 + distance_seg_2
 
 def read_hits(path):
     df = pd.read_csv(path)
-    # print(df)
     list_df = [row.tolist() for index, row in df.iterrows()]
     volumes = dict()
 
@@ -52,7 +69,7 @@ def read_hits(path):
                   volume_id=i[4],
                   layer_id =i[5]/2,
                   module_id = i[6],
-                  particle_id = i[7]
+                  particle_id= i[7]
                   )
         volume_id = int(hit.volume_id)
         if volume_id not in volumes:
@@ -71,9 +88,10 @@ def read_hits(path):
 
     return volumes
 
+
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/50hits/'
+    folder = '/6hits/'
 
     data_path = src_path + folder + 'known_track/hits.csv'
     model_path_out = "result" + folder + "known_track/model_docplex_CQM_no_dist_no_LB.lp"
@@ -91,20 +109,20 @@ if __name__ == '__main__':
             else:
                 track[p_id] += [h]
 
-    cost = 0
-    count = 1
+    expect_value = 0
     for pa, hs in track.items():
         t = []
         ct = 0
+        m = len(hs)
         for i in range(len(hs) - 2):
             h_i = hs[i]
             h_j = hs[i + 1]
             h_k = hs[i + 2]
             seg_1 = Segment(h_j, h_i)
             seg_2 = Segment(h_j, h_k)
-            angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
-            beta = angle
-            ct += beta
-        # print('Track', count, ':', ct)
-        cost += ct
-    print('cost of all track is', cost)
+            cost = Cost(seg_1=seg_1, seg_2=seg_2)
+            cos_beta = cost.cos_beta
+            ct += (-(cost.cos_beta ** m) / cost.sum_distance)
+        print('Track', pa, ':', ct)
+        expect_value += ct
+    print('Expect value of all track is', expect_value)

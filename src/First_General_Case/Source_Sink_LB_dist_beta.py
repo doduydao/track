@@ -179,7 +179,7 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
         n_p_2 = len(hits[layers[p_2]]) + 1
         for j in range(1, n_p_2):
             cp_tmp += c[p_2, j]
-            model.add_constraint(c[p_2, j] >= list_min_beta[p_2 - 1])
+            # model.add_constraint(c[p_2, j] >= list_min_beta[p_2 - 1])
             # if p_2 != 1 and p_2 != K - 1:
             #     model.add_constraint(c[p_2, j] <= beta_upper)
 
@@ -187,9 +187,11 @@ def run(hits, M, alpha, gamma, NT, model_path_out, solution_path_out, figure_pat
     print("total_hits:", total_hits)
     #
     objective = alpha * (total_hits - nt) + gamma * cp
+    model.add_constraint(ob == 124.0542)
+    # model.add_constraint(ob >= 124.0542)
 
     model.add_constraint(cp >= cp_tmp)
-    model.add_constraint(cp_tmp >= cost_min * nt)
+    # model.add_constraint(cp_tmp >= cost_min * nt)
     model.add_constraint(ob >= objective)
     model.set_objective('min', ob)
 
@@ -282,7 +284,7 @@ def create_source_sink(hits):
 
 if __name__ == '__main__':
     src_path = '../data_selected'
-    data_path = src_path + '/6hits/unknown_track/hits_2.csv'
+    data_path = src_path + '/6hits/unknown_track/hits.csv'
 
     hits = read_hits(data_path)
     source, sink = create_source_sink(hits)
@@ -293,7 +295,7 @@ if __name__ == '__main__':
     solution_path_out = "results/6hits/unknown_track/solution_LB_dist_ss_test.json"
     figure_path_out = "results/6hits/unknown_track/result_LB_dist_ss_test.PNG"
 
-    M = 1000
+    M = 10000
     alpha = 0
     gamma = 1
     NT = 6

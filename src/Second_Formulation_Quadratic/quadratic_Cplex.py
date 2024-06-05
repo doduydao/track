@@ -135,7 +135,7 @@ def display(hits, segments, out=""):
 
 # ------- Main program -------
 if __name__ == "__main__":
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
+    src_path = '../../src/data_selected'
     folder = '/6hits/'
 
     data_path = src_path + folder + 'known_track/hits.csv'

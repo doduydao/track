@@ -1,13 +1,10 @@
 import matplotlib
-import networkx as nx
 import dimod
-from dimod import ConstrainedQuadraticModel, Binary, quicksum
 from docplex.mp.model import Model
 from dwave.system import LeapHybridCQMSampler
 import json
 
 from data import *
-from read_data import *
 
 try:
     import matplotlib.pyplot as plt
@@ -21,80 +18,96 @@ def distance(h1, h2):
     return distance
 
 
+def assign_exact(model, f, hits):
+    track = dict()
+    for p, hp in hits.items():
+        for h in hp:
+            p_id = h.particle_id / 10000000000
+            if p_id not in track:
+                track[p_id] = [hp.index(h)]
+            else:
+                track[p_id] += [hp.index(h)]
+
+    for t, hs in track.items():
+        for p in range(len(hs) - 1):
+            i = hs[p] + 1
+            j = hs[p + 1] + 1
+            model.add_constraint(f[p + 1, i, j] == 1)
+
+
 def build_model(hits, model_path_out):
     model = Model(name="Track")
-
     layers = list(hits.keys())
-    print("layers:", layers)
-    no_layer = len(layers)
-    no_hits = len(list(hits.values())[0])
-    print(no_layer, no_hits)
+    layers = [0] + layers
+    L = len(layers)
+    no_hits = len(list(hits.values())[1]) + 1
+    print(L, no_hits)
 
     f = model.binary_var_dict(
-        [(p, i, j) for p in range(1, no_layer) for i in range(1, no_hits + 1) for j in range(1, no_hits + 1)],
+        [(p, i, j) for p in range(1, L - 1) for i in range(1, no_hits) for j in range(1, no_hits)],
         name="f")
 
+    assign_exact(model, f, hits)
+
     objective = 0
-    LB = 0
-    for p in range(1, no_layer - 1):
-        beta_lb = 10000
-        for i in range(1, no_hits + 1):
-            for j in range(1, no_hits + 1):
-                for k in range(1, no_hits + 1):
-                    h_i = hits[layers[p - 1]][i - 1]
-                    h_j = hits[layers[p]][j - 1]
-                    h_k = hits[layers[p + 1]][k - 1]
+    for p in range(1, L - 2):
+        for i in range(1, no_hits):
+            for j in range(1, no_hits):
+                for k in range(1, no_hits):
+                    h_i = hits[layers[p]][i - 1]
+                    h_j = hits[layers[p + 1]][j - 1]
+                    h_k = hits[layers[p + 2]][k - 1]
                     seg_1 = Segment(h_j, h_i)
                     seg_2 = Segment(h_j, h_k)
                     angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
-                    # dist = distance(h_i, h_j) + distance(h_j, h_k)
-                    beta = angle * 1
-                    if angle < beta_lb:
-                        beta_lb = angle
+
+                    beta = angle
+
                     objective += f[p, i, j] * f[p + 1, j, k] * beta
-        LB += beta_lb
     model.set_objective('min', objective)
-    # model.add_constraint(objective >= LB * no_hits)
-    # Constraints
+
     # first constraints:
     print("---First constraints---")
-    count_constraint = 0
-
-    for j in range(1, no_hits + 1):
-        for p in range(1, no_layer):
+    ct_1 = 0
+    for p in range(1, L - 1):
+        for j in range(1, no_hits):
             tmp = 0
-            for i in range(1, no_hits + 1):
+            for i in range(1, no_hits):
                 tmp += f[p, i, j]
-            constraint_name = "FC_" + str(count_constraint)
-            count_constraint += 1
-            model.add_constraint(tmp == 1, ctname=constraint_name)
-    print("Number of first constraints:", count_constraint)
-    # print()
+            ct_1 += 1
+            ctname = "FC_" + str(ct_1)
+            model.add_constraint(tmp == 1, ctname=ctname)
+
     # Second constraints:
     print("---Second constraints---")
-    count_constraint = 0
-    for i in range(1, no_hits + 1):
-        for p in range(1, no_layer):
+    ct_2 = 0
+    for p in range(1, L - 1):
+        for i in range(1, no_hits):
             tmp = 0
-            for j in range(1, no_hits + 1):
+            for j in range(1, no_hits):
                 tmp += f[p, i, j]
-            constraint_name = "SC_" + str(count_constraint)
-            count_constraint += 1
-            model.add_constraint(tmp == 1, ctname=constraint_name)
-    print("Number of second constraints:", count_constraint)
-    # Addition constraints:
+            ct_2 += 1
+            ctname = "SC_" + str(ct_2)
+            model.add_constraint(tmp == 1, ctname=ctname)
+
     model.print_information()
     model.export_as_lp(model_path_out)
+    # model.solve(log_output=True)
+    # print(model.solution)
+
     print("Wrote model")
 
 
 def run_hybrid_solver(cqm):
     """Solve CQM using hybrid solver."""
-
+    print("Solving CQM ...")
     # Initialize the CQM solver
     sampler = LeapHybridCQMSampler()
-
+    # print(sampler.properties["minimum_time_limit_s"])
+    # sampler.properties["minimum_time_limit_s"] = 10
+    print(sampler.min_time_limit(cqm))
     # Solve the problem using the CQM solver
+
     sampleset = sampler.sample_cqm(cqm, label='Track finding')
     feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
 
@@ -140,11 +153,13 @@ def display(hits, segments, out=""):
 
 # ------- Main program -------
 if __name__ == "__main__":
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
-    data_path = src_path + '/6hits/known_track/hits.csv'
-    model_path_out = "result/6hits/known_track/model_docplex_CQM.lp"
-    solution_path = "result/6hits/known_track/solution_dwave.json"
-    out = "result/result_dwave.PNG"
+    src_path = '/Users/doduydao/daodd/PycharmProjects/track/src/data_selected'
+    folder = '/50hits/'
+
+    data_path = src_path + folder + 'known_track/hits.csv'
+    model_path_out = "result" + folder + "known_track/CQM_no_dist_no_LB_exact.lp"
+    solution_path = "result" + folder + "known_track/solution_no_dist_no_LB_exact.json"
+    out = "result" + folder + "known_track/result_dwave_no_dist_no_LB_exact.PNG"
     hits = read_hits(data_path)[9]
 
     build_model(hits, model_path_out)
@@ -163,18 +178,16 @@ if __name__ == "__main__":
     with open(solution_path, 'r', encoding='utf-8') as f:
         result = json.load(f)
 
-    layers = list(hits.keys())
+    layers = [0] + list(hits.keys())
     segments = []
     for var, value in result.items():
         f_p_i_j = var.split('_')
-        if value == 0:
-            continue
-        print(var)
-        p = int(f_p_i_j[1])
-        i = int(f_p_i_j[2])
-        j = int(f_p_i_j[3])
-        h_1 = hits[layers[p - 1]][i - 1]
-        h_2 = hits[layers[p]][j - 1]
-        segments.append([h_1, h_2])
-
+        if 'f' in f_p_i_j[0] and value == 1.0:
+            print(var, value)
+            p = int(f_p_i_j[1])
+            i = int(f_p_i_j[2])
+            j = int(f_p_i_j[3])
+            h_1 = hits[layers[p]][i - 1]
+            h_2 = hits[layers[p + 1]][j - 1]
+            segments.append([h_1, h_2])
     display(hits, segments, out)

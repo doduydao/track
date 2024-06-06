@@ -42,6 +42,7 @@ class Cost:
         self.cos_beta = self.calculate_cos_beta()
         self.sum_distance = self.calculate_distance()
 
+
     def calculate_cos_beta(self):
         v1 = np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
         v2 = np.array([self.seg_2.d_x, self.seg_2.d_y, self.seg_2.d_z])

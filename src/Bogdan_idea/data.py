@@ -26,9 +26,9 @@ class Segment:
         self.id = (hit_1.index, hit_2.index)
         self.hit_1 = hit_1
         self.hit_2 = hit_2
-        self.x = hit_2.x - hit_1.x
-        self.y = hit_2.y - hit_1.y
-        self.z = hit_2.z - hit_1.z
+        self.d_x = hit_2.x - hit_1.x
+        self.d_y = hit_2.y - hit_1.y
+        self.d_z = hit_2.z - hit_1.z
 
 
 class Cost:
@@ -43,17 +43,19 @@ class Cost:
         self.sum_distance = self.calculate_distance()
 
     def calculate_cos_beta(self):
-        v1 = np.array([self.seg_1.x, self.seg_1.y, self.seg_1.z])
-        v2 = np.array([self.seg_2.x, self.seg_2.y, self.seg_2.z])
+        v1 = np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
+        v2 = np.array([self.seg_2.d_x, self.seg_2.d_y, self.seg_2.d_z])
         dot_product = np.dot(v1, v2)
         norm_v1 = np.linalg.norm(v1)
         norm_v2 = np.linalg.norm(v2)
         return dot_product / (norm_v1 * norm_v2)
 
     def calculate_distance(self):
-        distance_seg_1 = math.sqrt(self.seg_1.x ** 2 + self.seg_1.y ** 2 + self.seg_1.z ** 2)
-        distance_seg_2 = math.sqrt(self.seg_2.x ** 2 + self.seg_2.y ** 2 + self.seg_2.z ** 2)
-        return distance_seg_1 + distance_seg_2
+        v1 = np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
+        v2 = np.array([self.seg_2.d_x, self.seg_2.d_y, self.seg_2.d_z])
+        norm_v1 = np.linalg.norm(v1)
+        norm_v2 = np.linalg.norm(v2)
+        return norm_v1 + norm_v2
 
 def read_hits(path):
     df = pd.read_csv(path)

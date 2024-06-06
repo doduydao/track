@@ -88,15 +88,17 @@ def to_qubo(ob):
     return qubo, offset
 
 
-def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
+def create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, P_3):
     # define model
     model = Model(name="Track")
     model.float_precision = 15
+
     # create variables
     x, ob = define_variables(model, costs)
 
     # create objective function
-    N = len(list_hits)
+    hit_last_layer = hits_by_layers[m]
+    N = len(list_hits) - len(hit_last_layer)
 
     first_part = 0
     sum_segments = 0
@@ -109,12 +111,6 @@ def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
         sum_segments += x[i_j]
 
     second_part = M * ((sum_segments - N) ** 2)
-
-    i_s = set()
-    j_s = set()
-    for k in list(x.keys()):
-        i_s.add(k[0])
-        j_s.add(k[1])
 
     third_part = 0
     for k in list(x.keys()):
@@ -142,35 +138,9 @@ def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
                 # print("abc:", tmp[m], tmp[n])
                 fourth_part += x[tmp[m]] * x[tmp[n]]
 
-
-
-
-
-    # fourth_part = 0
-    # for j in j_s:
-    #     t_2 = 0
-    #     for k in list(x.keys()):
-    #         if j == k[1]:
-    #             t_2 += x[k]
-    #     fourth_part += (1 - t_2) ** 2
-
-    # fifth_part = 0
-    # for k in list(x.keys()):
-    #     j = k[1]
-    #     t_1 = 0
-    #     for k_1 in list(x.keys()):
-    #         if k_1[1] == j:
-    #             t_1 += x[k_1]
-    #     t_2 = 0
-    #     for k_2 in list(x.keys()):
-    #         if k_2[0] == j:
-    #             t_2 += x[k_2]
-    #     if str(t_1) != '0' and str(t_2) != '0':
-    #         fifth_part += (t_1 - t_2) ** 2
-
     ob = first_part + second_part + P_1 * third_part + P_2 * fourth_part
 
-    return 1/2 * ob
+    return 1 / 2 * ob
 
 
 def display(list_hits, result, out=""):
@@ -226,7 +196,7 @@ def build_segments(hits_1, hits_2, list_hits):
 def get_costs(list_hits, hits):
     layers = list(hits.keys())
     costs = []
-
+    # all_segments = []
     for l in layers[1:-1]:
         hits_l = hits[l]
         first_part = []
@@ -234,38 +204,50 @@ def get_costs(list_hits, hits):
             hits_i = hits[i]
             segs_l_i = build_segments(hits_i, hits_l, list_hits)
             first_part.append(segs_l_i)
+            # all_segments += segs_l_i
 
         second_part = []
         for i in range(l + 1, min(l + 3, layers[-1]) + 1):
             hits_i = hits[i]
             segs_l_i = build_segments(hits_l, hits_i, list_hits)
             second_part.append(segs_l_i)
+            # all_segments += segs_l_i
 
         for f in first_part:
             for s in second_part:
                 for seg_f in f:
                     for seg_s in s:
                         if seg_f.hit_2.hit_id == seg_s.hit_1.hit_id:
-                            costs.append(Cost(seg_f, seg_s))
+                            cost = Cost(seg_f, seg_s)
+                            cos_beta = cost.cos_beta
+                            print("cos_beta:", cos_beta)
+                            if cos_beta >= math.cos(math.pi/20):
+                                costs.append(cost)
+    all_segments = set()
+    for cost in costs:
+        all_segments.add(cost.seg_1)
+        all_segments.add(cost.seg_2)
+    print("number of segments:", len(all_segments))
     return costs
 
 
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/2hits/'
+    folder = '/6hits/'
     data_path = src_path + folder + 'known_track/hits.csv'
     hits_by_layers = read_hits(data_path)[9]
+
     list_hits = []
     for hs in list(hits_by_layers.values()):
         list_hits += hs
     costs = get_costs(list_hits, hits_by_layers)
 
-    m = 7
+    m = len(hits_by_layers.keys())
     M = 1
     P_1 = 1
     P_2 = 1
     P_3 = 1
-    ob_funct = create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3)
+    ob_funct = create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, P_3)
     qubo, offset = to_qubo(ob_funct)
 
     # for k, v in qubo.items():
@@ -277,8 +259,9 @@ if __name__ == '__main__':
 
     ob_value = response.first.energy
     result = response.first.sample
+
     if offset != 0:
         ob_value *= offset
     print("ob_value:", ob_value)
-    figure_out = 'results/2hits/known_track/result_dwave.PNG'
+    figure_out = 'results' + folder + 'known_track/result_dwave.PNG'
     display(list_hits, result, out=figure_out)

@@ -2,6 +2,7 @@ import numpy as np
 import math
 import pandas as pd
 
+
 class Hit:
     def __init__(self, hit_id, particle_id=None, x=0, y=0, z=0, volume_id=None, layer_id=None, module_id=None,
                  selected=None):
@@ -37,6 +38,7 @@ class Angle:
         magnitude2 = np.linalg.norm(v2)
         return math.pi - np.arccos(dot_product / (magnitude1 * magnitude2))
 
+
 def read_hits(path):
     df = pd.read_csv(path)
     # print(df)
@@ -45,15 +47,15 @@ def read_hits(path):
 
     for i in list_df:
         hit = Hit(
-                  hit_id=i[0],
-                  x=i[1],
-                  y=i[2],
-                  z=i[3],
-                  volume_id=i[4],
-                  layer_id =i[5]/2,
-                  module_id = i[6],
-                  particle_id = i[7]
-                  )
+            hit_id=i[0],
+            x=i[1],
+            y=i[2],
+            z=i[3],
+            volume_id=i[4],
+            layer_id=i[5] / 2,
+            module_id=i[6],
+            particle_id=i[7]
+        )
         volume_id = int(hit.volume_id)
         if volume_id not in volumes:
             volumes[volume_id] = [hit]
@@ -71,6 +73,7 @@ def read_hits(path):
 
     return volumes
 
+
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
     folder = '/50hits/'
@@ -85,7 +88,7 @@ if __name__ == '__main__':
     for p, hp in hits.items():
         print(p)
         for h in hp:
-            p_id = h.particle_id/10000000000
+            p_id = h.particle_id / 10000000000
             if p_id not in track:
                 track[p_id] = [h]
             else:

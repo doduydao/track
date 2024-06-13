@@ -24,6 +24,7 @@ class Hit:
 class Segment:
     def __init__(self, hit_1, hit_2):
         self.id = (hit_1.index, hit_2.index)
+        self.gaps = abs(hit_1.layer_id - hit_2.layer_id)
         self.hit_1 = hit_1
         self.hit_2 = hit_2
         self.d_x = hit_2.x - hit_1.x

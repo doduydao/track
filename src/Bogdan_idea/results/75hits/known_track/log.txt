@@ -1,0 +1,529 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/cplex_peterson_cost_dao.py
+Folder exist
+number of segments: 1843
+wrote!
+450
+segments: 1843
+Model: Track
+ - number of variables: 1847
+   - binary=1843, integer=0, continuous=4
+ - number of constraints: 3690
+   - linear=3687, quadratic=3
+ - parameters: defaults
+ - objective: maximize
+ - problem type is: MIQCP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 3 times.
+MIQCP Presolve eliminated 3700 rows and 1830 columns.
+MIQCP Presolve modified 10977 coefficients.
+Aggregator did 45 substitutions.
+Reduced MIQCP has 401 rows, 799 columns, and 2384 nonzeros.
+Reduced MIQCP has 45 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Reduced MIQCP has 3 quadratic constraints.
+Presolve time = 1.09 sec. (432.91 ticks)
+Probing fixed 20 vars, tightened 281 bounds.
+Probing time = 0.00 sec. (0.72 ticks)
+Clique table members: 31.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.00 sec. (3.40 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+      0     0        1.3957     0                      2.4484      284
+      0     0        1.3899     0                     Cone: 1      362
+      0     0        1.3811     4                     Cone: 2      372
+      0     0        1.3794     3                     Cone: 3      379
+      0     0        1.3729     3                     Cone: 4      384
+      0     0        1.3707     8                     Cone: 5      388
+      0     0        1.3679    10                     Cone: 6      393
+      0     0        1.3311    12                   Cone: 209      607
+      0     0        1.3311    13                   Cone: 246      618
+      0     0        1.3311    19                   Cone: 269      638
+      0     0        1.3311    19                   Cone: 282      646
+      0     0        1.3311    19                   Cone: 291      650
+      0     0        1.3311    19                   Cone: 294      653
+      0     0        1.3311    19                   Cone: 295      654
+      0     0        1.3311    19                      1.3311      654
+*     0+    0                            1.2985        1.3311             2.51%
+      0     0        1.3256    19        1.2985      Cuts: 10      688    2.09%
+*     0+    0                            1.3014        1.3256             1.86%
+      0     2        1.3256    19        1.3014        1.3256      688    1.86%
+Elapsed time = 1.21 sec. (635.63 ticks, tree = 0.02 MB, solutions = 2)
+*    84+    4                            1.3014        1.3155             1.08%
+*   107+    6                            1.3014        1.3094             0.61%
+*   127     7      integral     0        1.3014        1.3064     1431    0.38%
+
+Flow cuts applied:  4
+Mixed integer rounding cuts applied:  5
+Lift and project cuts applied:  1
+Cone linearizations applied:  253
+
+Root node processing (before b&c):
+  Real time             =    1.21 sec. (635.27 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.05 sec. (133.88 ticks)
+  Sync time (average)   =    0.03 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    1.26 sec. (769.16 ticks)
+{'index': '0', 'name': 'x_0_83', 'value': '1.0'}
+{'index': '4', 'name': 'x_1_84', 'value': '1.0'}
+{'index': '10', 'name': 'x_2_78', 'value': '1.0'}
+{'index': '15', 'name': 'x_3_80', 'value': '1.0'}
+{'index': '19', 'name': 'x_4_76', 'value': '1.0'}
+{'index': '24', 'name': 'x_5_75', 'value': '1.0'}
+{'index': '27', 'name': 'x_6_82', 'value': '1.0'}
+{'index': '35', 'name': 'x_7_79', 'value': '1.0'}
+{'index': '41', 'name': 'x_8_81', 'value': '1.0'}
+{'index': '46', 'name': 'x_9_77', 'value': '1.0'}
+{'index': '53', 'name': 'x_10_87', 'value': '1.0'}
+{'index': '62', 'name': 'x_11_86', 'value': '1.0'}
+{'index': '68', 'name': 'x_12_85', 'value': '1.0'}
+{'index': '71', 'name': 'x_13_89', 'value': '1.0'}
+{'index': '76', 'name': 'x_14_95', 'value': '1.0'}
+{'index': '81', 'name': 'x_15_94', 'value': '1.0'}
+{'index': '86', 'name': 'x_16_88', 'value': '1.0'}
+{'index': '91', 'name': 'x_17_91', 'value': '1.0'}
+{'index': '94', 'name': 'x_18_90', 'value': '1.0'}
+{'index': '98', 'name': 'x_19_93', 'value': '1.0'}
+{'index': '104', 'name': 'x_20_92', 'value': '1.0'}
+{'index': '108', 'name': 'x_21_104', 'value': '1.0'}
+{'index': '112', 'name': 'x_22_97', 'value': '1.0'}
+{'index': '115', 'name': 'x_23_100', 'value': '1.0'}
+{'index': '120', 'name': 'x_24_105', 'value': '1.0'}
+{'index': '123', 'name': 'x_25_102', 'value': '1.0'}
+{'index': '125', 'name': 'x_26_103', 'value': '1.0'}
+{'index': '128', 'name': 'x_27_98', 'value': '1.0'}
+{'index': '132', 'name': 'x_28_101', 'value': '1.0'}
+{'index': '135', 'name': 'x_29_99', 'value': '1.0'}
+{'index': '138', 'name': 'x_30_96', 'value': '1.0'}
+{'index': '142', 'name': 'x_31_106', 'value': '1.0'}
+{'index': '146', 'name': 'x_32_112', 'value': '1.0'}
+{'index': '151', 'name': 'x_33_107', 'value': '1.0'}
+{'index': '154', 'name': 'x_34_113', 'value': '1.0'}
+{'index': '159', 'name': 'x_35_109', 'value': '1.0'}
+{'index': '163', 'name': 'x_36_111', 'value': '1.0'}
+{'index': '167', 'name': 'x_37_110', 'value': '1.0'}
+{'index': '172', 'name': 'x_38_108', 'value': '1.0'}
+{'index': '176', 'name': 'x_39_121', 'value': '1.0'}
+{'index': '180', 'name': 'x_40_118', 'value': '1.0'}
+{'index': '184', 'name': 'x_41_116', 'value': '1.0'}
+{'index': '187', 'name': 'x_42_114', 'value': '1.0'}
+{'index': '190', 'name': 'x_43_119', 'value': '1.0'}
+{'index': '194', 'name': 'x_44_115', 'value': '1.0'}
+{'index': '197', 'name': 'x_45_120', 'value': '1.0'}
+{'index': '202', 'name': 'x_46_117', 'value': '1.0'}
+{'index': '206', 'name': 'x_47_125', 'value': '1.0'}
+{'index': '211', 'name': 'x_48_124', 'value': '1.0'}
+{'index': '215', 'name': 'x_49_123', 'value': '1.0'}
+{'index': '219', 'name': 'x_50_126', 'value': '1.0'}
+{'index': '225', 'name': 'x_51_127', 'value': '1.0'}
+{'index': '229', 'name': 'x_52_122', 'value': '1.0'}
+{'index': '234', 'name': 'x_53_128', 'value': '1.0'}
+{'index': '238', 'name': 'x_54_130', 'value': '1.0'}
+{'index': '242', 'name': 'x_55_135', 'value': '1.0'}
+{'index': '246', 'name': 'x_56_133', 'value': '1.0'}
+{'index': '252', 'name': 'x_57_134', 'value': '1.0'}
+{'index': '255', 'name': 'x_58_129', 'value': '1.0'}
+{'index': '258', 'name': 'x_59_132', 'value': '1.0'}
+{'index': '264', 'name': 'x_60_131', 'value': '1.0'}
+{'index': '267', 'name': 'x_61_136', 'value': '1.0'}
+{'index': '271', 'name': 'x_62_138', 'value': '1.0'}
+{'index': '276', 'name': 'x_63_140', 'value': '1.0'}
+{'index': '282', 'name': 'x_64_142', 'value': '1.0'}
+{'index': '286', 'name': 'x_65_137', 'value': '1.0'}
+{'index': '291', 'name': 'x_66_141', 'value': '1.0'}
+{'index': '296', 'name': 'x_67_139', 'value': '1.0'}
+{'index': '301', 'name': 'x_68_147', 'value': '1.0'}
+{'index': '304', 'name': 'x_69_144', 'value': '1.0'}
+{'index': '307', 'name': 'x_70_146', 'value': '1.0'}
+{'index': '310', 'name': 'x_71_145', 'value': '1.0'}
+{'index': '315', 'name': 'x_72_149', 'value': '1.0'}
+{'index': '321', 'name': 'x_73_143', 'value': '1.0'}
+{'index': '325', 'name': 'x_74_148', 'value': '1.0'}
+{'index': '328', 'name': 'x_75_153', 'value': '1.0'}
+{'index': '332', 'name': 'x_76_154', 'value': '1.0'}
+{'index': '337', 'name': 'x_77_158', 'value': '1.0'}
+{'index': '343', 'name': 'x_78_157', 'value': '1.0'}
+{'index': '352', 'name': 'x_79_156', 'value': '1.0'}
+{'index': '358', 'name': 'x_80_159', 'value': '1.0'}
+{'index': '361', 'name': 'x_81_152', 'value': '1.0'}
+{'index': '368', 'name': 'x_82_155', 'value': '1.0'}
+{'index': '375', 'name': 'x_83_151', 'value': '1.0'}
+{'index': '378', 'name': 'x_84_150', 'value': '1.0'}
+{'index': '387', 'name': 'x_85_161', 'value': '1.0'}
+{'index': '390', 'name': 'x_86_162', 'value': '1.0'}
+{'index': '395', 'name': 'x_87_160', 'value': '1.0'}
+{'index': '403', 'name': 'x_88_165', 'value': '1.0'}
+{'index': '408', 'name': 'x_89_167', 'value': '1.0'}
+{'index': '411', 'name': 'x_90_164', 'value': '1.0'}
+{'index': '415', 'name': 'x_91_166', 'value': '1.0'}
+{'index': '419', 'name': 'x_92_168', 'value': '1.0'}
+{'index': '422', 'name': 'x_93_163', 'value': '1.0'}
+{'index': '429', 'name': 'x_94_169', 'value': '1.0'}
+{'index': '435', 'name': 'x_95_170', 'value': '1.0'}
+{'index': '443', 'name': 'x_96_179', 'value': '1.0'}
+{'index': '447', 'name': 'x_97_176', 'value': '1.0'}
+{'index': '452', 'name': 'x_98_180', 'value': '1.0'}
+{'index': '455', 'name': 'x_99_171', 'value': '1.0'}
+{'index': '460', 'name': 'x_100_178', 'value': '1.0'}
+{'index': '465', 'name': 'x_101_177', 'value': '1.0'}
+{'index': '469', 'name': 'x_102_175', 'value': '1.0'}
+{'index': '472', 'name': 'x_103_172', 'value': '1.0'}
+{'index': '476', 'name': 'x_104_173', 'value': '1.0'}
+{'index': '481', 'name': 'x_105_174', 'value': '1.0'}
+{'index': '486', 'name': 'x_106_185', 'value': '1.0'}
+{'index': '490', 'name': 'x_107_187', 'value': '1.0'}
+{'index': '494', 'name': 'x_108_181', 'value': '1.0'}
+{'index': '500', 'name': 'x_109_186', 'value': '1.0'}
+{'index': '506', 'name': 'x_110_182', 'value': '1.0'}
+{'index': '509', 'name': 'x_111_183', 'value': '1.0'}
+{'index': '512', 'name': 'x_112_188', 'value': '1.0'}
+{'index': '517', 'name': 'x_113_184', 'value': '1.0'}
+{'index': '523', 'name': 'x_114_192', 'value': '1.0'}
+{'index': '528', 'name': 'x_115_189', 'value': '1.0'}
+{'index': '534', 'name': 'x_116_195', 'value': '1.0'}
+{'index': '538', 'name': 'x_117_196', 'value': '1.0'}
+{'index': '543', 'name': 'x_118_194', 'value': '1.0'}
+{'index': '548', 'name': 'x_119_190', 'value': '1.0'}
+{'index': '554', 'name': 'x_120_191', 'value': '1.0'}
+{'index': '559', 'name': 'x_121_193', 'value': '1.0'}
+{'index': '563', 'name': 'x_122_200', 'value': '1.0'}
+{'index': '566', 'name': 'x_123_198', 'value': '1.0'}
+{'index': '569', 'name': 'x_124_202', 'value': '1.0'}
+{'index': '573', 'name': 'x_125_197', 'value': '1.0'}
+{'index': '578', 'name': 'x_126_201', 'value': '1.0'}
+{'index': '582', 'name': 'x_127_199', 'value': '1.0'}
+{'index': '589', 'name': 'x_128_206', 'value': '1.0'}
+{'index': '596', 'name': 'x_129_207', 'value': '1.0'}
+{'index': '601', 'name': 'x_130_203', 'value': '1.0'}
+{'index': '606', 'name': 'x_131_208', 'value': '1.0'}
+{'index': '614', 'name': 'x_132_211', 'value': '1.0'}
+{'index': '618', 'name': 'x_133_210', 'value': '1.0'}
+{'index': '627', 'name': 'x_134_204', 'value': '1.0'}
+{'index': '635', 'name': 'x_135_209', 'value': '1.0'}
+{'index': '639', 'name': 'x_136_205', 'value': '1.0'}
+{'index': '643', 'name': 'x_137_212', 'value': '1.0'}
+{'index': '650', 'name': 'x_138_213', 'value': '1.0'}
+{'index': '654', 'name': 'x_139_214', 'value': '1.0'}
+{'index': '661', 'name': 'x_140_215', 'value': '1.0'}
+{'index': '665', 'name': 'x_141_217', 'value': '1.0'}
+{'index': '671', 'name': 'x_142_216', 'value': '1.0'}
+{'index': '680', 'name': 'x_143_221', 'value': '1.0'}
+{'index': '688', 'name': 'x_144_224', 'value': '1.0'}
+{'index': '692', 'name': 'x_145_219', 'value': '1.0'}
+{'index': '697', 'name': 'x_146_220', 'value': '1.0'}
+{'index': '702', 'name': 'x_147_223', 'value': '1.0'}
+{'index': '707', 'name': 'x_148_222', 'value': '1.0'}
+{'index': '711', 'name': 'x_149_218', 'value': '1.0'}
+{'index': '717', 'name': 'x_150_226', 'value': '1.0'}
+{'index': '724', 'name': 'x_151_228', 'value': '1.0'}
+{'index': '727', 'name': 'x_152_234', 'value': '1.0'}
+{'index': '733', 'name': 'x_153_225', 'value': '1.0'}
+{'index': '738', 'name': 'x_154_233', 'value': '1.0'}
+{'index': '744', 'name': 'x_155_230', 'value': '1.0'}
+{'index': '754', 'name': 'x_156_229', 'value': '1.0'}
+{'index': '759', 'name': 'x_157_231', 'value': '1.0'}
+{'index': '770', 'name': 'x_158_232', 'value': '1.0'}
+{'index': '774', 'name': 'x_159_227', 'value': '1.0'}
+{'index': '779', 'name': 'x_160_236', 'value': '1.0'}
+{'index': '784', 'name': 'x_161_237', 'value': '1.0'}
+{'index': '790', 'name': 'x_162_235', 'value': '1.0'}
+{'index': '795', 'name': 'x_163_240', 'value': '1.0'}
+{'index': '804', 'name': 'x_164_241', 'value': '1.0'}
+{'index': '807', 'name': 'x_165_239', 'value': '1.0'}
+{'index': '812', 'name': 'x_166_245', 'value': '1.0'}
+{'index': '815', 'name': 'x_167_244', 'value': '1.0'}
+{'index': '822', 'name': 'x_168_242', 'value': '1.0'}
+{'index': '829', 'name': 'x_169_243', 'value': '1.0'}
+{'index': '835', 'name': 'x_170_238', 'value': '1.0'}
+{'index': '840', 'name': 'x_171_247', 'value': '1.0'}
+{'index': '845', 'name': 'x_172_252', 'value': '1.0'}
+{'index': '848', 'name': 'x_173_248', 'value': '1.0'}
+{'index': '851', 'name': 'x_174_249', 'value': '1.0'}
+{'index': '860', 'name': 'x_175_254', 'value': '1.0'}
+{'index': '862', 'name': 'x_176_253', 'value': '1.0'}
+{'index': '866', 'name': 'x_177_255', 'value': '1.0'}
+{'index': '869', 'name': 'x_178_251', 'value': '1.0'}
+{'index': '877', 'name': 'x_179_246', 'value': '1.0'}
+{'index': '886', 'name': 'x_180_250', 'value': '1.0'}
+{'index': '891', 'name': 'x_181_261', 'value': '1.0'}
+{'index': '895', 'name': 'x_182_260', 'value': '1.0'}
+{'index': '900', 'name': 'x_183_256', 'value': '1.0'}
+{'index': '905', 'name': 'x_184_263', 'value': '1.0'}
+{'index': '909', 'name': 'x_185_258', 'value': '1.0'}
+{'index': '913', 'name': 'x_186_262', 'value': '1.0'}
+{'index': '917', 'name': 'x_187_257', 'value': '1.0'}
+{'index': '926', 'name': 'x_188_259', 'value': '1.0'}
+{'index': '930', 'name': 'x_189_264', 'value': '1.0'}
+{'index': '936', 'name': 'x_190_268', 'value': '1.0'}
+{'index': '944', 'name': 'x_191_269', 'value': '1.0'}
+{'index': '949', 'name': 'x_192_267', 'value': '1.0'}
+{'index': '954', 'name': 'x_193_271', 'value': '1.0'}
+{'index': '959', 'name': 'x_194_266', 'value': '1.0'}
+{'index': '965', 'name': 'x_195_265', 'value': '1.0'}
+{'index': '970', 'name': 'x_196_270', 'value': '1.0'}
+{'index': '973', 'name': 'x_197_272', 'value': '1.0'}
+{'index': '978', 'name': 'x_198_276', 'value': '1.0'}
+{'index': '982', 'name': 'x_199_277', 'value': '1.0'}
+{'index': '989', 'name': 'x_200_274', 'value': '1.0'}
+{'index': '994', 'name': 'x_201_275', 'value': '1.0'}
+{'index': '1000', 'name': 'x_202_273', 'value': '1.0'}
+{'index': '1005', 'name': 'x_203_283', 'value': '1.0'}
+{'index': '1011', 'name': 'x_204_282', 'value': '1.0'}
+{'index': '1015', 'name': 'x_205_279', 'value': '1.0'}
+{'index': '1018', 'name': 'x_206_285', 'value': '1.0'}
+{'index': '1023', 'name': 'x_207_284', 'value': '1.0'}
+{'index': '1029', 'name': 'x_208_286', 'value': '1.0'}
+{'index': '1036', 'name': 'x_209_278', 'value': '1.0'}
+{'index': '1042', 'name': 'x_210_281', 'value': '1.0'}
+{'index': '1047', 'name': 'x_211_280', 'value': '1.0'}
+{'index': '1052', 'name': 'x_212_288', 'value': '1.0'}
+{'index': '1060', 'name': 'x_213_287', 'value': '1.0'}
+{'index': '1064', 'name': 'x_214_290', 'value': '1.0'}
+{'index': '1074', 'name': 'x_215_292', 'value': '1.0'}
+{'index': '1078', 'name': 'x_216_291', 'value': '1.0'}
+{'index': '1085', 'name': 'x_217_289', 'value': '1.0'}
+{'index': '1093', 'name': 'x_218_296', 'value': '1.0'}
+{'index': '1099', 'name': 'x_219_299', 'value': '1.0'}
+{'index': '1104', 'name': 'x_220_293', 'value': '1.0'}
+{'index': '1112', 'name': 'x_221_295', 'value': '1.0'}
+{'index': '1117', 'name': 'x_222_298', 'value': '1.0'}
+{'index': '1120', 'name': 'x_223_297', 'value': '1.0'}
+{'index': '1126', 'name': 'x_224_294', 'value': '1.0'}
+{'index': '1130', 'name': 'x_225_308', 'value': '1.0'}
+{'index': '1134', 'name': 'x_226_303', 'value': '1.0'}
+{'index': '1140', 'name': 'x_227_309', 'value': '1.0'}
+{'index': '1143', 'name': 'x_228_300', 'value': '1.0'}
+{'index': '1146', 'name': 'x_229_306', 'value': '1.0'}
+{'index': '1151', 'name': 'x_230_305', 'value': '1.0'}
+{'index': '1159', 'name': 'x_231_304', 'value': '1.0'}
+{'index': '1170', 'name': 'x_232_301', 'value': '1.0'}
+{'index': '1174', 'name': 'x_233_302', 'value': '1.0'}
+{'index': '1178', 'name': 'x_234_307', 'value': '1.0'}
+{'index': '1188', 'name': 'x_235_311', 'value': '1.0'}
+{'index': '1191', 'name': 'x_236_310', 'value': '1.0'}
+{'index': '1195', 'name': 'x_237_312', 'value': '1.0'}
+{'index': '1198', 'name': 'x_238_314', 'value': '1.0'}
+{'index': '1204', 'name': 'x_239_316', 'value': '1.0'}
+{'index': '1210', 'name': 'x_240_313', 'value': '1.0'}
+{'index': '1216', 'name': 'x_241_315', 'value': '1.0'}
+{'index': '1220', 'name': 'x_242_318', 'value': '1.0'}
+{'index': '1226', 'name': 'x_243_317', 'value': '1.0'}
+{'index': '1232', 'name': 'x_244_319', 'value': '1.0'}
+{'index': '1235', 'name': 'x_245_320', 'value': '1.0'}
+{'index': '1237', 'name': 'x_246_322', 'value': '1.0'}
+{'index': '1243', 'name': 'x_247_329', 'value': '1.0'}
+{'index': '1247', 'name': 'x_248_323', 'value': '1.0'}
+{'index': '1250', 'name': 'x_249_324', 'value': '1.0'}
+{'index': '1254', 'name': 'x_250_321', 'value': '1.0'}
+{'index': '1258', 'name': 'x_251_325', 'value': '1.0'}
+{'index': '1262', 'name': 'x_252_327', 'value': '1.0'}
+{'index': '1266', 'name': 'x_253_326', 'value': '1.0'}
+{'index': '1271', 'name': 'x_254_330', 'value': '1.0'}
+{'index': '1272', 'name': 'x_255_328', 'value': '1.0'}
+{'index': '1275', 'name': 'x_256_336', 'value': '1.0'}
+{'index': '1278', 'name': 'x_257_337', 'value': '1.0'}
+{'index': '1282', 'name': 'x_258_335', 'value': '1.0'}
+{'index': '1287', 'name': 'x_259_338', 'value': '1.0'}
+{'index': '1290', 'name': 'x_260_332', 'value': '1.0'}
+{'index': '1295', 'name': 'x_261_334', 'value': '1.0'}
+{'index': '1300', 'name': 'x_262_333', 'value': '1.0'}
+{'index': '1305', 'name': 'x_263_331', 'value': '1.0'}
+{'index': '1309', 'name': 'x_264_342', 'value': '1.0'}
+{'index': '1313', 'name': 'x_265_344', 'value': '1.0'}
+{'index': '1317', 'name': 'x_266_339', 'value': '1.0'}
+{'index': '1320', 'name': 'x_267_340', 'value': '1.0'}
+{'index': '1328', 'name': 'x_268_343', 'value': '1.0'}
+{'index': '1332', 'name': 'x_269_345', 'value': '1.0'}
+{'index': '1335', 'name': 'x_270_341', 'value': '1.0'}
+{'index': '1338', 'name': 'x_271_346', 'value': '1.0'}
+{'index': '1343', 'name': 'x_272_351', 'value': '1.0'}
+{'index': '1350', 'name': 'x_273_350', 'value': '1.0'}
+{'index': '1353', 'name': 'x_274_347', 'value': '1.0'}
+{'index': '1357', 'name': 'x_275_349', 'value': '1.0'}
+{'index': '1362', 'name': 'x_276_352', 'value': '1.0'}
+{'index': '1366', 'name': 'x_277_348', 'value': '1.0'}
+{'index': '1371', 'name': 'x_278_361', 'value': '1.0'}
+{'index': '1374', 'name': 'x_279_353', 'value': '1.0'}
+{'index': '1384', 'name': 'x_280_358', 'value': '1.0'}
+{'index': '1389', 'name': 'x_281_355', 'value': '1.0'}
+{'index': '1393', 'name': 'x_282_357', 'value': '1.0'}
+{'index': '1398', 'name': 'x_283_354', 'value': '1.0'}
+{'index': '1402', 'name': 'x_284_359', 'value': '1.0'}
+{'index': '1405', 'name': 'x_285_356', 'value': '1.0'}
+{'index': '1413', 'name': 'x_286_360', 'value': '1.0'}
+{'index': '1417', 'name': 'x_287_367', 'value': '1.0'}
+{'index': '1420', 'name': 'x_288_365', 'value': '1.0'}
+{'index': '1425', 'name': 'x_289_363', 'value': '1.0'}
+{'index': '1433', 'name': 'x_290_364', 'value': '1.0'}
+{'index': '1440', 'name': 'x_291_366', 'value': '1.0'}
+{'index': '1449', 'name': 'x_292_362', 'value': '1.0'}
+{'index': '1455', 'name': 'x_293_372', 'value': '1.0'}
+{'index': '1460', 'name': 'x_294_370', 'value': '1.0'}
+{'index': '1464', 'name': 'x_295_369', 'value': '1.0'}
+{'index': '1468', 'name': 'x_296_371', 'value': '1.0'}
+{'index': '1472', 'name': 'x_297_368', 'value': '1.0'}
+{'index': '1477', 'name': 'x_298_374', 'value': '1.0'}
+{'index': '1480', 'name': 'x_299_373', 'value': '1.0'}
+{'index': '1484', 'name': 'x_300_378', 'value': '1.0'}
+{'index': '1486', 'name': 'x_301_376', 'value': '1.0'}
+{'index': '1489', 'name': 'x_302_382', 'value': '1.0'}
+{'index': '1491', 'name': 'x_303_380', 'value': '1.0'}
+{'index': '1494', 'name': 'x_304_375', 'value': '1.0'}
+{'index': '1506', 'name': 'x_305_379', 'value': '1.0'}
+{'index': '1510', 'name': 'x_306_377', 'value': '1.0'}
+{'index': '1515', 'name': 'x_307_381', 'value': '1.0'}
+{'index': '1521', 'name': 'x_308_383', 'value': '1.0'}
+{'index': '1523', 'name': 'x_309_384', 'value': '1.0'}
+{'index': '1525', 'name': 'x_310_387', 'value': '1.0'}
+{'index': '1527', 'name': 'x_311_386', 'value': '1.0'}
+{'index': '1529', 'name': 'x_312_385', 'value': '1.0'}
+{'index': '1532', 'name': 'x_313_392', 'value': '1.0'}
+{'index': '1537', 'name': 'x_314_391', 'value': '1.0'}
+{'index': '1541', 'name': 'x_315_393', 'value': '1.0'}
+{'index': '1543', 'name': 'x_316_389', 'value': '1.0'}
+{'index': '1547', 'name': 'x_317_388', 'value': '1.0'}
+{'index': '1550', 'name': 'x_318_390', 'value': '1.0'}
+{'index': '1554', 'name': 'x_319_394', 'value': '1.0'}
+{'index': '1556', 'name': 'x_320_395', 'value': '1.0'}
+{'index': '1557', 'name': 'x_321_396', 'value': '1.0'}
+{'index': '1560', 'name': 'x_322_397', 'value': '1.0'}
+{'index': '1566', 'name': 'x_323_401', 'value': '1.0'}
+{'index': '1569', 'name': 'x_324_400', 'value': '1.0'}
+{'index': '1572', 'name': 'x_325_399', 'value': '1.0'}
+{'index': '1577', 'name': 'x_326_398', 'value': '1.0'}
+{'index': '1581', 'name': 'x_327_403', 'value': '1.0'}
+{'index': '1583', 'name': 'x_328_404', 'value': '1.0'}
+{'index': '1585', 'name': 'x_329_402', 'value': '1.0'}
+{'index': '1587', 'name': 'x_330_405', 'value': '1.0'}
+{'index': '1589', 'name': 'x_331_412', 'value': '1.0'}
+{'index': '1591', 'name': 'x_332_408', 'value': '1.0'}
+{'index': '1596', 'name': 'x_333_407', 'value': '1.0'}
+{'index': '1600', 'name': 'x_334_406', 'value': '1.0'}
+{'index': '1605', 'name': 'x_335_410', 'value': '1.0'}
+{'index': '1607', 'name': 'x_336_411', 'value': '1.0'}
+{'index': '1610', 'name': 'x_337_409', 'value': '1.0'}
+{'index': '1613', 'name': 'x_338_413', 'value': '1.0'}
+{'index': '1615', 'name': 'x_339_415', 'value': '1.0'}
+{'index': '1618', 'name': 'x_340_414', 'value': '1.0'}
+{'index': '1622', 'name': 'x_341_418', 'value': '1.0'}
+{'index': '1624', 'name': 'x_342_416', 'value': '1.0'}
+{'index': '1630', 'name': 'x_343_419', 'value': '1.0'}
+{'index': '1632', 'name': 'x_344_420', 'value': '1.0'}
+{'index': '1635', 'name': 'x_345_417', 'value': '1.0'}
+{'index': '1637', 'name': 'x_346_421', 'value': '1.0'}
+{'index': '1639', 'name': 'x_347_422', 'value': '1.0'}
+{'index': '1642', 'name': 'x_348_423', 'value': '1.0'}
+{'index': '1647', 'name': 'x_349_426', 'value': '1.0'}
+{'index': '1649', 'name': 'x_350_427', 'value': '1.0'}
+{'index': '1653', 'name': 'x_351_424', 'value': '1.0'}
+{'index': '1659', 'name': 'x_352_425', 'value': '1.0'}
+{'index': '1662', 'name': 'x_353_434', 'value': '1.0'}
+{'index': '1665', 'name': 'x_354_428', 'value': '1.0'}
+{'index': '1671', 'name': 'x_355_430', 'value': '1.0'}
+{'index': '1674', 'name': 'x_356_432', 'value': '1.0'}
+{'index': '1678', 'name': 'x_357_433', 'value': '1.0'}
+{'index': '1681', 'name': 'x_358_431', 'value': '1.0'}
+{'index': '1684', 'name': 'x_359_436', 'value': '1.0'}
+{'index': '1686', 'name': 'x_360_429', 'value': '1.0'}
+{'index': '1691', 'name': 'x_361_435', 'value': '1.0'}
+{'index': '1695', 'name': 'x_362_442', 'value': '1.0'}
+{'index': '1698', 'name': 'x_363_440', 'value': '1.0'}
+{'index': '1701', 'name': 'x_364_437', 'value': '1.0'}
+{'index': '1705', 'name': 'x_365_438', 'value': '1.0'}
+{'index': '1708', 'name': 'x_366_439', 'value': '1.0'}
+{'index': '1710', 'name': 'x_367_441', 'value': '1.0'}
+{'index': '1712', 'name': 'x_368_444', 'value': '1.0'}
+{'index': '1715', 'name': 'x_369_445', 'value': '1.0'}
+{'index': '1719', 'name': 'x_370_446', 'value': '1.0'}
+{'index': '1724', 'name': 'x_371_448', 'value': '1.0'}
+{'index': '1726', 'name': 'x_372_443', 'value': '1.0'}
+{'index': '1728', 'name': 'x_373_449', 'value': '1.0'}
+{'index': '1731', 'name': 'x_374_447', 'value': '1.0'}
+{'index': '1734', 'name': 'x_375_453', 'value': '1.0'}
+{'index': '1735', 'name': 'x_376_452', 'value': '1.0'}
+{'index': '1736', 'name': 'x_377_457', 'value': '1.0'}
+{'index': '1737', 'name': 'x_378_456', 'value': '1.0'}
+{'index': '1738', 'name': 'x_379_454', 'value': '1.0'}
+{'index': '1739', 'name': 'x_380_450', 'value': '1.0'}
+{'index': '1741', 'name': 'x_381_451', 'value': '1.0'}
+{'index': '1743', 'name': 'x_382_455', 'value': '1.0'}
+{'index': '1744', 'name': 'x_383_459', 'value': '1.0'}
+{'index': '1745', 'name': 'x_384_458', 'value': '1.0'}
+{'index': '1746', 'name': 'x_385_462', 'value': '1.0'}
+{'index': '1747', 'name': 'x_386_460', 'value': '1.0'}
+{'index': '1748', 'name': 'x_387_461', 'value': '1.0'}
+{'index': '1749', 'name': 'x_388_465', 'value': '1.0'}
+{'index': '1751', 'name': 'x_389_463', 'value': '1.0'}
+{'index': '1752', 'name': 'x_390_464', 'value': '1.0'}
+{'index': '1753', 'name': 'x_391_469', 'value': '1.0'}
+{'index': '1755', 'name': 'x_392_466', 'value': '1.0'}
+{'index': '1756', 'name': 'x_393_468', 'value': '1.0'}
+{'index': '1757', 'name': 'x_394_467', 'value': '1.0'}
+{'index': '1758', 'name': 'x_395_470', 'value': '1.0'}
+{'index': '1759', 'name': 'x_396_471', 'value': '1.0'}
+{'index': '1761', 'name': 'x_397_475', 'value': '1.0'}
+{'index': '1762', 'name': 'x_398_472', 'value': '1.0'}
+{'index': '1765', 'name': 'x_399_474', 'value': '1.0'}
+{'index': '1767', 'name': 'x_400_473', 'value': '1.0'}
+{'index': '1771', 'name': 'x_401_480', 'value': '1.0'}
+{'index': '1772', 'name': 'x_402_479', 'value': '1.0'}
+{'index': '1773', 'name': 'x_403_476', 'value': '1.0'}
+{'index': '1775', 'name': 'x_404_478', 'value': '1.0'}
+{'index': '1776', 'name': 'x_405_477', 'value': '1.0'}
+{'index': '1778', 'name': 'x_406_486', 'value': '1.0'}
+{'index': '1779', 'name': 'x_407_481', 'value': '1.0'}
+{'index': '1782', 'name': 'x_408_482', 'value': '1.0'}
+{'index': '1783', 'name': 'x_409_484', 'value': '1.0'}
+{'index': '1784', 'name': 'x_410_483', 'value': '1.0'}
+{'index': '1786', 'name': 'x_411_488', 'value': '1.0'}
+{'index': '1787', 'name': 'x_412_485', 'value': '1.0'}
+{'index': '1788', 'name': 'x_413_487', 'value': '1.0'}
+{'index': '1789', 'name': 'x_414_489', 'value': '1.0'}
+{'index': '1793', 'name': 'x_415_490', 'value': '1.0'}
+{'index': '1796', 'name': 'x_416_491', 'value': '1.0'}
+{'index': '1798', 'name': 'x_417_495', 'value': '1.0'}
+{'index': '1799', 'name': 'x_418_496', 'value': '1.0'}
+{'index': '1800', 'name': 'x_419_494', 'value': '1.0'}
+{'index': '1801', 'name': 'x_420_493', 'value': '1.0'}
+{'index': '1802', 'name': 'x_421_492', 'value': '1.0'}
+{'index': '1804', 'name': 'x_422_502', 'value': '1.0'}
+{'index': '1805', 'name': 'x_423_497', 'value': '1.0'}
+{'index': '1806', 'name': 'x_424_499', 'value': '1.0'}
+{'index': '1807', 'name': 'x_425_501', 'value': '1.0'}
+{'index': '1809', 'name': 'x_426_498', 'value': '1.0'}
+{'index': '1810', 'name': 'x_427_500', 'value': '1.0'}
+{'index': '1812', 'name': 'x_428_507', 'value': '1.0'}
+{'index': '1815', 'name': 'x_429_509', 'value': '1.0'}
+{'index': '1816', 'name': 'x_430_504', 'value': '1.0'}
+{'index': '1817', 'name': 'x_431_505', 'value': '1.0'}
+{'index': '1819', 'name': 'x_432_508', 'value': '1.0'}
+{'index': '1820', 'name': 'x_433_506', 'value': '1.0'}
+{'index': '1821', 'name': 'x_434_503', 'value': '1.0'}
+{'index': '1824', 'name': 'x_435_511', 'value': '1.0'}
+{'index': '1825', 'name': 'x_436_510', 'value': '1.0'}
+{'index': '1826', 'name': 'x_437_515', 'value': '1.0'}
+{'index': '1827', 'name': 'x_438_514', 'value': '1.0'}
+{'index': '1828', 'name': 'x_439_512', 'value': '1.0'}
+{'index': '1830', 'name': 'x_440_513', 'value': '1.0'}
+{'index': '1831', 'name': 'x_441_516', 'value': '1.0'}
+{'index': '1832', 'name': 'x_442_517', 'value': '1.0'}
+{'index': '1833', 'name': 'x_443_518', 'value': '1.0'}
+{'index': '1834', 'name': 'x_444_520', 'value': '1.0'}
+{'index': '1836', 'name': 'x_445_524', 'value': '1.0'}
+{'index': '1839', 'name': 'x_446_519', 'value': '1.0'}
+{'index': '1840', 'name': 'x_447_522', 'value': '1.0'}
+{'index': '1841', 'name': 'x_448_521', 'value': '1.0'}
+{'index': '1842', 'name': 'x_449_523', 'value': '1.0'}
+{'index': '1843', 'name': 'ob', 'value': '1.3014348605962225'}
+{'index': '1844', 'name': 'ss', 'value': '450.0'}
+{'index': '1845', 'name': 'fp', 'value': '1.3014348645885472'}
+{'index': '1846', 'name': 'sp', 'value': '3.9485262954526415e-15'}
+count x: 450
+
+Process finished with exit code 0

@@ -2,9 +2,9 @@ import matplotlib
 from docplex.mp.model import Model
 from dwave.system import LeapHybridCQMSampler
 import json
-
+import dimod
 from data import *
-from read_data import *
+
 
 try:
     import matplotlib.pyplot as plt
@@ -137,8 +137,8 @@ def display(hits, segments, out=""):
 
 # ------- Main program -------
 if __name__ == "__main__":
-    src_path = '/Users/doduydao/daodd/PycharmProjects/Quantum_Research/Tracking/src/data_selected'
-    folder = '/6hits/'
+    src_path = '../../src/data_selected'
+    folder = '/50hits/'
 
     data_path = src_path + folder + 'known_track/hits.csv'
     model_path_out = "result" + folder + "known_track/model_docplex_CQM_LB_dist.lp"
@@ -146,18 +146,18 @@ if __name__ == "__main__":
     out = "result" + folder + "known_track/result_dwave_LB_dist.PNG"
     hits = read_hits(data_path)[9]
 
-    build_model(hits, model_path_out)
+    # build_model(hits, model_path_out)
 
-    with open(model_path_out, 'rb') as f:
-        cqm = dimod.lp.load(f)
+    # with open(model_path_out, 'rb') as f:
+    #     cqm = dimod.lp.load(f)
+    #
+    # sample, energy, run_time = run_hybrid_solver(cqm)
+    #
+    # print("Run time:", run_time)
+    # print("Objective value:", energy)
 
-    sample, energy, run_time = run_hybrid_solver(cqm)
-
-    print("Run time:", run_time)
-    print("Objective value:", energy)
-
-    with open(solution_path, 'w', encoding='utf-8') as f:
-        json.dump(sample, f, ensure_ascii=False, indent=4)
+    # with open(solution_path, 'w', encoding='utf-8') as f:
+    #     json.dump(sample, f, ensure_ascii=False, indent=4)
 
     with open(solution_path, 'r', encoding='utf-8') as f:
         result = json.load(f)

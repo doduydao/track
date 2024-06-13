@@ -47,7 +47,7 @@ def build_model(hits, model_path_out):
         [(p, i, j) for p in range(1, L - 1) for i in range(1, no_hits) for j in range(1, no_hits)],
         name="f")
 
-    assign_exact(model, f, hits)
+    # assign_exact(model, f, hits)
 
     objective = 0
     for p in range(1, L - 2):
@@ -92,9 +92,6 @@ def build_model(hits, model_path_out):
 
     model.print_information()
     model.export_as_lp(model_path_out)
-    # model.solve(log_output=True)
-    # print(model.solution)
-
     print("Wrote model")
 
 
@@ -103,9 +100,9 @@ def run_hybrid_solver(cqm):
     print("Solving CQM ...")
     # Initialize the CQM solver
     sampler = LeapHybridCQMSampler()
-    # print(sampler.properties["minimum_time_limit_s"])
-    # sampler.properties["minimum_time_limit_s"] = 10
-    print(sampler.min_time_limit(cqm))
+    print("Default minimum time:", sampler.min_time_limit(cqm))
+    sampler.properties["minimum_time_limit_s"] *= 1.5
+    print("More:", sampler.properties["minimum_time_limit_s"])
     # Solve the problem using the CQM solver
 
     sampleset = sampler.sample_cqm(cqm, label='Track finding')

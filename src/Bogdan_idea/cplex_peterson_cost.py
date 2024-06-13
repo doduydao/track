@@ -242,7 +242,7 @@ def load_costs(path):
 
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/15hits/'
+    folder = '/50hits/'
     data_path = src_path + folder + 'known_track/hits.csv'
     root_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
     costs_path_out = root_path + folder + "known_track/costs.json"

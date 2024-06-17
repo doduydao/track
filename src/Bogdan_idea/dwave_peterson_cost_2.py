@@ -3,20 +3,17 @@ from docplex.mp.model import Model
 import json
 import matplotlib.pyplot as plt
 import neal
-from collections import defaultdict
-from dwave.system.samplers import DWaveSampler
-from dwave.system.composites import EmbeddingComposite
 from matplotlib import pyplot as plt
-import networkx as nx
 from dimod.binary import BinaryQuadraticModel
 import re
+import os
 
 
 def define_variables(model, costs):
     var = set()
-    for cost in costs:
-        i_j = cost.id[0]
-        j_k = cost.id[1]
+    for cost in costs.keys():
+        i_j = cost[0]
+        j_k = cost[1]
         var.add(i_j)
         var.add(j_k)
     var = sorted(var, key=lambda x: (x[0], x[1]))
@@ -35,7 +32,6 @@ def to_qubo(ob):
         e = elements[i]
         if "^2" in e:
             match = re.search(r'^[^x]+x', e)
-            # print(match)
             if match:
                 i_cut = match.end() - 1
                 if e[:i_cut].replace('.', '', 1).replace('-', '').isdigit() or e[:i_cut] == "-":
@@ -51,7 +47,6 @@ def to_qubo(ob):
         offset = 0
 
     qubo = dict()
-    # print(elements[:-1])
     for e in elements[:-1]:
         es = e.replace("*", "").split("x")
         if es[0] == "":
@@ -73,22 +68,18 @@ def to_qubo(ob):
             j = int(var[-1])
             key = ((i, j), (i, j))
 
-        if offset != 0:
-            coeff = coeff / offset
-        # if key == ((12, 21), (21, 36)):
-        #     print("error:",e)
+        # if offset != 0:
+        #     coeff = coeff / offset
+
         if key not in qubo:
             qubo[key] = coeff
         else:
             qubo[key] += coeff
-    #
-    # for k, v in qubo.items():
-    #     print(k, v)
 
     return qubo, offset
 
 
-def create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, P_3):
+def create_objective_function(hits_by_layers, list_hits, costs, m, alpha, beta):
     # define model
     model = Model(name="Track")
     model.float_precision = 15
@@ -99,18 +90,18 @@ def create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, 
     # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
-
+    print("N =", N)
     first_part = 0
-    sum_segments = 0
-    for cost in costs:
-        i_j = cost.id[0]
-        j_k = cost.id[1]
-        cos_beta = cost.cos_beta
-        sum_distance = cost.sum_distance
-        first_part += (-(cos_beta ** m) / sum_distance) * x[i_j] * x[j_k]
-        sum_segments += x[i_j]
+    segments = set()
+    for id, cost in costs.items():
+        i_j = id[0]
+        j_k = id[1]
+        first_part += cost * x[i_j] * x[j_k]
+        segments.add(i_j)
+        segments.add(j_k)
 
-    second_part = M * ((sum_segments - N) ** 2)
+    sum_segments = sum([x[s] for s in segments])
+    second_part = ((sum_segments - N) ** 2)
 
     third_part = 0
     for k in list(x.keys()):
@@ -122,7 +113,6 @@ def create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, 
         tmp = list(tmp)
         for m in range(len(tmp) - 1):
             for n in range(m + 1, len(tmp)):
-                # print("abc:", tmp[m], tmp[n])
                 third_part += x[tmp[m]] * x[tmp[n]]
 
     fourth_part = 0
@@ -135,19 +125,17 @@ def create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, 
         tmp = list(tmp)
         for m in range(len(tmp) - 1):
             for n in range(m + 1, len(tmp)):
-                # print("abc:", tmp[m], tmp[n])
                 fourth_part += x[tmp[m]] * x[tmp[n]]
 
-    ob = first_part + second_part + P_1 * third_part + P_2 * fourth_part
+    ob = -first_part + beta * second_part + alpha * (third_part + fourth_part)
 
-    return 1 / 2 * ob
+    return ob
 
 
 def display(list_hits, result, out=""):
     segments = []
     for k, v in result.items():
         if v == 1:
-            print(k)
             h_1 = list_hits[k[0]]
             h_2 = list_hits[k[1]]
             segments.append([h_1, h_2])
@@ -193,7 +181,7 @@ def build_segments(hits_1, hits_2, list_hits):
     return segments
 
 
-def get_costs(list_hits, hits):
+def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
     costs = []
     # all_segments = []
@@ -218,50 +206,82 @@ def get_costs(list_hits, hits):
                 for seg_f in f:
                     for seg_s in s:
                         if seg_f.hit_2.hit_id == seg_s.hit_1.hit_id:
-                            cost = Cost(seg_f, seg_s)
-                            cos_beta = cost.cos_beta
-                            print("cos_beta:", cos_beta)
-                            if cos_beta >= math.cos(math.pi/20):
-                                costs.append(cost)
+                            if seg_f.gaps + seg_s.gaps <= 4:
+                                cost = Cost(seg_f, seg_s)
+                                cos_beta = cost.cos_beta
+                                if cos_beta >= math.cos(beta_max):
+                                    costs.append(cost)
     all_segments = set()
     for cost in costs:
-        all_segments.add(cost.seg_1)
-        all_segments.add(cost.seg_2)
+        all_segments.add(cost.seg_1.id)
+        all_segments.add(cost.seg_2.id)
+
     print("number of segments:", len(all_segments))
     return costs
 
 
+def write_costs(costs, path, m):
+    data = dict()
+    for cost in costs:
+        cos_beta = cost.cos_beta
+        sum_distance = cost.sum_distance
+        str_key = str(cost.id)
+        data[str_key] = (cos_beta ** m) / sum_distance
+    with open(path, 'w') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    print('wrote!')
+
+
+def load_costs(path):
+    with open(path) as f:
+        data = json.load(f)
+    costs = dict()
+    for k, v in data.items():
+        costs[eval(k)] = v
+    return costs
+
+def check_path(path):
+    if os.path.exists(path) == False:
+        os.mkdir(path)
+    else:
+        print("Folder exist")
+
+
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/6hits/'
-    data_path = src_path + folder + 'known_track/hits.csv'
+    folder = '/6hits/known_track/'
+    out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
+    check_path(out_path + folder)
+    data_path = src_path + folder + 'hits.csv'
+    costs_path_out = out_path + folder + "costs.json"
+    figure_path_out = out_path + folder + "result_qubo.PNG"
     hits_by_layers = read_hits(data_path)[9]
-
     list_hits = []
+
     for hs in list(hits_by_layers.values()):
         list_hits += hs
-    costs = get_costs(list_hits, hits_by_layers)
 
-    m = len(hits_by_layers.keys())
-    M = 1
-    P_1 = 1
-    P_2 = 1
-    P_3 = 1
-    ob_funct = create_objective_function(hits_by_layers, list_hits, costs, m, M, P_1, P_2, P_3)
+    beta_max = math.pi / 100
+    m = 7
+    costs = get_costs(list_hits, hits_by_layers, beta_max)
+    write_costs(costs, costs_path_out, m)
+    costs = load_costs(costs_path_out)
+
+    alpha = 1
+    beta = 1
+    ob_funct = create_objective_function(hits_by_layers, list_hits, costs, m, alpha, beta)
+    # print("ob_funct:", ob_funct)
     qubo, offset = to_qubo(ob_funct)
-
-    # for k, v in qubo.items():
-    #     print(k, v)
-
-    # sampler = EmbeddingComposite(DWaveSampler())
+    # print(offset)
+    # print(qubo)
+    import time
+    start = time.time()
     sampler = neal.SimulatedAnnealingSampler()
     response = sampler.sample_qubo(qubo)
-
+    print(response)
     ob_value = response.first.energy
     result = response.first.sample
-
-    if offset != 0:
-        ob_value *= offset
     print("ob_value:", ob_value)
-    figure_out = 'results' + folder + 'known_track/result_dwave.PNG'
-    display(list_hits, result, out=figure_out)
+    end = time.time()
+    display(list_hits, result, out=figure_path_out)
+    print("time:", end-start)

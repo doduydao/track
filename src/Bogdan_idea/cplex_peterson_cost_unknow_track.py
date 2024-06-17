@@ -44,8 +44,10 @@ def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_o
 
     # print("segments:", len(segments))
     sum_segments = sum([x[s] for s in segments])
-    second_part = M * ((sum_segments - N) ** 2)
-    object_function = first_part + second_part
+    # second_part = M * ((sum_segments - N) ** 2)
+    # object_function = first_part + second_part
+    ctn = "SP" + str(1)
+    model.add_constraint(sum_segments <= N, ctname=ctn)
 
     # third_part
     ct = 0
@@ -85,11 +87,11 @@ def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_o
         if str(t_1) != '0' and str(t_2) != '0':
             model.add_constraint(t_1 == t_2)
 
-    model.add_constraint(ss >= sum_segments)
-    model.add_constraint(fp >= first_part)
-    model.add_constraint(sp >= second_part)
-    model.add_constraint(ob >= -object_function)
-    model.set_objective("min", ob)
+    model.add_constraint(ss <= sum_segments)
+    model.add_constraint(fp <= first_part)
+    # model.add_constraint(sp >= second_part)
+    model.add_constraint(ob <= first_part)
+    model.set_objective("max", ob)
 
     model.print_information()
     model.solve(log_output=True)
@@ -182,7 +184,7 @@ def get_costs(list_hits, hits):
                             if seg_f.gaps + seg_s.gaps <= 4:
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
-                                if cos_beta >= math.cos(math.pi / 750):
+                                if cos_beta >= math.cos(math.pi / 50):
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -225,7 +227,7 @@ def check_path(path):
 if __name__ == '__main__':
     data_selected_path = '../../src/data_selected'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
-    folder = '/30hits/known_track/'
+    folder = '/6hits/unknown_track/'
     check_path(out_path + folder)
     data_path = data_selected_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"

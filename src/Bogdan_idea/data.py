@@ -30,6 +30,8 @@ class Segment:
         self.d_x = hit_2.x - hit_1.x
         self.d_y = hit_2.y - hit_1.y
         self.d_z = hit_2.z - hit_1.z
+        self.d_l = (hit_2.layer_id - hit_1.layer_id) / 2
+        self.layer = hit_1.layer_id
 
 
 class Cost:

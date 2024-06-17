@@ -22,7 +22,7 @@ def define_variables(model, costs):
     return x, ob, ss, fp, sp
 
 
-def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_out):
+def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, figure_path_out):
     # define model
     model = Model(name="Track")
 
@@ -32,7 +32,7 @@ def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_o
     # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
-    print(N)
+    print("N =", N)
     first_part = 0
     segments = set()
     for id, cost in costs.items():
@@ -42,37 +42,36 @@ def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_o
         segments.add(i_j)
         segments.add(j_k)
 
-    # print("segments:", len(segments))
     sum_segments = sum([x[s] for s in segments])
     # second_part
-    ctn = "SP" + str(1)
-    model.add_constraint(sum_segments == N, ctname=ctn)
+    second_part = (sum_segments - N) ** 2
 
     # third_part
-    ct = 0
+    third_part = 0
     for k in list(x.keys()):
         i = k[0]
         t_1 = 0
         for k_1 in list(x.keys()):
             if i == k_1[0]:
                 t_1 += x[k_1]
-        ct += 1
-        ctn = "TP" + str(ct)
-        model.add_constraint(t_1 == 1, ctname=ctn)
+        third_part += (1 - t_1) ** 2
 
     # fourth_part
-    ct = 0
+    fourth_part = 0
     for k in list(x.keys()):
         j = k[1]
         t_2 = 0
         for k_1 in list(x.keys()):
             if j == k_1[1]:
                 t_2 += x[k_1]
-        ct += 1
-        ctn = "FP" + str(ct)
-        model.add_constraint(t_2 == 1, ctname=ctn)
+        fourth_part += (1 - t_2) ** 2
 
-    model.set_objective("min", -first_part)
+    ob = -first_part + alpha * second_part + beta * (third_part + fourth_part)
+
+    # model.add_constraint(ss <= sum_segments)
+    # model.add_constraint(fp <= first_part)
+    # model.add_constraint(ob <= first_part)
+    model.set_objective("min", ob)
 
     model.print_information()
     model.solve(log_output=True)
@@ -142,37 +141,34 @@ def build_segments(hits_1, hits_2, list_hits):
 
 def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
+    print("Layers: ", layers)
     costs = []
-    for l in layers[1:-1]:
+    single_segs = []
+    for l in layers[0:-1]:
+        print("Combine h-layer: ", l)
         hits_l = hits[l]
-        first_part = []
-        for i in range(max(layers[0], l - 3), l):
-            hits_i = hits[i]
-            segs_l_i = build_segments(hits_i, hits_l, list_hits)
-            first_part.append(segs_l_i)
-
-        second_part = []
         for i in range(l + 1, min(l + 3, layers[-1]) + 1):
+            print("   with h-layer: ", i)
             hits_i = hits[i]
-            segs_l_i = build_segments(hits_l, hits_i, list_hits)
-            second_part.append(segs_l_i)
+            segs = build_segments(hits_l, hits_i, list_hits)
+            single_segs.append(segs)
 
-        for f in first_part:
-            for s in second_part:
-                for seg_f in f:
-                    for seg_s in s:
-                        if seg_f.hit_2.hit_id == seg_s.hit_1.hit_id:
-                            if seg_f.gaps + seg_s.gaps <= 4:
-                                cost = Cost(seg_f, seg_s)
-                                cos_beta = cost.cos_beta
-                                if cos_beta >= math.cos(beta_max):
-                                    costs.append(cost)
+    for segs_1 in single_segs:
+        for segs_2 in single_segs:
+            for seg_1 in segs_1:
+                for seg_2 in segs_2:
+                    if ((seg_1.hit_2.hit_id == seg_2.hit_1.hit_id) & ((seg_1.d_l + seg_2.d_l) <= 4) & (
+                            seg_1.layer < seg_2.layer)):
+                        # print("Combine segment ", seg_1.layer, seg_1.d_l, " with segment " , seg_2.layer, seg_2.d_l, " , Hits: ", seg_1.hit_1.hit_id, seg_1.hit_2.hit_id, seg_2.hit_1.hit_id, seg_2.hit_2.hit_id);
+                        cost = Cost(seg_1, seg_2)
+                        cos_beta = cost.cos_beta
+                        if cos_beta >= math.cos(beta_max):
+                            costs.append(cost)
     all_segments = set()
     for cost in costs:
-        all_segments.add(cost.seg_1.id)
-        all_segments.add(cost.seg_2.id)
-
-    print("number of segments:", len(all_segments))
+        all_segments.add(cost.seg_1)
+        all_segments.add(cost.seg_2)
+    print("Number of segments:", len(all_segments))
     return costs
 
 
@@ -221,10 +217,11 @@ if __name__ == '__main__':
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 2
+    beta_max = math.pi / 100
     m = 7
-    M = -1
+    alpha = 1
+    beta = 1
     costs = get_costs(list_hits, hits_by_layers, beta_max)
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
-    result = run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_out)
+    result = run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, figure_path_out)

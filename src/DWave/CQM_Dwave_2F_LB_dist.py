@@ -92,7 +92,6 @@ def run_hybrid_solver(cqm):
 
     # Solve the problem using the CQM solver
     sampleset = sampler.sample_cqm(cqm, label='Track finding')
-    # sampleset = sampler.sample_qubo(cqm, label='Track finding BQO - QUBO')
     feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
 
     try:
@@ -142,22 +141,22 @@ if __name__ == "__main__":
 
     data_path = src_path + folder + 'known_track/hits.csv'
     model_path_out = "result" + folder + "known_track/model_docplex_CQM_LB_dist.lp"
-    solution_path = "result" + folder + "known_track/solution_dwave_LB_dist.json"
+    solution_path = "result" + folder + "known_track/solution_LB_dist_lan_1.json"
     out = "result" + folder + "known_track/result_dwave_LB_dist.PNG"
     hits = read_hits(data_path)[9]
 
-    # build_model(hits, model_path_out)
+    build_model(hits, model_path_out)
 
-    # with open(model_path_out, 'rb') as f:
-    #     cqm = dimod.lp.load(f)
-    #
-    # sample, energy, run_time = run_hybrid_solver(cqm)
-    #
-    # print("Run time:", run_time)
-    # print("Objective value:", energy)
+    with open(model_path_out, 'rb') as f:
+        cqm = dimod.lp.load(f)
 
-    # with open(solution_path, 'w', encoding='utf-8') as f:
-    #     json.dump(sample, f, ensure_ascii=False, indent=4)
+    sample, energy, run_time = run_hybrid_solver(cqm)
+
+    print("Run time:", run_time)
+    print("Objective value:", energy)
+
+    with open(solution_path, 'w', encoding='utf-8') as f:
+        json.dump(sample, f, ensure_ascii=False, indent=4)
 
     with open(solution_path, 'r', encoding='utf-8') as f:
         result = json.load(f)

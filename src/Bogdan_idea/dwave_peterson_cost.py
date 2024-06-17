@@ -29,6 +29,7 @@ def define_variables(model, costs):
 def to_qubo(ob):
     str_ob = ob.repr_str().replace("+-", "-").replace("-", "+-")
     elements = str_ob.split("+")
+    # print("elements:", elements)
     while "" in elements:
         elements.remove("")
 
@@ -50,10 +51,13 @@ def to_qubo(ob):
         offset = float(elements[-1])
     else:
         offset = 0
+        elements.append(0)
 
     qubo = dict()
     for e in elements[:-1]:
         es = e.replace("*", "").split("x")
+        if es[0] == "":
+            es[0] = "1"
         coeff = float(es[0])
         vars = es[1:]
         if len(vars) > 1:
@@ -71,22 +75,18 @@ def to_qubo(ob):
             j = int(var[-1])
             key = ((i, j), (i, j))
 
-        if offset != 0:
-            coeff = coeff / offset
-        # if key == ((12, 21), (21, 36)):
-        #     print("error:",e)
+        # if offset != 0:
+        #     coeff = coeff / offset
+
         if key not in qubo:
             qubo[key] = coeff
         else:
             qubo[key] += coeff
-    #
-    # for k, v in qubo.items():
-    #     print(k, v)
 
     return qubo, offset
 
 
-def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
+def create_objective_function(hits_by_layers,list_hits, costs, m, alpha, beta):
     # define model
     model = Model(name="Track")
     model.float_precision = 15
@@ -96,18 +96,19 @@ def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
     # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
-    print(N)
+    print("N =", N)
 
     first_part = 0
     segments = set()
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += -cost * x[i_j] * x[j_k]
+        first_part += cost * x[i_j] * x[j_k]
         segments.add(i_j)
         segments.add(j_k)
 
     sum_segments = sum([x[s] for s in segments])
+
     second_part = (sum_segments - N) ** 2
 
     # third_part
@@ -130,7 +131,17 @@ def create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3):
                 t_2 += x[k_1]
         fourth_part += (1 - t_2) ** 2
 
-    ob = P_3 * first_part + M * second_part + P_1 * third_part + P_2 * fourth_part
+    ob = -first_part + beta * second_part + alpha * (third_part + fourth_part)
+    # print("sum_segments:", sum_segments)
+    # print("---" * 10)
+    # print("first_part", first_part)
+    # print("---" * 10)
+    # print("second_part", second_part)
+    # print("---" * 10)
+    # print("third_part", third_part)
+    # print("---" * 10)
+    # print("fourth_part", fourth_part)
+    # print("---" * 10)
 
     return ob
 
@@ -153,7 +164,7 @@ def display(list_hits, result, out=""):
     count_segments = 0
     for k, v in result.items():
         if v == 1:
-            print(k, v)
+            # print(k, v)
             count_segments += 1
             h1 = list_hits[k[0]]
             h2 = list_hits[k[1]]
@@ -182,7 +193,7 @@ def build_segments(hits_1, hits_2, list_hits):
     return segments
 
 
-def get_costs(list_hits, hits):
+def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
     costs = []
     for l in layers[1:-1]:
@@ -207,7 +218,7 @@ def get_costs(list_hits, hits):
                             if seg_f.gaps + seg_s.gaps <= 4:
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
-                                if cos_beta >= math.cos(math.pi / 200):
+                                if cos_beta >= math.cos(beta_max):
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -249,7 +260,7 @@ def check_path(path):
 
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/50hits/known_track/'
+    folder = '/2hits/known_track/'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
     check_path(out_path + folder)
     data_path = src_path + folder + 'hits.csv'
@@ -260,18 +271,19 @@ if __name__ == '__main__':
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
+    beta_max = math.pi / 50
     m = 7
-    M = 1
-    P_1 = 1
-    P_2 = 1
-    P_3 = 1
-    # costs = get_costs(list_hits, hits_by_layers)
-    # write_costs(costs, costs_path_out, m)
+    alpha = 1
+    beta = 10000
+
+    costs = get_costs(list_hits, hits_by_layers, beta_max)
+    write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
-
-    ob_funct = create_objective_function(list_hits, costs, m, M, P_1, P_2, P_3)
+    ob_funct = create_objective_function(hits_by_layers,list_hits, costs, m, alpha, beta)
+    # print("ob_funct:", ob_funct)
     qubo, offset = to_qubo(ob_funct)
-
+    # print(offset)
+    # print(qubo)
     # sampler = EmbeddingComposite(DWaveSampler())
     sampler = neal.SimulatedAnnealingSampler()
     response = sampler.sample_qubo(qubo)

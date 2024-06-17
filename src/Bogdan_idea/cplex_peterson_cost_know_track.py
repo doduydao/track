@@ -43,8 +43,8 @@ def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_o
         segments.add(j_k)
 
     # print("segments:", len(segments))
-    sum_segments = sum([x[s] for s in segments])
     # second_part
+    sum_segments = sum([x[s] for s in segments])
     ctn = "SP" + str(1)
     model.add_constraint(sum_segments == N, ctname=ctn)
 
@@ -144,18 +144,18 @@ def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
     costs = []
     for l in layers[1:-1]:
-        hits_l = hits[l]
+        hits_j = hits[l]
         first_part = []
         for i in range(max(layers[0], l - 3), l):
             hits_i = hits[i]
-            segs_l_i = build_segments(hits_i, hits_l, list_hits)
-            first_part.append(segs_l_i)
+            segs_j_i = build_segments(hits_i, hits_j, list_hits)
+            first_part.append(segs_j_i)
 
         second_part = []
-        for i in range(l + 1, min(l + 3, layers[-1]) + 1):
-            hits_i = hits[i]
-            segs_l_i = build_segments(hits_l, hits_i, list_hits)
-            second_part.append(segs_l_i)
+        for k in range(l + 1, min(l + 3, layers[-1]) + 1):
+            hits_k = hits[k]
+            segs_j_k = build_segments(hits_j, hits_k, list_hits)
+            second_part.append(segs_j_k)
 
         for f in first_part:
             for s in second_part:
@@ -166,6 +166,7 @@ def get_costs(list_hits, hits, beta_max):
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
                                 if cos_beta >= math.cos(beta_max):
+                                    # print(cos_beta)
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -223,8 +224,11 @@ if __name__ == '__main__':
 
     beta_max = math.pi / 2
     m = 7
-    M = -1
+    M = 1
     costs = get_costs(list_hits, hits_by_layers, beta_max)
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
     result = run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_out)
+    #
+    #
+    # print(math.cos(math.pi))

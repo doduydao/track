@@ -6,6 +6,7 @@ import os
 import time
 from pyqubo import Binary
 
+
 def define_variables(costs):
     var = set()
     for cost in costs.keys():
@@ -117,36 +118,39 @@ def build_segments(hits_1, hits_2, list_hits):
 
 def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
-    print("Layers: ", layers)
     costs = []
-    single_segs = []
-    for l in layers[0:-1]:
-        print("Combine h-layer: ", l)
-        hits_l = hits[l]
-        for i in range(l + 1, min(l + 3, layers[-1]) + 1):
-            print("   with h-layer: ", i)
+    for l in layers[1:-1]:
+        hits_j = hits[l]
+        first_part = []
+        for i in range(max(layers[0], l - 3), l):
             hits_i = hits[i]
-            segs = build_segments(hits_l, hits_i, list_hits)
-            single_segs.append(segs)
+            segs_j_i = build_segments(hits_i, hits_j, list_hits)
+            first_part.append(segs_j_i)
 
-    for segs_1 in single_segs:
-        for segs_2 in single_segs:
-            for seg_1 in segs_1:
-                for seg_2 in segs_2:
-                    if ((seg_1.hit_2.hit_id == seg_2.hit_1.hit_id) & ((seg_1.d_l + seg_2.d_l) <= 4) & (
-                            seg_1.layer < seg_2.layer)):
-                        # print("Combine segment ", seg_1.layer, seg_1.d_l, " with segment " , seg_2.layer, seg_2.d_l, " , Hits: ", seg_1.hit_1.hit_id, seg_1.hit_2.hit_id, seg_2.hit_1.hit_id, seg_2.hit_2.hit_id);
-                        cost = Cost(seg_1, seg_2)
-                        cos_beta = cost.cos_beta
-                        if cos_beta >= math.cos(beta_max):
-                            costs.append(cost)
+        second_part = []
+        for k in range(l + 1, min(l + 3, layers[-1]) + 1):
+            hits_k = hits[k]
+            segs_j_k = build_segments(hits_j, hits_k, list_hits)
+            second_part.append(segs_j_k)
+
+        for f in first_part:
+            for s in second_part:
+                for seg_f in f:
+                    for seg_s in s:
+                        if seg_f.hit_2.hit_id == seg_s.hit_1.hit_id:
+                            if seg_f.gaps + seg_s.gaps <= 4:
+                                cost = Cost(seg_f, seg_s)
+                                cos_beta = cost.cos_beta
+                                if cos_beta >= math.cos(beta_max):
+                                    # print(cos_beta)
+                                    costs.append(cost)
     all_segments = set()
     for cost in costs:
-        all_segments.add(cost.seg_1)
-        all_segments.add(cost.seg_2)
-    print("Number of segments:", len(all_segments))
-    return costs
+        all_segments.add(cost.seg_1.id)
+        all_segments.add(cost.seg_2.id)
 
+    print("number of segments:", len(all_segments))
+    return costs
 
 def write_costs(costs, path, m):
     data = dict()
@@ -174,6 +178,30 @@ def check_path(path):
         os.mkdir(path)
     else:
         print("Folder exist")
+
+
+def cal_expected_value(list_hits):
+    track = dict()
+    for hit in list_hits:
+        k = hit.particle_id/1000
+        if k not in track:
+            track[k] = [hit]
+        else:
+            track[k].append(hit)
+    cost = 0
+    for t, hs in track.items():
+        for i in range(len(hs) - 2):
+            h_i = hs[i]
+            h_j = hs[i + 1]
+            h_k = hs[i + 2]
+
+            seg_1 = Segment(h_j, h_i)
+            seg_2 = Segment(h_j, h_k)
+            c = Cost(seg_1, seg_2)
+            print(c.cos_beta ** 7 / c.sum_distance)
+            cost += c.cos_beta ** 7 / c.sum_distance
+
+    print("cost=", cost)
 
 
 if __name__ == '__main__':
@@ -220,6 +248,7 @@ if __name__ == '__main__':
     end = time.time()
     display(list_hits, result, out=figure_path_out)
     print("time:", end - start)
+    cal_expected_value(list_hits)
 
     # obf = cbf(hits_by_layers, list_hits, costs, m, alpha, beta)
     # qubo_dao, offset_dao = tqubo(obf)
@@ -251,5 +280,3 @@ if __name__ == '__main__':
     # end = time.time()
     # display(list_hits, result, out=figure_path_out)
     # print("time:", end - start)
-
-

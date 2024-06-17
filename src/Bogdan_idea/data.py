@@ -2,6 +2,7 @@ import numpy as np
 import math
 import pandas as pd
 
+
 class Hit:
     def __init__(self, hit_id, particle_id=None, x=0, y=0, z=0, volume_id=None, layer_id=None, module_id=None,
                  selected=None):
@@ -45,14 +46,13 @@ class Cost:
         self.cos_beta = self.calculate_cos_beta()
         self.sum_distance = self.calculate_distance()
 
-
     def calculate_cos_beta(self):
-        v1 = np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
+        v1 = -np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
         v2 = np.array([self.seg_2.d_x, self.seg_2.d_y, self.seg_2.d_z])
         dot_product = np.dot(v1, v2)
         norm_v1 = np.linalg.norm(v1)
         norm_v2 = np.linalg.norm(v2)
-        return dot_product / (norm_v1 * norm_v2)
+        return -dot_product / (norm_v1 * norm_v2)
 
     def calculate_distance(self):
         v1 = np.array([self.seg_1.d_x, self.seg_1.d_y, self.seg_1.d_z])
@@ -61,6 +61,7 @@ class Cost:
         norm_v2 = np.linalg.norm(v2)
         return norm_v1 + norm_v2
 
+
 def read_hits(path):
     df = pd.read_csv(path)
     list_df = [row.tolist() for index, row in df.iterrows()]
@@ -68,15 +69,15 @@ def read_hits(path):
 
     for i in list_df:
         hit = Hit(
-                  hit_id=i[0],
-                  x=i[1],
-                  y=i[2],
-                  z=i[3],
-                  volume_id=i[4],
-                  layer_id =i[5]/2,
-                  module_id = i[6],
-                  particle_id= i[7]
-                  )
+            hit_id=i[0],
+            x=i[1],
+            y=i[2],
+            z=i[3],
+            volume_id=i[4],
+            layer_id=i[5] / 2,
+            module_id=i[6],
+            particle_id=i[7]
+        )
         volume_id = int(hit.volume_id)
         if volume_id not in volumes:
             volumes[volume_id] = [hit]
@@ -109,7 +110,7 @@ if __name__ == '__main__':
     for p, hp in hits.items():
         print(p)
         for h in hp:
-            p_id = h.particle_id/10000000000
+            p_id = h.particle_id / 10000000000
             if p_id not in track:
                 track[p_id] = [h]
             else:

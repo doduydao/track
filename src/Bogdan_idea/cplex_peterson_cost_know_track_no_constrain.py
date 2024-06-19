@@ -44,23 +44,36 @@ def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, fig
 
     # third_part
     third_part = 0
-    for k in list(x.keys()):
+    t_1 = dict()
+    for k in x.keys():
         i = k[0]
-        t_1 = 0
-        for k_1 in list(x.keys()):
-            if i == k_1[0]:
-                t_1 += x[k_1]
-        third_part += (1 - t_1) ** 2
+        j = k[1]
+        if i not in t_1:
+            t_1[i] = {j}
+        else:
+            t_1[i].add(j)
+
+    for i, v in t_1.items():
+        tmp = 0
+        for j in v:
+            tmp += x[(i, j)]
+        third_part += (1 - tmp) ** 2
 
     # fourth_part
     fourth_part = 0
-    for k in list(x.keys()):
+    t_2 = dict()
+    for k in x.keys():
+        i = k[0]
         j = k[1]
-        t_2 = 0
-        for k_1 in list(x.keys()):
-            if j == k_1[1]:
-                t_2 += x[k_1]
-        fourth_part += (1 - t_2) ** 2
+        if j not in t_2:
+            t_2[j] = {i}
+        else:
+            t_2[j].add(i)
+    for j, v in t_2.items():
+        tmp = 0
+        for i in v:
+            tmp += x[(i, j)]
+        fourth_part += (1 - tmp) ** 2
 
     ob = -first_part + alpha * second_part + beta * (third_part + fourth_part)
 
@@ -201,7 +214,7 @@ def check_path(path):
 if __name__ == '__main__':
     data_selected_path = '../../src/data_selected'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
-    folder = '/6hits/known_track/'
+    folder = '/30hits/known_track/'
     check_path(out_path + folder)
     data_path = data_selected_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"
@@ -214,7 +227,7 @@ if __name__ == '__main__':
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 100
+    beta_max = math.pi / 200
     m = 7
     alpha = 1
     beta = 1

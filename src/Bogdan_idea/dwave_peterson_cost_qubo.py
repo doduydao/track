@@ -23,7 +23,9 @@ def define_variables(costs):
 
 def create_objective_function(list_hits, costs, m, alpha, beta):
     x = define_variables(costs)
-    # print(x)
+    for k, v in x.items():
+        print(k, v)
+
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
     print("N =", N)
@@ -34,32 +36,61 @@ def create_objective_function(list_hits, costs, m, alpha, beta):
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += cost * x[i_j] * x[j_k]
+        first_part += cost * (x[i_j] * x[j_k])
         segments.add(i_j)
         segments.add(j_k)
+    print("----" * 20)
+    print("first_part:", first_part)
+    print("----" * 20)
 
     sum_segments = sum([x[s] for s in segments])
     second_part = (sum_segments - N) ** 2
 
+    print("----" * 20)
+    print("second_part:", second_part)
+    print("----" * 20)
+
     # third_part
     third_part = 0
-    for k in list(x.keys()):
+    t_1 = dict()
+    for k in x.keys():
         i = k[0]
-        t_1 = 0
-        for k_1 in list(x.keys()):
-            if i == k_1[0]:
-                t_1 += x[k_1]
-        third_part += (1 - t_1) ** 2
+        j = k[1]
+        if i not in t_1:
+            t_1[i] = {j}
+        else:
+            t_1[i].add(j)
+
+    for i, v in t_1.items():
+        tmp = 0
+        for j in v:
+            tmp += x[(i, j)]
+        third_part += (1 - tmp) ** 2
+
+    print("----" * 20)
+    print("third_part:", third_part)
+    print("----" * 20)
 
     # fourth_part
     fourth_part = 0
-    for k in list(x.keys()):
+    t_2 = dict()
+    for k in x.keys():
+        i = k[0]
         j = k[1]
-        t_2 = 0
-        for k_1 in list(x.keys()):
-            if j == k_1[1]:
-                t_2 += x[k_1]
-        fourth_part += (1 - t_2) ** 2
+        if j not in t_2:
+            t_2[j] = {i}
+        else:
+            t_2[j].add(i)
+    for j, v in t_2.items():
+        tmp = 0
+        for i in v:
+            tmp += x[(i, j)]
+        fourth_part += (1 - tmp) ** 2
+
+
+    print("----" * 20)
+    print("fourth_part:", fourth_part)
+    print("----" * 20)
 
     H = -first_part + alpha * second_part + beta * (third_part + fourth_part)
     return H
@@ -152,6 +183,7 @@ def get_costs(list_hits, hits, beta_max):
     print("number of segments:", len(all_segments))
     return costs
 
+
 def write_costs(costs, path, m):
     data = dict()
     for cost in costs:
@@ -183,7 +215,7 @@ def check_path(path):
 def cal_expected_value(list_hits):
     track = dict()
     for hit in list_hits:
-        k = hit.particle_id/1000
+        k = hit.particle_id / 1000
         if k not in track:
             track[k] = [hit]
         else:
@@ -206,7 +238,7 @@ def cal_expected_value(list_hits):
 
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/2hits/known_track/'
+    folder = '/15hits/known_track/'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
     check_path(out_path + folder)
     data_path = src_path + folder + 'hits.csv'
@@ -218,14 +250,14 @@ if __name__ == '__main__':
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 2
+    beta_max = math.pi / 200
     m = 7
     costs = get_costs(list_hits, hits_by_layers, beta_max)
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
 
-    alpha = 1
-    beta = 1
+    alpha = 10
+    beta = 1000
 
     H = create_objective_function(list_hits, costs, m, alpha, beta)
     # print(H)
@@ -233,12 +265,8 @@ if __name__ == '__main__':
     qubo, offset = model.to_qubo()
     print("offset:", offset)
     print(len(qubo.keys()))
-    # qubo = {(k[1], k[0]): v for k, v in sorted(qubo.items(), key=lambda x:x[0][1])}
-    # for k, v in qubo.items():
-    #     print(k, v)
 
     sampler = neal.SimulatedAnnealingSampler()
-
     start = time.time()
     response = sampler.sample_qubo(qubo)
     print(response)
@@ -249,34 +277,3 @@ if __name__ == '__main__':
     display(list_hits, result, out=figure_path_out)
     print("time:", end - start)
     cal_expected_value(list_hits)
-
-    # obf = cbf(hits_by_layers, list_hits, costs, m, alpha, beta)
-    # qubo_dao, offset_dao = tqubo(obf)
-    #
-    # print("offset_dao:", offset_dao)
-    # print(len(qubo_dao.keys()))
-    # qubo_tmp = dict()
-    # for k, v in qubo_dao.items():
-    #     x_i_j = "x_" + str(k[0][0]) + "_" + str(k[0][1])
-    #     x_j_k = "x_" + str(k[1][0]) + "_" + str(k[1][1])
-    #     qubo_tmp[(x_i_j, x_j_k)] = v
-    # for k, v in qubo_tmp.items():
-    #     # print(k, v)
-    #     if k in qubo:
-    #         if round(v,4) != round(qubo[k],4):
-    #             print(k, v, qubo[k])
-    #     else:
-    #         print(k, v)
-
-    # print(qubo_dao)
-
-    # start = time.time()
-    # response = sampler.sample_qubo(qubo_dao)
-    # # # response = sampler.sample(bqm)
-    # print(response)
-    # ob_value = response.first.energy
-    # result = response.first.sample
-    # print("ob_value:", ob_value)
-    # end = time.time()
-    # display(list_hits, result, out=figure_path_out)
-    # print("time:", end - start)

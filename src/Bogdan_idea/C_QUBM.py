@@ -1,13 +1,11 @@
 from data import *
+from docplex.mp.model import Model
 import json
 import matplotlib.pyplot as plt
-import neal
 import os
-import time
-from pyqubo import Binary
 
 
-def define_variables(costs):
+def define_variables(model, costs):
     var = set()
     for cost in costs.keys():
         i_j = cost[0]
@@ -15,44 +13,36 @@ def define_variables(costs):
         var.add(i_j)
         var.add(j_k)
     var = sorted(var, key=lambda x: (x[0], x[1]))
-    x = dict()
-    for v in var:
-        x[v] = Binary('x_' + str(v[0]) + "_" + str(v[1]))
+    x = model.binary_var_dict(var, name='x')
     return x
 
 
-def create_objective_function(list_hits, costs, m, alpha, beta):
-    x = define_variables(costs)
-    for k, v in x.items():
-        print(k, v)
+def run(list_hits, costs, m, gamma, alpha, model_path_out, solution_path_out, figure_path_out):
+    # define model
+    model = Model(name="Track")
 
+    # create variables
+    x = define_variables(model, costs)
+
+    # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
     print("N =", N)
-
-    # first part
     first_part = 0
     segments = set()
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += cost * (x[i_j] * x[j_k])
+        first_part += cost * x[i_j] * x[j_k]
         segments.add(i_j)
         segments.add(j_k)
-    print("----" * 20)
-    print("first_part:", first_part)
-    print("----" * 20)
 
+    # second_part
     sum_segments = sum([x[s] for s in segments])
     second_part = (sum_segments - N) ** 2
 
-    print("----" * 20)
-    print("second_part:", second_part)
-    print("----" * 20)
-
-    # third_part
-    third_part = 0
     t_1 = dict()
+    t_2 = dict()
     for k in x.keys():
         i = k[0]
         j = k[1]
@@ -61,51 +51,50 @@ def create_objective_function(list_hits, costs, m, alpha, beta):
         else:
             t_1[i].add(j)
 
+        if j not in t_2:
+            t_2[j] = {i}
+        else:
+            t_2[j].add(i)
+
+    # third_part
+    third_part = 0
     for i, v in t_1.items():
         tmp = 0
         for j in v:
             tmp += x[(i, j)]
         third_part += (1 - tmp) ** 2
 
-    print("----" * 20)
-    print("third_part:", third_part)
-    print("----" * 20)
-
     # fourth_part
     fourth_part = 0
-    t_2 = dict()
-    for k in x.keys():
-        i = k[0]
-        j = k[1]
-        if j not in t_2:
-            t_2[j] = {i}
-        else:
-            t_2[j].add(i)
     for j, v in t_2.items():
         tmp = 0
         for i in v:
             tmp += x[(i, j)]
         fourth_part += (1 - tmp) ** 2
 
+    ob = -first_part + gamma * second_part + alpha * (third_part + fourth_part)
 
-    print("----" * 20)
-    print("fourth_part:", fourth_part)
-    print("----" * 20)
+    model.set_objective("min", ob)
 
-    H = -first_part + alpha * second_part + beta * (third_part + fourth_part)
-    return H
+    model.print_information()
+    model.solve(log_output=True)
+
+    model.export_as_lp(model_path_out)
+    if model.solution == None:
+        print("No solution!")
+    else:
+        model.solution.export(solution_path_out)
+
+        f = open(solution_path_out)
+        result = json.load(f)
+        f.close()
+
+        result = result['CPLEXSolution']['variables']
+
+        display(list_hits, result, figure_path_out)
 
 
-def display(list_hits, result, out=""):
-    segments = list()
-    for k, v in result.items():
-        if v == 1:
-            if type(k) is str:
-                k = [int(e) for e in k.split('_')[1:]]
-            h_1 = list_hits[k[0]]
-            h_2 = list_hits[k[1]]
-            segments.append([h_1, h_2])
-    print("No_segments:", len(segments))
+def display(hits, result, out=""):
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
 
@@ -113,17 +102,24 @@ def display(list_hits, result, out=""):
     ys = []
     zs = []
 
-    for h in list_hits:
+    for h in hits:
         xs.append(h.x)
         ys.append(h.y)
         zs.append(h.z)
     ax.scatter(xs, ys, zs, marker='o', color='red')
 
-    for segment in segments:
-        h1 = segment[0]
-        h2 = segment[1]
-        ax.plot(xs=[h1.x, h2.x], ys=[h1.y, h2.y], zs=[h1.z, h2.z], color='blue')
-
+    count_x = 0
+    for var in result:
+        print(var)
+        x_i_j = var['name'].split('_')
+        if 'x' in x_i_j[0] and round(float(var['value'])) == 1.0:
+            count_x += 1
+            i = int(x_i_j[1])
+            j = int(x_i_j[2])
+            h1 = list_hits[i]
+            h2 = list_hits[j]
+            ax.plot(xs=[h1.x, h2.x], ys=[h1.y, h2.y], zs=[h1.z, h2.z], color='blue')
+    print("count x:", count_x)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
@@ -143,7 +139,6 @@ def build_segments(hits_1, hits_2, list_hits):
                 index_j = list_hits.index(j)
                 j.set_index(index_j)
             segments.append(Segment(i, j))
-
     return segments
 
 
@@ -202,6 +197,7 @@ def load_costs(path):
     costs = dict()
     for k, v in data.items():
         costs[eval(k)] = v
+
     return costs
 
 
@@ -230,50 +226,34 @@ def cal_expected_value(list_hits):
             seg_1 = Segment(h_j, h_i)
             seg_2 = Segment(h_j, h_k)
             c = Cost(seg_1, seg_2)
-            print(c.cos_beta ** 7 / c.sum_distance)
+            # print(c.cos_beta ** 7 / c.sum_distance)
             cost += c.cos_beta ** 7 / c.sum_distance
 
-    print("cost=", cost)
+    print("expected cost=", cost)
 
 
 if __name__ == '__main__':
-    src_path = '../../src/data_selected'
-    folder = '/15hits/known_track/'
+    data_selected_path = '../../src/data_selected'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
+    folder = '/25hits/known_track/'
     check_path(out_path + folder)
-    data_path = src_path + folder + 'hits.csv'
+    data_path = data_selected_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"
-    figure_path_out = out_path + folder + "result_qubo.PNG"
+    model_path_out = out_path + folder + "model_C_QUBM.lp"
+    solution_path_out = out_path + folder + "solution_C_QUBM.json"
+    figure_path_out = out_path + folder + "result_C_QUBM.PNG"
+
     hits_by_layers = read_hits(data_path)[9]
     list_hits = []
-
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 200
+    beta_max = math.pi / 300
     m = 7
+    gamma = 1
+    alpha = 1
     costs = get_costs(list_hits, hits_by_layers, beta_max)
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
-
-    alpha = 10
-    beta = 1000
-
-    H = create_objective_function(list_hits, costs, m, alpha, beta)
-    # print(H)
-    model = H.compile()
-    qubo, offset = model.to_qubo()
-    print("offset:", offset)
-    print(len(qubo.keys()))
-
-    sampler = neal.SimulatedAnnealingSampler()
-    start = time.time()
-    response = sampler.sample_qubo(qubo)
-    print(response)
-    ob_value = response.first.energy
-    result = response.first.sample
-    print("ob_value:", ob_value)
-    end = time.time()
-    display(list_hits, result, out=figure_path_out)
-    print("time:", end - start)
+    result = run(list_hits, costs, m, gamma, alpha, model_path_out, solution_path_out, figure_path_out)
     cal_expected_value(list_hits)

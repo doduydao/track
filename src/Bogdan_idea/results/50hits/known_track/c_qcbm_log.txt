@@ -1,0 +1,404 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/C_QCBM.py
+Folder exist
+beta_max: 0.031415926535897934
+number of segments: 4201
+wrote!
+N= 300
+Model: Track
+ - number of variables: 4201
+   - binary=4201, integer=0, continuous=0
+ - number of constraints: 601
+   - linear=601
+ - parameters: defaults
+ - objective: minimize quadratic
+ - problem type is: MIQP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 86 rows and 573 columns.
+MIP Presolve added 8590 rows and 4295 columns.
+MIP Presolve modified 3610 coefficients.
+Reduced MIP has 9105 rows, 7923 columns, and 24454 nonzeros.
+Reduced MIP has 7923 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (20.38 ticks)
+Found incumbent of value -0.091113 after 0.04 sec. (55.28 ticks)
+Probing fixed 60 vars, tightened 0 bounds.
+Probing changed sense of 5 constraints.
+Probing time = 0.05 sec. (55.76 ticks)
+Tried aggregator 2 times.
+Detecting symmetries...
+MIP Presolve eliminated 100 rows and 81 columns.
+Aggregator did 195 substitutions.
+Reduced MIP has 8810 rows, 7647 columns, and 25000 nonzeros.
+Reduced MIP has 7647 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (26.69 ticks)
+Classifier predicts products in MIQP should be linearized.
+Probing time = 0.01 sec. (4.90 ticks)
+Clique table members: 18172.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.28 sec. (242.53 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           -0.2170       -9.4332              ---
+      0     0       -1.0062   344       -0.2170       -1.0062       15  363.74%
+      0     0       -0.9398   249       -0.2170     Cuts: 113      265  333.13%
+      0     0       -0.8985   167       -0.2170      Cuts: 88      469  314.11%
+*     0+    0                           -0.8677       -0.8985             3.56%
+      0     0       -0.8880   154       -0.8677  ZeroHalf: 36      571    2.34%
+Detecting symmetries...
+
+Repeating presolve.
+Tried aggregator 2 times.
+MIP Presolve eliminated 4287 rows and 3592 columns.
+MIP Presolve added 11 rows and 11 columns.
+Aggregator did 99 substitutions.
+Reduced MIP has 4435 rows, 3967 columns, and 13603 nonzeros.
+Reduced MIP has 3967 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (14.93 ticks)
+Probing time = 0.00 sec. (3.50 ticks)
+Tried aggregator 2 times.
+Detecting symmetries...
+Aggregator did 12 substitutions.
+Reduced MIP has 4423 rows, 3955 columns, and 13701 nonzeros.
+Reduced MIP has 3955 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (13.25 ticks)
+Represolve time = 0.03 sec. (41.20 ticks)
+Probing fixed 1 vars, tightened 0 bounds.
+Probing time = 0.01 sec. (5.61 ticks)
+Cover probing fixed 3 vars, tightened 0 bounds.
+Clique table members: 9967.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.17 sec. (200.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           -0.8677       -0.8880             2.34%
+      0     0       -0.8880   154       -0.8677       -0.8880      598    2.34%
+      0     0       -0.8696    93       -0.8677      Cuts: 61      849    0.22%
+      0     0       -0.8694    33       -0.8677      Cuts: 18      855    0.21%
+      0     0        cutoff             -0.8677                    873    0.00%
+Elapsed time = 1.04 sec. (1148.34 ticks, tree = 0.01 MB, solutions = 3)
+
+Zero-half cuts applied:  170
+Lift and project cuts applied:  5
+Gomory fractional cuts applied:  23
+
+Root node processing (before b&c):
+  Real time             =    1.04 sec. (1148.62 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    1.04 sec. (1148.62 ticks)
+{'index': '1', 'name': 'x_0_57', 'value': '1.0'}
+{'index': '18', 'name': 'x_1_58', 'value': '1.0'}
+{'index': '31', 'name': 'x_2_54', 'value': '1.0'}
+{'index': '51', 'name': 'x_3_53', 'value': '1.0'}
+{'index': '69', 'name': 'x_4_51', 'value': '1.0'}
+{'index': '87', 'name': 'x_5_50', 'value': '1.0'}
+{'index': '106', 'name': 'x_6_56', 'value': '1.0'}
+{'index': '121', 'name': 'x_7_55', 'value': '1.0'}
+{'index': '137', 'name': 'x_8_52', 'value': '1.0'}
+{'index': '153', 'name': 'x_9_61', 'value': '1.0'}
+{'index': '168', 'name': 'x_10_59', 'value': '1.0'}
+{'index': '182', 'name': 'x_11_60', 'value': '1.0'}
+{'index': '199', 'name': 'x_12_65', 'value': '1.0'}
+{'index': '213', 'name': 'x_13_63', 'value': '1.0'}
+{'index': '225', 'name': 'x_14_62', 'value': '1.0'}
+{'index': '243', 'name': 'x_15_64', 'value': '1.0'}
+{'index': '260', 'name': 'x_16_67', 'value': '1.0'}
+{'index': '280', 'name': 'x_17_71', 'value': '1.0'}
+{'index': '293', 'name': 'x_18_73', 'value': '1.0'}
+{'index': '311', 'name': 'x_19_72', 'value': '1.0'}
+{'index': '327', 'name': 'x_20_68', 'value': '1.0'}
+{'index': '340', 'name': 'x_21_70', 'value': '1.0'}
+{'index': '355', 'name': 'x_22_69', 'value': '1.0'}
+{'index': '366', 'name': 'x_23_66', 'value': '1.0'}
+{'index': '384', 'name': 'x_24_74', 'value': '1.0'}
+{'index': '396', 'name': 'x_25_75', 'value': '1.0'}
+{'index': '414', 'name': 'x_26_76', 'value': '1.0'}
+{'index': '430', 'name': 'x_27_79', 'value': '1.0'}
+{'index': '448', 'name': 'x_28_81', 'value': '1.0'}
+{'index': '461', 'name': 'x_29_77', 'value': '1.0'}
+{'index': '478', 'name': 'x_30_78', 'value': '1.0'}
+{'index': '494', 'name': 'x_31_80', 'value': '1.0'}
+{'index': '509', 'name': 'x_32_84', 'value': '1.0'}
+{'index': '523', 'name': 'x_33_83', 'value': '1.0'}
+{'index': '537', 'name': 'x_34_86', 'value': '1.0'}
+{'index': '546', 'name': 'x_35_85', 'value': '1.0'}
+{'index': '559', 'name': 'x_36_82', 'value': '1.0'}
+{'index': '569', 'name': 'x_37_88', 'value': '1.0'}
+{'index': '583', 'name': 'x_38_91', 'value': '1.0'}
+{'index': '599', 'name': 'x_39_94', 'value': '1.0'}
+{'index': '613', 'name': 'x_40_92', 'value': '1.0'}
+{'index': '628', 'name': 'x_41_90', 'value': '1.0'}
+{'index': '647', 'name': 'x_42_89', 'value': '1.0'}
+{'index': '662', 'name': 'x_43_87', 'value': '1.0'}
+{'index': '679', 'name': 'x_44_93', 'value': '1.0'}
+{'index': '695', 'name': 'x_45_95', 'value': '1.0'}
+{'index': '706', 'name': 'x_46_98', 'value': '1.0'}
+{'index': '723', 'name': 'x_47_99', 'value': '1.0'}
+{'index': '738', 'name': 'x_48_97', 'value': '1.0'}
+{'index': '750', 'name': 'x_49_96', 'value': '1.0'}
+{'index': '759', 'name': 'x_50_101', 'value': '1.0'}
+{'index': '775', 'name': 'x_51_102', 'value': '1.0'}
+{'index': '803', 'name': 'x_52_108', 'value': '1.0'}
+{'index': '828', 'name': 'x_53_107', 'value': '1.0'}
+{'index': '849', 'name': 'x_54_103', 'value': '1.0'}
+{'index': '874', 'name': 'x_55_105', 'value': '1.0'}
+{'index': '893', 'name': 'x_56_104', 'value': '1.0'}
+{'index': '917', 'name': 'x_57_100', 'value': '1.0'}
+{'index': '940', 'name': 'x_58_106', 'value': '1.0'}
+{'index': '951', 'name': 'x_59_110', 'value': '1.0'}
+{'index': '964', 'name': 'x_60_109', 'value': '1.0'}
+{'index': '984', 'name': 'x_61_111', 'value': '1.0'}
+{'index': '996', 'name': 'x_62_112', 'value': '1.0'}
+{'index': '1020', 'name': 'x_63_113', 'value': '1.0'}
+{'index': '1034', 'name': 'x_64_114', 'value': '1.0'}
+{'index': '1055', 'name': 'x_65_115', 'value': '1.0'}
+{'index': '1070', 'name': 'x_66_121', 'value': '1.0'}
+{'index': '1093', 'name': 'x_67_118', 'value': '1.0'}
+{'index': '1118', 'name': 'x_68_123', 'value': '1.0'}
+{'index': '1136', 'name': 'x_69_116', 'value': '1.0'}
+{'index': '1149', 'name': 'x_70_119', 'value': '1.0'}
+{'index': '1162', 'name': 'x_71_120', 'value': '1.0'}
+{'index': '1188', 'name': 'x_72_122', 'value': '1.0'}
+{'index': '1202', 'name': 'x_73_117', 'value': '1.0'}
+{'index': '1226', 'name': 'x_74_125', 'value': '1.0'}
+{'index': '1248', 'name': 'x_75_126', 'value': '1.0'}
+{'index': '1271', 'name': 'x_76_124', 'value': '1.0'}
+{'index': '1292', 'name': 'x_77_130', 'value': '1.0'}
+{'index': '1318', 'name': 'x_78_128', 'value': '1.0'}
+{'index': '1338', 'name': 'x_79_131', 'value': '1.0'}
+{'index': '1349', 'name': 'x_80_127', 'value': '1.0'}
+{'index': '1367', 'name': 'x_81_129', 'value': '1.0'}
+{'index': '1383', 'name': 'x_82_134', 'value': '1.0'}
+{'index': '1396', 'name': 'x_83_132', 'value': '1.0'}
+{'index': '1411', 'name': 'x_84_136', 'value': '1.0'}
+{'index': '1423', 'name': 'x_85_133', 'value': '1.0'}
+{'index': '1439', 'name': 'x_86_135', 'value': '1.0'}
+{'index': '1447', 'name': 'x_87_140', 'value': '1.0'}
+{'index': '1466', 'name': 'x_88_139', 'value': '1.0'}
+{'index': '1480', 'name': 'x_89_142', 'value': '1.0'}
+{'index': '1504', 'name': 'x_90_143', 'value': '1.0'}
+{'index': '1527', 'name': 'x_91_144', 'value': '1.0'}
+{'index': '1549', 'name': 'x_92_141', 'value': '1.0'}
+{'index': '1567', 'name': 'x_93_137', 'value': '1.0'}
+{'index': '1589', 'name': 'x_94_138', 'value': '1.0'}
+{'index': '1614', 'name': 'x_95_145', 'value': '1.0'}
+{'index': '1628', 'name': 'x_96_147', 'value': '1.0'}
+{'index': '1642', 'name': 'x_97_146', 'value': '1.0'}
+{'index': '1657', 'name': 'x_98_148', 'value': '1.0'}
+{'index': '1675', 'name': 'x_99_149', 'value': '1.0'}
+{'index': '1690', 'name': 'x_100_152', 'value': '1.0'}
+{'index': '1714', 'name': 'x_101_151', 'value': '1.0'}
+{'index': '1736', 'name': 'x_102_157', 'value': '1.0'}
+{'index': '1762', 'name': 'x_103_153', 'value': '1.0'}
+{'index': '1787', 'name': 'x_104_155', 'value': '1.0'}
+{'index': '1810', 'name': 'x_105_154', 'value': '1.0'}
+{'index': '1830', 'name': 'x_106_150', 'value': '1.0'}
+{'index': '1845', 'name': 'x_107_158', 'value': '1.0'}
+{'index': '1872', 'name': 'x_108_156', 'value': '1.0'}
+{'index': '1892', 'name': 'x_109_160', 'value': '1.0'}
+{'index': '1911', 'name': 'x_110_161', 'value': '1.0'}
+{'index': '1920', 'name': 'x_111_159', 'value': '1.0'}
+{'index': '1933', 'name': 'x_112_163', 'value': '1.0'}
+{'index': '1961', 'name': 'x_113_164', 'value': '1.0'}
+{'index': '1976', 'name': 'x_114_165', 'value': '1.0'}
+{'index': '2002', 'name': 'x_115_162', 'value': '1.0'}
+{'index': '2027', 'name': 'x_116_167', 'value': '1.0'}
+{'index': '2046', 'name': 'x_117_169', 'value': '1.0'}
+{'index': '2071', 'name': 'x_118_172', 'value': '1.0'}
+{'index': '2101', 'name': 'x_119_173', 'value': '1.0'}
+{'index': '2115', 'name': 'x_120_171', 'value': '1.0'}
+{'index': '2143', 'name': 'x_121_166', 'value': '1.0'}
+{'index': '2174', 'name': 'x_122_168', 'value': '1.0'}
+{'index': '2202', 'name': 'x_123_170', 'value': '1.0'}
+{'index': '2220', 'name': 'x_124_176', 'value': '1.0'}
+{'index': '2244', 'name': 'x_125_174', 'value': '1.0'}
+{'index': '2269', 'name': 'x_126_175', 'value': '1.0'}
+{'index': '2292', 'name': 'x_127_177', 'value': '1.0'}
+{'index': '2312', 'name': 'x_128_180', 'value': '1.0'}
+{'index': '2329', 'name': 'x_129_178', 'value': '1.0'}
+{'index': '2349', 'name': 'x_130_179', 'value': '1.0'}
+{'index': '2385', 'name': 'x_131_181', 'value': '1.0'}
+{'index': '2403', 'name': 'x_132_185', 'value': '1.0'}
+{'index': '2425', 'name': 'x_133_186', 'value': '1.0'}
+{'index': '2445', 'name': 'x_134_182', 'value': '1.0'}
+{'index': '2459', 'name': 'x_135_184', 'value': '1.0'}
+{'index': '2468', 'name': 'x_136_183', 'value': '1.0'}
+{'index': '2484', 'name': 'x_137_188', 'value': '1.0'}
+{'index': '2503', 'name': 'x_138_189', 'value': '1.0'}
+{'index': '2521', 'name': 'x_139_191', 'value': '1.0'}
+{'index': '2539', 'name': 'x_140_194', 'value': '1.0'}
+{'index': '2556', 'name': 'x_141_187', 'value': '1.0'}
+{'index': '2578', 'name': 'x_142_190', 'value': '1.0'}
+{'index': '2598', 'name': 'x_143_192', 'value': '1.0'}
+{'index': '2618', 'name': 'x_144_193', 'value': '1.0'}
+{'index': '2643', 'name': 'x_145_195', 'value': '1.0'}
+{'index': '2661', 'name': 'x_146_196', 'value': '1.0'}
+{'index': '2674', 'name': 'x_147_198', 'value': '1.0'}
+{'index': '2689', 'name': 'x_148_199', 'value': '1.0'}
+{'index': '2710', 'name': 'x_149_197', 'value': '1.0'}
+{'index': '2730', 'name': 'x_150_200', 'value': '1.0'}
+{'index': '2739', 'name': 'x_151_207', 'value': '1.0'}
+{'index': '2746', 'name': 'x_152_201', 'value': '1.0'}
+{'index': '2773', 'name': 'x_153_205', 'value': '1.0'}
+{'index': '2793', 'name': 'x_154_206', 'value': '1.0'}
+{'index': '2814', 'name': 'x_155_204', 'value': '1.0'}
+{'index': '2834', 'name': 'x_156_202', 'value': '1.0'}
+{'index': '2856', 'name': 'x_157_203', 'value': '1.0'}
+{'index': '2880', 'name': 'x_158_208', 'value': '1.0'}
+{'index': '2897', 'name': 'x_159_210', 'value': '1.0'}
+{'index': '2909', 'name': 'x_160_209', 'value': '1.0'}
+{'index': '2920', 'name': 'x_161_211', 'value': '1.0'}
+{'index': '2930', 'name': 'x_162_214', 'value': '1.0'}
+{'index': '2940', 'name': 'x_163_212', 'value': '1.0'}
+{'index': '2962', 'name': 'x_164_213', 'value': '1.0'}
+{'index': '2970', 'name': 'x_165_215', 'value': '1.0'}
+{'index': '2989', 'name': 'x_166_217', 'value': '1.0'}
+{'index': '3015', 'name': 'x_167_223', 'value': '1.0'}
+{'index': '3027', 'name': 'x_168_218', 'value': '1.0'}
+{'index': '3051', 'name': 'x_169_219', 'value': '1.0'}
+{'index': '3065', 'name': 'x_170_216', 'value': '1.0'}
+{'index': '3082', 'name': 'x_171_220', 'value': '1.0'}
+{'index': '3103', 'name': 'x_172_221', 'value': '1.0'}
+{'index': '3125', 'name': 'x_173_222', 'value': '1.0'}
+{'index': '3134', 'name': 'x_174_225', 'value': '1.0'}
+{'index': '3153', 'name': 'x_175_226', 'value': '1.0'}
+{'index': '3175', 'name': 'x_176_224', 'value': '1.0'}
+{'index': '3187', 'name': 'x_177_230', 'value': '1.0'}
+{'index': '3199', 'name': 'x_178_229', 'value': '1.0'}
+{'index': '3208', 'name': 'x_179_227', 'value': '1.0'}
+{'index': '3228', 'name': 'x_180_228', 'value': '1.0'}
+{'index': '3240', 'name': 'x_181_231', 'value': '1.0'}
+{'index': '3246', 'name': 'x_182_234', 'value': '1.0'}
+{'index': '3256', 'name': 'x_183_233', 'value': '1.0'}
+{'index': '3266', 'name': 'x_184_236', 'value': '1.0'}
+{'index': '3272', 'name': 'x_185_235', 'value': '1.0'}
+{'index': '3287', 'name': 'x_186_232', 'value': '1.0'}
+{'index': '3306', 'name': 'x_187_243', 'value': '1.0'}
+{'index': '3318', 'name': 'x_188_237', 'value': '1.0'}
+{'index': '3345', 'name': 'x_189_242', 'value': '1.0'}
+{'index': '3363', 'name': 'x_190_239', 'value': '1.0'}
+{'index': '3377', 'name': 'x_191_244', 'value': '1.0'}
+{'index': '3385', 'name': 'x_192_241', 'value': '1.0'}
+{'index': '3403', 'name': 'x_193_240', 'value': '1.0'}
+{'index': '3424', 'name': 'x_194_238', 'value': '1.0'}
+{'index': '3444', 'name': 'x_195_245', 'value': '1.0'}
+{'index': '3453', 'name': 'x_196_246', 'value': '1.0'}
+{'index': '3461', 'name': 'x_197_249', 'value': '1.0'}
+{'index': '3473', 'name': 'x_198_248', 'value': '1.0'}
+{'index': '3480', 'name': 'x_199_247', 'value': '1.0'}
+{'index': '3493', 'name': 'x_200_250', 'value': '1.0'}
+{'index': '3497', 'name': 'x_201_254', 'value': '1.0'}
+{'index': '3509', 'name': 'x_202_251', 'value': '1.0'}
+{'index': '3525', 'name': 'x_203_256', 'value': '1.0'}
+{'index': '3538', 'name': 'x_204_255', 'value': '1.0'}
+{'index': '3557', 'name': 'x_205_257', 'value': '1.0'}
+{'index': '3569', 'name': 'x_206_253', 'value': '1.0'}
+{'index': '3583', 'name': 'x_207_258', 'value': '1.0'}
+{'index': '3588', 'name': 'x_208_252', 'value': '1.0'}
+{'index': '3608', 'name': 'x_209_259', 'value': '1.0'}
+{'index': '3614', 'name': 'x_210_260', 'value': '1.0'}
+{'index': '3619', 'name': 'x_211_261', 'value': '1.0'}
+{'index': '3626', 'name': 'x_212_263', 'value': '1.0'}
+{'index': '3642', 'name': 'x_213_265', 'value': '1.0'}
+{'index': '3646', 'name': 'x_214_264', 'value': '1.0'}
+{'index': '3656', 'name': 'x_215_262', 'value': '1.0'}
+{'index': '3672', 'name': 'x_216_266', 'value': '1.0'}
+{'index': '3681', 'name': 'x_217_267', 'value': '1.0'}
+{'index': '3699', 'name': 'x_218_268', 'value': '1.0'}
+{'index': '3716', 'name': 'x_219_270', 'value': '1.0'}
+{'index': '3728', 'name': 'x_220_271', 'value': '1.0'}
+{'index': '3742', 'name': 'x_221_269', 'value': '1.0'}
+{'index': '3754', 'name': 'x_222_273', 'value': '1.0'}
+{'index': '3756', 'name': 'x_223_272', 'value': '1.0'}
+{'index': '3764', 'name': 'x_224_274', 'value': '1.0'}
+{'index': '3775', 'name': 'x_225_276', 'value': '1.0'}
+{'index': '3787', 'name': 'x_226_275', 'value': '1.0'}
+{'index': '3797', 'name': 'x_227_277', 'value': '1.0'}
+{'index': '3814', 'name': 'x_228_280', 'value': '1.0'}
+{'index': '3823', 'name': 'x_229_279', 'value': '1.0'}
+{'index': '3831', 'name': 'x_230_278', 'value': '1.0'}
+{'index': '3839', 'name': 'x_231_281', 'value': '1.0'}
+{'index': '3845', 'name': 'x_232_282', 'value': '1.0'}
+{'index': '3858', 'name': 'x_233_284', 'value': '1.0'}
+{'index': '3868', 'name': 'x_234_286', 'value': '1.0'}
+{'index': '3876', 'name': 'x_235_283', 'value': '1.0'}
+{'index': '3885', 'name': 'x_236_285', 'value': '1.0'}
+{'index': '3893', 'name': 'x_237_292', 'value': '1.0'}
+{'index': '3902', 'name': 'x_238_288', 'value': '1.0'}
+{'index': '3912', 'name': 'x_239_287', 'value': '1.0'}
+{'index': '3920', 'name': 'x_240_290', 'value': '1.0'}
+{'index': '3934', 'name': 'x_241_289', 'value': '1.0'}
+{'index': '3948', 'name': 'x_242_291', 'value': '1.0'}
+{'index': '3958', 'name': 'x_243_294', 'value': '1.0'}
+{'index': '3964', 'name': 'x_244_293', 'value': '1.0'}
+{'index': '3967', 'name': 'x_245_295', 'value': '1.0'}
+{'index': '3976', 'name': 'x_246_299', 'value': '1.0'}
+{'index': '3980', 'name': 'x_247_296', 'value': '1.0'}
+{'index': '3987', 'name': 'x_248_297', 'value': '1.0'}
+{'index': '3995', 'name': 'x_249_298', 'value': '1.0'}
+{'index': '4005', 'name': 'x_250_300', 'value': '1.0'}
+{'index': '4007', 'name': 'x_251_302', 'value': '1.0'}
+{'index': '4013', 'name': 'x_252_301', 'value': '1.0'}
+{'index': '4021', 'name': 'x_253_307', 'value': '1.0'}
+{'index': '4027', 'name': 'x_254_305', 'value': '1.0'}
+{'index': '4032', 'name': 'x_255_303', 'value': '1.0'}
+{'index': '4038', 'name': 'x_256_304', 'value': '1.0'}
+{'index': '4045', 'name': 'x_257_306', 'value': '1.0'}
+{'index': '4049', 'name': 'x_258_308', 'value': '1.0'}
+{'index': '4050', 'name': 'x_259_309', 'value': '1.0'}
+{'index': '4054', 'name': 'x_260_310', 'value': '1.0'}
+{'index': '4056', 'name': 'x_261_311', 'value': '1.0'}
+{'index': '4057', 'name': 'x_262_312', 'value': '1.0'}
+{'index': '4063', 'name': 'x_263_313', 'value': '1.0'}
+{'index': '4069', 'name': 'x_264_314', 'value': '1.0'}
+{'index': '4070', 'name': 'x_265_315', 'value': '1.0'}
+{'index': '4071', 'name': 'x_266_316', 'value': '1.0'}
+{'index': '4079', 'name': 'x_267_321', 'value': '1.0'}
+{'index': '4085', 'name': 'x_268_320', 'value': '1.0'}
+{'index': '4089', 'name': 'x_269_317', 'value': '1.0'}
+{'index': '4096', 'name': 'x_270_319', 'value': '1.0'}
+{'index': '4104', 'name': 'x_271_318', 'value': '1.0'}
+{'index': '4108', 'name': 'x_272_323', 'value': '1.0'}
+{'index': '4109', 'name': 'x_273_322', 'value': '1.0'}
+{'index': '4110', 'name': 'x_274_326', 'value': '1.0'}
+{'index': '4113', 'name': 'x_275_324', 'value': '1.0'}
+{'index': '4117', 'name': 'x_276_325', 'value': '1.0'}
+{'index': '4118', 'name': 'x_277_327', 'value': '1.0'}
+{'index': '4124', 'name': 'x_278_330', 'value': '1.0'}
+{'index': '4126', 'name': 'x_279_329', 'value': '1.0'}
+{'index': '4129', 'name': 'x_280_331', 'value': '1.0'}
+{'index': '4130', 'name': 'x_281_328', 'value': '1.0'}
+{'index': '4131', 'name': 'x_282_332', 'value': '1.0'}
+{'index': '4139', 'name': 'x_283_335', 'value': '1.0'}
+{'index': '4144', 'name': 'x_284_333', 'value': '1.0'}
+{'index': '4148', 'name': 'x_285_336', 'value': '1.0'}
+{'index': '4149', 'name': 'x_286_334', 'value': '1.0'}
+{'index': '4153', 'name': 'x_287_342', 'value': '1.0'}
+{'index': '4157', 'name': 'x_288_338', 'value': '1.0'}
+{'index': '4163', 'name': 'x_289_339', 'value': '1.0'}
+{'index': '4167', 'name': 'x_290_343', 'value': '1.0'}
+{'index': '4170', 'name': 'x_291_337', 'value': '1.0'}
+{'index': '4180', 'name': 'x_292_340', 'value': '1.0'}
+{'index': '4185', 'name': 'x_293_341', 'value': '1.0'}
+{'index': '4188', 'name': 'x_294_344', 'value': '1.0'}
+{'index': '4190', 'name': 'x_295_345', 'value': '1.0'}
+{'index': '4193', 'name': 'x_296_347', 'value': '1.0'}
+{'index': '4196', 'name': 'x_297_349', 'value': '1.0'}
+{'index': '4198', 'name': 'x_298_346', 'value': '1.0'}
+{'index': '4200', 'name': 'x_299_348', 'value': '1.0'}
+count x: 300
+expected cost= -0.8676526160626855
+
+Process finished with exit code 0

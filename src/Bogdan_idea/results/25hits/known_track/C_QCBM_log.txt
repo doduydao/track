@@ -1,0 +1,282 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/C_QCBM.py
+Folder exist
+number of segments: 938
+wrote!
+N= 150
+Model: Track
+ - number of variables: 938
+   - binary=938, integer=0, continuous=0
+ - number of constraints: 301
+   - linear=301
+ - parameters: defaults
+ - objective: minimize quadratic
+ - problem type is: MIQP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Tried aggregator 1 time.
+MIP Presolve eliminated 110 rows and 331 columns.
+MIP Presolve added 1544 rows and 772 columns.
+MIP Presolve modified 577 coefficients.
+Reduced MIP has 1735 rows, 1379 columns, and 4332 nonzeros.
+Reduced MIP has 1379 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.48 ticks)
+Found incumbent of value -0.182738 after 0.02 sec. (7.30 ticks)
+Probing fixed 904 vars, tightened 0 bounds.
+Probing changed sense of 38 constraints.
+Probing time = 0.01 sec. (7.01 ticks)
+Tried aggregator 4 times.
+MIP Presolve eliminated 1246 rows and 982 columns.
+MIP Presolve modified 2 coefficients.
+Aggregator did 58 substitutions.
+Reduced MIP has 431 rows, 334 columns, and 1082 nonzeros.
+Reduced MIP has 334 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (4.89 ticks)
+Probing time = 0.00 sec. (1.07 ticks)
+Tried aggregator 2 times.
+Detecting symmetries...
+MIP Presolve eliminated 72 rows and 42 columns.
+Aggregator did 1 substitutions.
+Reduced MIP has 358 rows, 291 columns, and 936 nonzeros.
+Reduced MIP has 291 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (1.07 ticks)
+Classifier predicts products in MIQP should be linearized.
+Probing time = 0.00 sec. (0.99 ticks)
+Clique table members: 776.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.00 sec. (2.81 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           -0.3372       -0.8048           138.66%
+*     0+    0                           -0.3431       -0.8048           134.56%
+*     0+    0                           -0.3590       -0.8048           124.16%
+*     0+    0                           -0.3628       -0.8048           121.85%
+*     0+    0                           -0.3691       -0.8048           118.05%
+*     0+    0                           -0.3983       -0.8048           102.06%
+*     0+    0                           -0.4042       -0.8048            99.12%
+*     0+    0                           -0.4113       -0.8048            95.67%
+      0     0       -0.4549    59       -0.4113       -0.4549      278   10.59%
+*     0+    0                           -0.4338       -0.4549             4.86%
+      0     0       -0.4422    54       -0.4338      Cuts: 18      321    1.94%
+      0     0       -0.4357    21       -0.4338      Cuts: 21      345    0.44%
+*     0+    0                           -0.4339       -0.4357             0.44%
+Detecting symmetries...
+
+Repeating presolve.
+Tried aggregator 3 times.
+MIP Presolve eliminated 140 rows and 133 columns.
+Aggregator did 11 substitutions.
+Reduced MIP has 207 rows, 144 columns, and 484 nonzeros.
+Reduced MIP has 144 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.82 ticks)
+Probing fixed 5 vars, tightened 0 bounds.
+Probing changed sense of 4 constraints.
+Probing time = 0.00 sec. (0.32 ticks)
+Tried aggregator 5 times.
+MIP Presolve eliminated 37 rows and 21 columns.
+MIP Presolve modified 6 coefficients.
+Aggregator did 9 substitutions.
+Reduced MIP has 161 rows, 108 columns, and 365 nonzeros.
+Reduced MIP has 108 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.99 ticks)
+Probing fixed 32 vars, tightened 0 bounds.
+Probing changed sense of 3 constraints.
+Probing time = 0.00 sec. (0.15 ticks)
+Tried aggregator 2 times.
+MIP Presolve eliminated 65 rows and 43 columns.
+Aggregator did 7 substitutions.
+Reduced MIP has 89 rows, 58 columns, and 189 nonzeros.
+Reduced MIP has 58 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.35 ticks)
+Probing time = 0.00 sec. (0.07 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 89 rows, 58 columns, and 189 nonzeros.
+Reduced MIP has 58 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.16 ticks)
+Represolve time = 0.01 sec. (6.19 ticks)
+Probing time = 0.00 sec. (0.06 ticks)
+Clique table members: 203.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.00 sec. (0.29 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           -0.4339       -0.4357             0.44%
+      0     0       -0.4357    16       -0.4339       -0.4357      398    0.44%
+      0     0        cutoff             -0.4339                    401    0.00%
+Elapsed time = 0.08 sec. (45.97 ticks, tree = 0.01 MB, solutions = 20)
+
+Clique cuts applied:  4
+Zero-half cuts applied:  28
+Lift and project cuts applied:  2
+Gomory fractional cuts applied:  3
+
+Root node processing (before b&c):
+  Real time             =    0.08 sec. (46.13 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =     sec. (46.13 ticks)
+{'index': '0', 'name': 'x_0_26', 'value': '1.0'}
+{'index': '6', 'name': 'x_1_25', 'value': '1.0'}
+{'index': '13', 'name': 'x_2_27', 'value': '1.0'}
+{'index': '21', 'name': 'x_3_28', 'value': '1.0'}
+{'index': '26', 'name': 'x_4_29', 'value': '1.0'}
+{'index': '33', 'name': 'x_5_32', 'value': '1.0'}
+{'index': '37', 'name': 'x_6_31', 'value': '1.0'}
+{'index': '42', 'name': 'x_7_30', 'value': '1.0'}
+{'index': '49', 'name': 'x_8_36', 'value': '1.0'}
+{'index': '59', 'name': 'x_9_35', 'value': '1.0'}
+{'index': '64', 'name': 'x_10_34', 'value': '1.0'}
+{'index': '71', 'name': 'x_11_33', 'value': '1.0'}
+{'index': '78', 'name': 'x_12_37', 'value': '1.0'}
+{'index': '84', 'name': 'x_13_38', 'value': '1.0'}
+{'index': '91', 'name': 'x_14_39', 'value': '1.0'}
+{'index': '98', 'name': 'x_15_41', 'value': '1.0'}
+{'index': '105', 'name': 'x_16_42', 'value': '1.0'}
+{'index': '113', 'name': 'x_17_40', 'value': '1.0'}
+{'index': '120', 'name': 'x_18_45', 'value': '1.0'}
+{'index': '130', 'name': 'x_19_46', 'value': '1.0'}
+{'index': '140', 'name': 'x_20_43', 'value': '1.0'}
+{'index': '150', 'name': 'x_21_44', 'value': '1.0'}
+{'index': '159', 'name': 'x_22_47', 'value': '1.0'}
+{'index': '169', 'name': 'x_23_49', 'value': '1.0'}
+{'index': '174', 'name': 'x_24_48', 'value': '1.0'}
+{'index': '178', 'name': 'x_25_51', 'value': '1.0'}
+{'index': '185', 'name': 'x_26_50', 'value': '1.0'}
+{'index': '191', 'name': 'x_27_52', 'value': '1.0'}
+{'index': '200', 'name': 'x_28_53', 'value': '1.0'}
+{'index': '207', 'name': 'x_29_55', 'value': '1.0'}
+{'index': '214', 'name': 'x_30_54', 'value': '1.0'}
+{'index': '222', 'name': 'x_31_56', 'value': '1.0'}
+{'index': '228', 'name': 'x_32_57', 'value': '1.0'}
+{'index': '234', 'name': 'x_33_60', 'value': '1.0'}
+{'index': '242', 'name': 'x_34_61', 'value': '1.0'}
+{'index': '248', 'name': 'x_35_59', 'value': '1.0'}
+{'index': '256', 'name': 'x_36_58', 'value': '1.0'}
+{'index': '268', 'name': 'x_37_62', 'value': '1.0'}
+{'index': '274', 'name': 'x_38_64', 'value': '1.0'}
+{'index': '282', 'name': 'x_39_63', 'value': '1.0'}
+{'index': '292', 'name': 'x_40_66', 'value': '1.0'}
+{'index': '299', 'name': 'x_41_67', 'value': '1.0'}
+{'index': '307', 'name': 'x_42_65', 'value': '1.0'}
+{'index': '316', 'name': 'x_43_68', 'value': '1.0'}
+{'index': '328', 'name': 'x_44_71', 'value': '1.0'}
+{'index': '340', 'name': 'x_45_70', 'value': '1.0'}
+{'index': '352', 'name': 'x_46_69', 'value': '1.0'}
+{'index': '365', 'name': 'x_47_73', 'value': '1.0'}
+{'index': '370', 'name': 'x_48_74', 'value': '1.0'}
+{'index': '378', 'name': 'x_49_72', 'value': '1.0'}
+{'index': '387', 'name': 'x_50_75', 'value': '1.0'}
+{'index': '394', 'name': 'x_51_76', 'value': '1.0'}
+{'index': '402', 'name': 'x_52_78', 'value': '1.0'}
+{'index': '408', 'name': 'x_53_77', 'value': '1.0'}
+{'index': '414', 'name': 'x_54_82', 'value': '1.0'}
+{'index': '420', 'name': 'x_55_81', 'value': '1.0'}
+{'index': '430', 'name': 'x_56_80', 'value': '1.0'}
+{'index': '437', 'name': 'x_57_79', 'value': '1.0'}
+{'index': '443', 'name': 'x_58_84', 'value': '1.0'}
+{'index': '455', 'name': 'x_59_86', 'value': '1.0'}
+{'index': '462', 'name': 'x_60_83', 'value': '1.0'}
+{'index': '474', 'name': 'x_61_85', 'value': '1.0'}
+{'index': '480', 'name': 'x_62_87', 'value': '1.0'}
+{'index': '486', 'name': 'x_63_89', 'value': '1.0'}
+{'index': '496', 'name': 'x_64_88', 'value': '1.0'}
+{'index': '507', 'name': 'x_65_92', 'value': '1.0'}
+{'index': '519', 'name': 'x_66_90', 'value': '1.0'}
+{'index': '526', 'name': 'x_67_91', 'value': '1.0'}
+{'index': '537', 'name': 'x_68_96', 'value': '1.0'}
+{'index': '547', 'name': 'x_69_93', 'value': '1.0'}
+{'index': '562', 'name': 'x_70_95', 'value': '1.0'}
+{'index': '576', 'name': 'x_71_94', 'value': '1.0'}
+{'index': '586', 'name': 'x_72_97', 'value': '1.0'}
+{'index': '598', 'name': 'x_73_98', 'value': '1.0'}
+{'index': '605', 'name': 'x_74_99', 'value': '1.0'}
+{'index': '611', 'name': 'x_75_100', 'value': '1.0'}
+{'index': '616', 'name': 'x_76_101', 'value': '1.0'}
+{'index': '622', 'name': 'x_77_102', 'value': '1.0'}
+{'index': '629', 'name': 'x_78_103', 'value': '1.0'}
+{'index': '634', 'name': 'x_79_104', 'value': '1.0'}
+{'index': '642', 'name': 'x_80_105', 'value': '1.0'}
+{'index': '651', 'name': 'x_81_106', 'value': '1.0'}
+{'index': '655', 'name': 'x_82_107', 'value': '1.0'}
+{'index': '658', 'name': 'x_83_109', 'value': '1.0'}
+{'index': '667', 'name': 'x_84_110', 'value': '1.0'}
+{'index': '671', 'name': 'x_85_108', 'value': '1.0'}
+{'index': '676', 'name': 'x_86_111', 'value': '1.0'}
+{'index': '681', 'name': 'x_87_112', 'value': '1.0'}
+{'index': '685', 'name': 'x_88_113', 'value': '1.0'}
+{'index': '696', 'name': 'x_89_114', 'value': '1.0'}
+{'index': '705', 'name': 'x_90_117', 'value': '1.0'}
+{'index': '709', 'name': 'x_91_116', 'value': '1.0'}
+{'index': '718', 'name': 'x_92_115', 'value': '1.0'}
+{'index': '730', 'name': 'x_93_121', 'value': '1.0'}
+{'index': '737', 'name': 'x_94_119', 'value': '1.0'}
+{'index': '745', 'name': 'x_95_118', 'value': '1.0'}
+{'index': '754', 'name': 'x_96_120', 'value': '1.0'}
+{'index': '761', 'name': 'x_97_122', 'value': '1.0'}
+{'index': '768', 'name': 'x_98_124', 'value': '1.0'}
+{'index': '772', 'name': 'x_99_123', 'value': '1.0'}
+{'index': '776', 'name': 'x_100_125', 'value': '1.0'}
+{'index': '778', 'name': 'x_101_126', 'value': '1.0'}
+{'index': '782', 'name': 'x_102_128', 'value': '1.0'}
+{'index': '785', 'name': 'x_103_127', 'value': '1.0'}
+{'index': '790', 'name': 'x_104_130', 'value': '1.0'}
+{'index': '793', 'name': 'x_105_129', 'value': '1.0'}
+{'index': '798', 'name': 'x_106_131', 'value': '1.0'}
+{'index': '800', 'name': 'x_107_132', 'value': '1.0'}
+{'index': '802', 'name': 'x_108_133', 'value': '1.0'}
+{'index': '804', 'name': 'x_109_134', 'value': '1.0'}
+{'index': '814', 'name': 'x_110_136', 'value': '1.0'}
+{'index': '820', 'name': 'x_111_135', 'value': '1.0'}
+{'index': '826', 'name': 'x_112_137', 'value': '1.0'}
+{'index': '829', 'name': 'x_113_139', 'value': '1.0'}
+{'index': '833', 'name': 'x_114_138', 'value': '1.0'}
+{'index': '838', 'name': 'x_115_140', 'value': '1.0'}
+{'index': '846', 'name': 'x_116_141', 'value': '1.0'}
+{'index': '855', 'name': 'x_117_142', 'value': '1.0'}
+{'index': '857', 'name': 'x_118_144', 'value': '1.0'}
+{'index': '865', 'name': 'x_119_143', 'value': '1.0'}
+{'index': '871', 'name': 'x_120_146', 'value': '1.0'}
+{'index': '875', 'name': 'x_121_145', 'value': '1.0'}
+{'index': '880', 'name': 'x_122_148', 'value': '1.0'}
+{'index': '884', 'name': 'x_123_147', 'value': '1.0'}
+{'index': '888', 'name': 'x_124_149', 'value': '1.0'}
+{'index': '890', 'name': 'x_125_150', 'value': '1.0'}
+{'index': '891', 'name': 'x_126_151', 'value': '1.0'}
+{'index': '892', 'name': 'x_127_152', 'value': '1.0'}
+{'index': '895', 'name': 'x_128_153', 'value': '1.0'}
+{'index': '897', 'name': 'x_129_154', 'value': '1.0'}
+{'index': '901', 'name': 'x_130_156', 'value': '1.0'}
+{'index': '902', 'name': 'x_131_155', 'value': '1.0'}
+{'index': '903', 'name': 'x_132_157', 'value': '1.0'}
+{'index': '904', 'name': 'x_133_158', 'value': '1.0'}
+{'index': '906', 'name': 'x_134_160', 'value': '1.0'}
+{'index': '909', 'name': 'x_135_159', 'value': '1.0'}
+{'index': '911', 'name': 'x_136_161', 'value': '1.0'}
+{'index': '912', 'name': 'x_137_162', 'value': '1.0'}
+{'index': '915', 'name': 'x_138_164', 'value': '1.0'}
+{'index': '916', 'name': 'x_139_163', 'value': '1.0'}
+{'index': '920', 'name': 'x_140_165', 'value': '1.0'}
+{'index': '923', 'name': 'x_141_166', 'value': '1.0'}
+{'index': '924', 'name': 'x_142_167', 'value': '1.0'}
+{'index': '925', 'name': 'x_143_168', 'value': '1.0'}
+{'index': '928', 'name': 'x_144_170', 'value': '1.0'}
+{'index': '931', 'name': 'x_145_171', 'value': '1.0'}
+{'index': '932', 'name': 'x_146_169', 'value': '1.0'}
+{'index': '933', 'name': 'x_147_172', 'value': '1.0'}
+{'index': '936', 'name': 'x_148_173', 'value': '1.0'}
+{'index': '937', 'name': 'x_149_174', 'value': '1.0'}
+count x: 150
+expected cost= -0.4338500394175256
+
+Process finished with exit code 0

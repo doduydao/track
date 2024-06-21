@@ -1,0 +1,13 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/D_QUBM.py
+Folder exist
+number of segments: 938
+wrote!
+N = 150
+offset: 22800.0
+  x_0_26 x_0_50 x_0_51 x_0_72 x_0_75 x_0_76 ... x_9_86        energy num_oc.
+0      1      0      0      0      0      0 ...      0 -22798.297587       1
+['BINARY', 1 rows, 1 samples, 938 variables]
+time: 21.919963836669922
+ob_value: 1.7024129282181093
+expected cost= -0.4338500394175256
+No_segments: 150

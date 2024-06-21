@@ -3,6 +3,8 @@ from docplex.mp.model import Model
 import json
 import matplotlib.pyplot as plt
 import os
+from dwave.system import LeapHybridCQMSampler
+import dimod
 
 
 def define_variables(model, costs):
@@ -14,110 +16,139 @@ def define_variables(model, costs):
         var.add(j_k)
     var = sorted(var, key=lambda x: (x[0], x[1]))
     x = model.binary_var_dict(var, name='x')
-
-    ob = model.continuous_var(name="ob")
-    ss = model.continuous_var(name="ss")
-    fp = model.continuous_var(name="fp")
-    sp = model.continuous_var(name="sp")
-    return x, ob, ss, fp, sp
+    return x
 
 
-def run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_out):
+def build_model(list_hits, costs, m, model_path_out, solution_path_out, figure_path_out):
     # define model
-    model = Model(name="Track")
+    model = Model(name="Track_D_QCBM")
 
     # create variables
-    x, ob, ss, fp, sp = define_variables(model, costs)
+    x = define_variables(model, costs)
 
     # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
-    print(N)
-    first_part = 0
+    print("N=", N)
+    ob = 0
     segments = set()
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += cost * x[i_j] * x[j_k]
+        ob += cost * x[i_j] * x[j_k]
         segments.add(i_j)
         segments.add(j_k)
 
-    # print("segments:", len(segments))
     # second_part
     sum_segments = sum([x[s] for s in segments])
     ctn = "SP" + str(1)
     model.add_constraint(sum_segments == N, ctname=ctn)
 
+    t_1 = dict()
+    t_2 = dict()
+    for k in x.keys():
+        i = k[0]
+        j = k[1]
+        if i not in t_1:
+            t_1[i] = {j}
+        else:
+            t_1[i].add(j)
+
+        if j not in t_2:
+            t_2[j] = {i}
+        else:
+            t_2[j].add(i)
+
     # third_part
     ct = 0
-    for k in list(x.keys()):
-        i = k[0]
-        t_1 = 0
-        for k_1 in list(x.keys()):
-            if i == k_1[0]:
-                t_1 += x[k_1]
+    for i, v in t_1.items():
+        tmp = 0
+        for j in v:
+            tmp += x[(i, j)]
         ct += 1
         ctn = "TP" + str(ct)
-        model.add_constraint(t_1 == 1, ctname=ctn)
+        model.add_constraint(tmp == 1, ctname=ctn)
 
     # fourth_part
     ct = 0
-    for k in list(x.keys()):
-        j = k[1]
-        t_2 = 0
-        for k_1 in list(x.keys()):
-            if j == k_1[1]:
-                t_2 += x[k_1]
+    for j, v in t_2.items():
+        tmp = 0
+        for i in v:
+            tmp += x[(i, j)]
         ct += 1
         ctn = "FP" + str(ct)
-        model.add_constraint(t_2 == 1, ctname=ctn)
+        model.add_constraint(tmp == 1, ctname=ctn)
 
-    model.set_objective("min", -first_part)
-
+    model.set_objective("min", -ob)
     model.print_information()
     model.solve(log_output=True)
-
     model.export_as_lp(model_path_out)
-    if model.solution == None:
-        print("No solution!")
-    else:
-        model.solution.export(solution_path_out)
-
-        f = open(solution_path_out)
-        result = json.load(f)
-        f.close()
-
-        result = result['CPLEXSolution']['variables']
-
-        display(list_hits, result, figure_path_out)
+    print("Wrote model")
 
 
-def display(hits, result, out=""):
+def run_hybrid_solver(cqm, no_track):
+    """Solve CQM using hybrid solver."""
+    print("Solving CQM ...")
+    # Initialize the CQM solver
+    sampler = LeapHybridCQMSampler()
+    # Solve the problem using the CQM solver
+    model_name = str(no_track) + ' Track D-QCBM'
+    sampleset = sampler.sample_cqm(cqm, label=model_name)
+    print(sampleset)
+    feasible_sampleset = sampleset.filter(lambda row: row.is_feasible)
+
+    try:
+        sample = feasible_sampleset.first.sample
+        energy = feasible_sampleset.first.energy
+        run_time = sampleset.info['run_time'] / 1000000
+    except:
+        print("\nNo feasible solutions found.")
+        exit()
+
+    return sample, energy, run_time
+
+
+def cal_expected_value(list_hits):
+    track = dict()
+    for hit in list_hits:
+        k = hit.particle_id / 1000
+        if k not in track:
+            track[k] = [hit]
+        else:
+            track[k].append(hit)
+    cost = 0
+    for t, hs in track.items():
+        for i in range(len(hs) - 2):
+            h_i = hs[i]
+            h_j = hs[i + 1]
+            h_k = hs[i + 2]
+
+            seg_1 = Segment(h_j, h_i)
+            seg_2 = Segment(h_j, h_k)
+            c = Cost(seg_1, seg_2)
+            # print(c.cos_beta ** 7 / c.sum_distance)
+            cost += c.cos_beta ** 7 / c.sum_distance
+
+    print("expected cost=", cost)
+
+
+def display(hits, segments, out=""):
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
-
     xs = []
     ys = []
     zs = []
-
     for h in hits:
         xs.append(h.x)
         ys.append(h.y)
         zs.append(h.z)
     ax.scatter(xs, ys, zs, marker='o', color='red')
 
-    count_x = 0
-    for var in result:
-        print(var)
-        x_i_j = var['name'].split('_')
-        if 'x' in x_i_j[0] and round(float(var['value'])) == 1.0:
-            count_x += 1
-            i = int(x_i_j[1])
-            j = int(x_i_j[2])
-            h1 = list_hits[i]
-            h2 = list_hits[j]
-            ax.plot(xs=[h1.x, h2.x], ys=[h1.y, h2.y], zs=[h1.z, h2.z], color='blue')
-    print("count x:", count_x)
+    for segment in segments:
+        h1 = segment[0]
+        h2 = segment[1]
+        ax.plot(xs=[h1.x, h2.x], ys=[h1.y, h2.y], zs=[h1.z, h2.z], color='blue')
+
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
@@ -166,7 +197,6 @@ def get_costs(list_hits, hits, beta_max):
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
                                 if cos_beta >= math.cos(beta_max):
-                                    # print(cos_beta)
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -209,26 +239,50 @@ def check_path(path):
 if __name__ == '__main__':
     data_selected_path = '../../src/data_selected'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
-    folder = '/6hits/known_track/'
+    no_track = 100
+    folder = "/" + str(no_track) + 'hits/known_track/'
     check_path(out_path + folder)
     data_path = data_selected_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"
-    model_path_out = out_path + folder + "model.lp"
-    solution_path_out = out_path + folder + "solution.json"
-    figure_path_out = out_path + folder + "result.PNG"
-
+    model_path_out = out_path + folder + "model_C_QCBM.lp"
+    solution_path_out = out_path + folder + "solution_D_QCBM.json"
+    figure_path_out = out_path + folder + "result_D_QCBm.PNG"
     hits_by_layers = read_hits(data_path)[9]
     list_hits = []
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 2
+    beta_max = math.pi / 100
+    print("beta_max:", beta_max)
     m = 7
-    M = 1
-    costs = get_costs(list_hits, hits_by_layers, beta_max)
-    write_costs(costs, costs_path_out, m)
-    costs = load_costs(costs_path_out)
-    result = run(list_hits, costs, m, M, model_path_out, solution_path_out, figure_path_out)
+
+    # costs = get_costs(list_hits, hits_by_layers, beta_max)
+    # write_costs(costs, costs_path_out, m)
+    # costs = load_costs(costs_path_out)
+    # build_model(list_hits, costs, m, model_path_out, solution_path_out, figure_path_out)
     #
-    #
-    # print(math.cos(math.pi))
+    cqm = dimod.lp.load(model_path_out)
+
+    sample, energy, run_time = run_hybrid_solver(cqm, no_track=no_track)
+
+    print("Run time:", run_time)
+    print("Objective value:", energy)
+
+    with open(solution_path_out, 'w', encoding='utf-8') as f:
+        json.dump(sample, f, ensure_ascii=False, indent=4)
+
+    with open(solution_path_out, 'r', encoding='utf-8') as f:
+        result = json.load(f)
+
+    segments = []
+    for var, value in result.items():
+        x_i_j = var.split('_')
+        if 'x' in x_i_j[0] and value == 1.0:
+            print(var, value)
+            i = int(x_i_j[1])
+            j = int(x_i_j[2])
+            h_1 = list_hits[i]
+            h_2 = list_hits[j]
+            segments.append([h_1, h_2])
+    display(list_hits, segments, figure_path_out)
+    cal_expected_value(list_hits)

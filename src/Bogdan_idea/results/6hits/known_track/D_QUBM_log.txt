@@ -1,0 +1,12 @@
+Folder exist
+number of segments: 114
+wrote!
+N = 36
+offset: 2016.0
+  x_0_13 x_0_18 x_0_19 x_0_7 x_10_16 x_10_22 ... x_9_26      energy num_oc.
+0      0      0      0     1       1       0 ...      0 -2016.10416       1
+['BINARY', 1 rows, 1 samples, 114 variables]
+ob_value: -0.10415996986330356
+expected cost= -0.10415996986346211
+time: 9.488801002502441
+No_segments: 36

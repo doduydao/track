@@ -1,0 +1,148 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/C_QUBM.py
+Folder exist
+N = 36
+Model: Track
+ - number of variables: 114
+   - binary=114, integer=0, continuous=0
+ - number of constraints: 0
+   - linear=0
+ - parameters: defaults
+ - objective: minimize quadratic
+ - problem type is: MIQP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Found incumbent of value 2016.000000 after 0.00 sec. (0.05 ticks)
+Tried aggregator 1 time.
+MIP Presolve added 12882 rows and 6441 columns.
+Reduced MIP has 12882 rows, 6555 columns, and 25764 nonzeros.
+Reduced MIP has 6555 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (1.75 ticks)
+Probing time = 0.00 sec. (0.79 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+MIP Presolve eliminated 6441 rows and 0 columns.
+Reduced MIP has 6441 rows, 6555 columns, and 19323 nonzeros.
+Reduced MIP has 6555 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (15.27 ticks)
+Classifier predicts products in MIQP should not be linearized.
+Represolve...
+
+Tried aggregator 1 time.
+Repairing indefinite Q in the objective.
+Reduced MIQP has 0 rows, 114 columns, and 0 nonzeros.
+Reduced MIQP has 114 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Reduced MIQP objective Q matrix has 12996 nonzeros.
+Presolve time = 0.00 sec. (8.09 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIQP has 0 rows, 114 columns, and 0 nonzeros.
+Reduced MIQP has 114 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Reduced MIQP objective Q matrix has 12996 nonzeros.
+Presolve time = 0.00 sec. (4.61 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.01 sec. (10.96 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                         2016.0000   -10752.0000           633.33%
+      0     0      -58.6828    96     2016.0000      -58.6828       10  102.91%
+*     0+    0                          188.9310      -58.6828           131.06%
+*     0+    0                           -0.1042      -58.6828              ---
+      0     2      -58.6828    96       -0.1042      -57.6160       10     ---
+Elapsed time = 0.06 sec. (118.46 ticks, tree = 0.02 MB, solutions = 3)
+   1679  1178       -8.6874    51       -0.1042      -48.3282     2833     ---
+
+Performing restart 1
+
+Repeating presolve.
+Tried aggregator 1 time.
+Reduced MIQP has 0 rows, 114 columns, and 0 nonzeros.
+Reduced MIQP has 114 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Reduced MIQP objective Q matrix has 12996 nonzeros.
+Presolve time = 0.00 sec. (4.61 ticks)
+Tried aggregator 1 time.
+Reduced MIQP has 0 rows, 114 columns, and 0 nonzeros.
+Reduced MIQP has 114 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Reduced MIQP objective Q matrix has 12996 nonzeros.
+Presolve time = 0.00 sec. (4.61 ticks)
+Represolve time = 0.00 sec. (9.66 ticks)
+   3473     2      -58.6828    96       -0.1042      -44.9120     6426     ---
+   4973   985      -16.3530    73       -0.1042      -38.0830     9558     ---
+   7400  2649       -0.2506    68       -0.1042      -32.1528    15448     ---
+   9959  4220       -9.1302    75       -0.1042      -29.7142    21447     ---
+  13208  5964      -24.7364    80       -0.1042      -27.6903    29106     ---
+  17010  8053      -22.4889    73       -0.1042      -25.8834    38815     ---
+  21378 10595      -22.2314    74       -0.1042      -24.3001    51220     ---
+  24914 12115       -8.7340    67       -0.1042      -22.8845    59209     ---
+  36761 18041      -10.2401    66       -0.1042      -19.6747    95633     ---
+Elapsed time = 1.27 sec. (3226.06 ticks, tree = 4.20 MB, solutions = 3)
+  52759 23578        cutoff             -0.1042      -17.4342   137600     ---
+  68845 28713       -1.1352    71       -0.1042      -14.7611   188435     ---
+  82700 32035       -0.8862    67       -0.1042      -12.8308   230688     ---
+  95426 34636       -0.4628    72       -0.1042      -11.5919   277099     ---
+ 107937 36056       -4.4679    71       -0.1042      -10.4867   318024     ---
+ 120197 36758       -5.6431    70       -0.1042       -9.5412   359003     ---
+ 131803 36806       -4.9705    68       -0.1042       -8.6265   394450     ---
+ 143404 35976        cutoff             -0.1042       -7.7770   434509     ---
+ 154734 34557        cutoff             -0.1042       -6.9837   473251     ---
+ 165812 32352       -4.9927    70       -0.1042       -6.2076   507655     ---
+Elapsed time = 4.84 sec. (12763.41 ticks, tree = 7.77 MB, solutions = 3)
+ 176478 29253        cutoff             -0.1042       -5.3464   543105     ---
+ 186209 26056       -3.1144    64       -0.1042       -4.5338   569326     ---
+ 196571 21121        cutoff             -0.1042       -3.6285   602051     ---
+ 206876 14950        cutoff             -0.1042       -2.5574   632689     ---
+ 215931  7982        cutoff             -0.1042       -1.4480   658090     ---
+ 223926   505        cutoff             -0.1042       -0.1974   677352   89.49%
+
+Root node processing (before b&c):
+  Real time             =    0.06 sec. (116.19 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    7.00 sec. (18430.71 ticks)
+  Sync time (average)   =    1.55 sec.
+  Wait time (average)   =    0.05 sec.
+                          ------------
+Total (root+branch&cut) =    7.06 sec. (18546.90 ticks)
+{'index': '0', 'name': 'x_0_7', 'value': '1.0'}
+{'index': '4', 'name': 'x_1_6', 'value': '1.0'}
+{'index': '8', 'name': 'x_2_9', 'value': '1.0'}
+{'index': '12', 'name': 'x_3_8', 'value': '1.0'}
+{'index': '15', 'name': 'x_4_10', 'value': '1.0'}
+{'index': '18', 'name': 'x_5_11', 'value': '1.0'}
+{'index': '21', 'name': 'x_6_12', 'value': '1.0'}
+{'index': '26', 'name': 'x_7_13', 'value': '1.0'}
+{'index': '30', 'name': 'x_8_14', 'value': '1.0'}
+{'index': '33', 'name': 'x_9_15', 'value': '1.0'}
+{'index': '38', 'name': 'x_10_16', 'value': '1.0'}
+{'index': '41', 'name': 'x_11_17', 'value': '1.0'}
+{'index': '44', 'name': 'x_12_18', 'value': '1.0'}
+{'index': '51', 'name': 'x_13_19', 'value': '1.0'}
+{'index': '55', 'name': 'x_14_20', 'value': '1.0'}
+{'index': '58', 'name': 'x_15_21', 'value': '1.0'}
+{'index': '63', 'name': 'x_16_22', 'value': '1.0'}
+{'index': '66', 'name': 'x_17_23', 'value': '1.0'}
+{'index': '69', 'name': 'x_18_24', 'value': '1.0'}
+{'index': '76', 'name': 'x_19_25', 'value': '1.0'}
+{'index': '80', 'name': 'x_20_27', 'value': '1.0'}
+{'index': '83', 'name': 'x_21_26', 'value': '1.0'}
+{'index': '87', 'name': 'x_22_28', 'value': '1.0'}
+{'index': '90', 'name': 'x_23_29', 'value': '1.0'}
+{'index': '94', 'name': 'x_24_31', 'value': '1.0'}
+{'index': '97', 'name': 'x_25_30', 'value': '1.0'}
+{'index': '99', 'name': 'x_26_32', 'value': '1.0'}
+{'index': '101', 'name': 'x_27_33', 'value': '1.0'}
+{'index': '103', 'name': 'x_28_34', 'value': '1.0'}
+{'index': '105', 'name': 'x_29_35', 'value': '1.0'}
+{'index': '107', 'name': 'x_30_36', 'value': '1.0'}
+{'index': '109', 'name': 'x_31_37', 'value': '1.0'}
+{'index': '110', 'name': 'x_32_38', 'value': '1.0'}
+{'index': '111', 'name': 'x_33_39', 'value': '1.0'}
+{'index': '112', 'name': 'x_34_40', 'value': '1.0'}
+{'index': '113', 'name': 'x_35_41', 'value': '1.0'}
+count x: 36
+expected cost= -0.10415996986346211
+
+Process finished with exit code 0

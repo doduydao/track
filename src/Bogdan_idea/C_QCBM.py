@@ -14,11 +14,10 @@ def define_variables(model, costs):
         var.add(j_k)
     var = sorted(var, key=lambda x: (x[0], x[1]))
     x = model.binary_var_dict(var, name='x')
-    # ob = model.continuous_var(name="ob")
     return x
 
 
-def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, figure_path_out):
+def run(list_hits, costs, m, model_path_out, solution_path_out, figure_path_out):
     # define model
     model = Model(name="Track")
 
@@ -28,23 +27,23 @@ def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, fig
     # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
-    print("N =", N)
-    first_part = 0
+    print("N=", N)
+    ob = 0
     segments = set()
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += cost * x[i_j] * x[j_k]
+        ob += cost * x[i_j] * x[j_k]
         segments.add(i_j)
         segments.add(j_k)
 
     # second_part
     sum_segments = sum([x[s] for s in segments])
-    second_part = (sum_segments - N) ** 2
+    ctn = "SP" + str(1)
+    model.add_constraint(sum_segments == N, ctname=ctn)
 
-    # third_part
-    third_part = 0
     t_1 = dict()
+    t_2 = dict()
     for k in x.keys():
         i = k[0]
         j = k[1]
@@ -53,32 +52,32 @@ def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, fig
         else:
             t_1[i].add(j)
 
-    for i, v in t_1.items():
-        tmp = 0
-        for j in v:
-            tmp += x[(i, j)]
-        third_part += (1 - tmp) ** 2
-
-    # fourth_part
-    fourth_part = 0
-    t_2 = dict()
-    for k in x.keys():
-        i = k[0]
-        j = k[1]
         if j not in t_2:
             t_2[j] = {i}
         else:
             t_2[j].add(i)
+
+    # third_part
+    ct = 0
+    for i, v in t_1.items():
+        tmp = 0
+        for j in v:
+            tmp += x[(i, j)]
+        ct += 1
+        ctn = "TP" + str(ct)
+        model.add_constraint(tmp == 1, ctname=ctn)
+
+    # fourth_part
+    ct = 0
     for j, v in t_2.items():
         tmp = 0
         for i in v:
             tmp += x[(i, j)]
-        fourth_part += (1 - tmp) ** 2
+        ct += 1
+        ctn = "FP" + str(ct)
+        model.add_constraint(tmp == 1, ctname=ctn)
 
-    ob = -first_part + alpha * second_part + beta * (third_part + fourth_part)
-
-    model.set_objective("min", ob)
-
+    model.set_objective("min", -ob)
     model.print_information()
     model.solve(log_output=True)
 
@@ -95,6 +94,30 @@ def run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, fig
         result = result['CPLEXSolution']['variables']
 
         display(list_hits, result, figure_path_out)
+
+
+def cal_expected_value(list_hits):
+    track = dict()
+    for hit in list_hits:
+        k = hit.particle_id / 1000
+        if k not in track:
+            track[k] = [hit]
+        else:
+            track[k].append(hit)
+    cost = 0
+    for t, hs in track.items():
+        for i in range(len(hs) - 2):
+            h_i = hs[i]
+            h_j = hs[i + 1]
+            h_k = hs[i + 2]
+
+            seg_1 = Segment(h_j, h_i)
+            seg_2 = Segment(h_j, h_k)
+            c = Cost(seg_1, seg_2)
+            # print(c.cos_beta ** 7 / c.sum_distance)
+            cost += c.cos_beta ** 7 / c.sum_distance
+
+    print("expected cost=", cost)
 
 
 def display(hits, result, out=""):
@@ -171,7 +194,6 @@ def get_costs(list_hits, hits, beta_max):
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
                                 if cos_beta >= math.cos(beta_max):
-                                    # print(cos_beta)
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -214,24 +236,24 @@ def check_path(path):
 if __name__ == '__main__':
     data_selected_path = '../../src/data_selected'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
-    folder = '/30hits/known_track/'
+    folder = '/100hits/known_track/'
     check_path(out_path + folder)
     data_path = data_selected_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"
-    model_path_out = out_path + folder + "model.lp"
-    solution_path_out = out_path + folder + "solution.json"
-    figure_path_out = out_path + folder + "result.PNG"
+    model_path_out = out_path + folder + "model_C_QCBM.lp"
+    solution_path_out = out_path + folder + "solution_C_QCBM.json"
+    figure_path_out = out_path + folder + "result_C_QCBM.PNG"
 
     hits_by_layers = read_hits(data_path)[9]
     list_hits = []
     for hs in list(hits_by_layers.values()):
         list_hits += hs
 
-    beta_max = math.pi / 200
+    beta_max = math.pi / 100
+    print("beta_max:", beta_max)
     m = 7
-    alpha = 1
-    beta = 1
     costs = get_costs(list_hits, hits_by_layers, beta_max)
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
-    result = run(list_hits, costs, m, alpha, beta, model_path_out, solution_path_out, figure_path_out)
+    result = run(list_hits, costs, m, model_path_out, solution_path_out, figure_path_out)
+    cal_expected_value(list_hits)

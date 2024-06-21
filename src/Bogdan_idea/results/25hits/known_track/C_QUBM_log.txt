@@ -1,0 +1,300 @@
+/Users/doduydao/anaconda3/envs/track_finding/bin/python /Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/C_QUBM.py
+Folder exist
+number of segments: 499
+wrote!
+N = 150
+Model: Track
+ - number of variables: 499
+   - binary=499, integer=0, continuous=0
+ - number of constraints: 0
+   - linear=0
+ - parameters: defaults
+ - objective: minimize quadratic
+ - problem type is: MIQP
+Version identifier: 22.1.1.0 | 2022-11-28 | 9160aff4d
+CPXPARAM_Read_DataCheck                          1
+Found incumbent of value 22800.000000 after 0.00 sec. (0.97 ticks)
+Tried aggregator 1 time.
+MIP Presolve added 248502 rows and 124251 columns.
+Reduced MIP has 248502 rows, 124750 columns, and 497004 nonzeros.
+Reduced MIP has 124750 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (33.30 ticks)
+Probing time = 0.07 sec. (11.37 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+MIP Presolve eliminated 124251 rows and 0 columns.
+Reduced MIP has 124251 rows, 124750 columns, and 372753 nonzeros.
+Reduced MIP has 124750 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.18 sec. (289.20 ticks)
+Classifier predicts products in MIQP should be linearized.
+Probing time = 0.05 sec. (9.36 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 2.62 sec. (3664.41 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                        22800.0000  -127399.0000           658.77%
+*     0+    0                          412.7773  -127399.0000              ---
+*     0+    0                          328.7526  -127399.0000              ---
+*     0+    0                          258.7613  -127399.0000              ---
+*     0+    0                          199.7872  -127399.0000              ---
+*     0+    0                          137.7736  -127399.0000              ---
+*     0+    0                           91.7231  -127399.0000              ---
+*     0+    0                           59.6828  -127399.0000              ---
+*     0+    0                           37.6792  -127399.0000              ---
+*     0+    0                           31.6761  -127399.0000              ---
+      0     0   -52299.5000   499       31.6761   -52299.5000    39622     ---
+      0     0   -52044.5028   965       31.6761   Cuts: 10000    42480     ---
+      0     0   -51786.0031  1436       31.6761   Cuts: 10000    44594     ---
+      0     0   -51538.0045  1851       31.6761 ZeroHalf: 10000    46352     ---
+      0     0   -51294.0054  2262       31.6761 ZeroHalf: 10000    48086     ---
+      0     0   -51048.5077  2679       31.6761 ZeroHalf: 10000    49822     ---
+Detecting symmetries...
+      0     0   -50807.7591  3092       31.6761 ZeroHalf: 10000    51550     ---
+      0     0   -50566.5114  3503       31.6761 ZeroHalf: 10000    53586     ---
+      0     0   -50331.2641  3907       31.6761 ZeroHalf: 10000    55869     ---
+      0     0   -50098.5158  4307       31.6761 ZeroHalf: 10000    58046     ---
+      0     0   -49871.0166  4720       31.6761 ZeroHalf: 10000    59934     ---
+      0     0   -49640.2677  5137       31.6761 ZeroHalf: 10000    61943     ---
+      0     0   -49412.7690  5554       31.6761 ZeroHalf: 10000    64516     ---
+      0     0   -49192.1437  5969       31.6761 ZeroHalf: 10000    66493     ---
+      0     0   -48964.3953  6362       31.6761 ZeroHalf: 10000    68881     ---
+      0     0   -48743.8964  6779       31.6761 ZeroHalf: 10000    71889     ---
+      0     0   -48527.1500  7180       31.6761 ZeroHalf: 10000    75344     ---
+      0     0   -48312.1516  7611       31.6761 ZeroHalf: 10000    78395     ---
+      0     0   -48100.1526  8036       31.6761 ZeroHalf: 10000    80922     ---
+      0     0   -47907.1535  8417       31.6761 ZeroHalf: 10000    83158     ---
+      0     0   -47732.9898  8774       31.6761 ZeroHalf: 10000    84937     ---
+      0     0   -47584.4898  9062       31.6761 ZeroHalf: 10000    86625     ---
+      0     0   -47450.4907  9320       31.6761 ZeroHalf: 10000    88373     ---
+      0     0   -47343.2407  9537       31.6761 ZeroHalf: 10000    89662     ---
+      0     0   -47245.4907  9739       31.6761    Cuts: 9712    90728     ---
+      0     0   -47161.6585  9899       31.6761 ZeroHalf: 7295    92281     ---
+      0     0   -47091.4085 10032       31.6761 ZeroHalf: 3277    93452     ---
+      0     0   -47023.5342 10151       31.6761 ZeroHalf: 2663    94712     ---
+      0     0   -46955.1585 10280       31.6761 ZeroHalf: 4230    95891     ---
+      0     0   -46894.1585 10405       31.6761 ZeroHalf: 4097    97465     ---
+      0     0   -46830.4092 10532       31.6761 ZeroHalf: 3288    98545     ---
+      0     0   -46777.3259 10637       31.6761 ZeroHalf: 2432    99609     ---
+      0     0   -46726.2016 10732       31.6761 ZeroHalf: 2366   100903     ---
+      0     0   -46677.2015 10808       31.6761 ZeroHalf: 2618   102300     ---
+      0     0   -46631.7027 10906       31.6761 ZeroHalf: 1844   103479     ---
+      0     0   -46589.9509 10980       31.6761 ZeroHalf: 1471   104796     ---
+      0     0   -46549.8672 11068       31.6761 ZeroHalf: 1762   106315     ---
+      0     0   -46510.6172 11146       31.6761 ZeroHalf: 1698   108986     ---
+      0     0   -46473.6179 11207       31.6761 ZeroHalf: 1476   110142     ---
+      0     0   -46433.8672 11294       31.6761 ZeroHalf: 1660   112268     ---
+      0     0   -46398.9508 11353       31.6761 ZeroHalf: 1132   113941     ---
+      0     0   -46366.2428 11435       31.6761 ZeroHalf: 1460   115535     ---
+      0     0   -46333.6806 11492       31.6761 ZeroHalf: 1412   117036     ---
+      0     0   -46302.9750 11570       31.6761 ZeroHalf: 1456   118932     ---
+      0     0   -46272.0368 11626       31.6761 ZeroHalf: 1215   120819     ---
+      0     0   -46241.9750 11697       31.6761    Cuts: 1218   123648     ---
+      0     0   -46212.0165 11708       31.6761 ZeroHalf: 1373   127517     ---
+      0     0   -46184.9326 11783       31.6761 ZeroHalf: 1332   130377     ---
+      0     0   -46160.1322 11862       31.6761 ZeroHalf: 1337   133280     ---
+      0     0   -46134.2083 11919       31.6761 ZeroHalf: 1353   137148     ---
+      0     0   -46105.3856 11976       31.6761 ZeroHalf: 1541   140864     ---
+      0     0   -46075.4969 12024       31.6761 ZeroHalf: 1820   144945     ---
+      0     0   -46051.1513 12098       31.6761 ZeroHalf: 1778   149232     ---
+      0     0   -46022.8882 12151       31.6761 ZeroHalf: 1800   154267     ---
+      0     0   -45996.4552 12149       31.6761    Cuts: 1679   159142     ---
+      0     0   -45974.2978 12220       31.6761 ZeroHalf: 1501   162808     ---
+      0     0   -45955.5750 12265       31.6761 ZeroHalf: 1648   169479     ---
+Heuristic still looking.
+Heuristic still looking.
+Detecting symmetries...
+      0     2   -45955.5750 12265       31.6761   -45955.5750   169479     ---
+Elapsed time = 1028.81 sec. (1538586.59 ticks, tree = 0.02 MB, solutions = 10)
+      1     3   -45623.9236 12596       31.6761   -45955.5715   180440     ---
+      2     3   -45829.5750 12142       31.6761   -45955.5715   176049     ---
+      3     4   -45297.4224 12991       31.6761   -45955.5715   192405     ---
+      4     5   -45518.4290 12622       31.6761   -45829.5742   209915     ---
+      5     7   -45388.4290 12575       31.6761   -45829.5742   226753     ---
+      6     6   -45198.4881 12956       31.6761   -45829.5742   221517     ---
+      7     4   -45498.4179 12522       31.6761   -45829.5742   190097     ---
+      8     9   -45116.2424 12798       31.6761   -45829.5742   268198     ---
+      9     5   -45720.4227 12131       31.6761   -45829.5742   205600     ---
+     10     8   -45262.8040 12482       31.6761   -45829.5742   246672     ---
+Elapsed time = 5205.48 sec. (1846103.56 ticks, tree = 0.07 MB, solutions = 10)
+     11    10   -45377.0972 12518       31.6761   -45829.5742   290347     ---
+     12    11   -44983.0847 12779       31.6761   -45829.5742   308924     ---
+     13     6   -44997.0764 13469       31.6761   -45829.5742   218131     ---
+     14    12   -45579.7223 12134       31.6761   -45720.4227   341836     ---
+     15    13   -45157.3615 12383       31.6761   -45720.4227   358195     ---
+     16    14   -45244.6580 12487       31.6761   -45720.4227   385209     ---
+     17    15   -44871.5083 12645       31.6761   -45720.4227   405927     ---
+     18    17   -45447.5658 12092       31.6761   -45720.4227   461798     ---
+     19    15   -45104.5329 12438       31.6761   -45720.4227   399988     ---
+     20     7   -45183.4302 13053       31.6761   -45720.4227   231873     ---
+Elapsed time = 5857.41 sec. (2027770.21 ticks, tree = 0.02 MB, solutions = 10)
+     21     9   -44914.4934 13269       31.6761   -45720.4227   273692     ---
+
+Zero-half cuts applied:  101496
+Gomory fractional cuts applied:  13
+
+Root node processing (before b&c):
+  Real time             = 1028.41 sec. (1538452.52 ticks)
+Parallel b&c, 8 threads:
+  Real time             = 4829.12 sec. (534591.01 ticks)
+  Sync time (average)   = 1079.99 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) = 5857.53 sec. (2073043.53 ticks)
+{'index': '0', 'name': 'x_0_26', 'value': '1.0'}
+{'index': '4', 'name': 'x_1_25', 'value': '1.0'}
+{'index': '7', 'name': 'x_2_27', 'value': '1.0'}
+{'index': '11', 'name': 'x_3_28', 'value': '1.0'}
+{'index': '15', 'name': 'x_4_29', 'value': '1.0'}
+{'index': '18', 'name': 'x_5_32', 'value': '1.0'}
+{'index': '21', 'name': 'x_6_31', 'value': '1.0'}
+{'index': '24', 'name': 'x_7_30', 'value': '1.0'}
+{'index': '28', 'name': 'x_8_36', 'value': '1.0'}
+{'index': '31', 'name': 'x_9_35', 'value': '1.0'}
+{'index': '34', 'name': 'x_10_34', 'value': '1.0'}
+{'index': '37', 'name': 'x_11_33', 'value': '1.0'}
+{'index': '41', 'name': 'x_12_37', 'value': '1.0'}
+{'index': '44', 'name': 'x_13_38', 'value': '1.0'}
+{'index': '47', 'name': 'x_14_39', 'value': '1.0'}
+{'index': '50', 'name': 'x_15_41', 'value': '1.0'}
+{'index': '55', 'name': 'x_16_65', 'value': '1.0'}
+{'index': '58', 'name': 'x_17_40', 'value': '1.0'}
+{'index': '61', 'name': 'x_18_42', 'value': '1.0'}
+{'index': '66', 'name': 'x_19_46', 'value': '1.0'}
+{'index': '70', 'name': 'x_20_43', 'value': '1.0'}
+{'index': '74', 'name': 'x_21_44', 'value': '1.0'}
+{'index': '79', 'name': 'x_22_47', 'value': '1.0'}
+{'index': '83', 'name': 'x_23_49', 'value': '1.0'}
+{'index': '87', 'name': 'x_24_48', 'value': '1.0'}
+{'index': '90', 'name': 'x_25_51', 'value': '1.0'}
+{'index': '93', 'name': 'x_26_50', 'value': '1.0'}
+{'index': '97', 'name': 'x_27_52', 'value': '1.0'}
+{'index': '103', 'name': 'x_28_53', 'value': '1.0'}
+{'index': '109', 'name': 'x_29_55', 'value': '1.0'}
+{'index': '112', 'name': 'x_30_54', 'value': '1.0'}
+{'index': '117', 'name': 'x_31_80', 'value': '1.0'}
+{'index': '119', 'name': 'x_32_57', 'value': '1.0'}
+{'index': '122', 'name': 'x_33_60', 'value': '1.0'}
+{'index': '125', 'name': 'x_34_61', 'value': '1.0'}
+{'index': '131', 'name': 'x_35_111', 'value': '1.0'}
+{'index': '133', 'name': 'x_36_58', 'value': '1.0'}
+{'index': '136', 'name': 'x_37_62', 'value': '1.0'}
+{'index': '139', 'name': 'x_38_64', 'value': '1.0'}
+{'index': '142', 'name': 'x_39_63', 'value': '1.0'}
+{'index': '146', 'name': 'x_40_66', 'value': '1.0'}
+{'index': '149', 'name': 'x_41_67', 'value': '1.0'}
+{'index': '155', 'name': 'x_42_92', 'value': '1.0'}
+{'index': '159', 'name': 'x_43_96', 'value': '1.0'}
+{'index': '162', 'name': 'x_44_71', 'value': '1.0'}
+{'index': '166', 'name': 'x_45_70', 'value': '1.0'}
+{'index': '172', 'name': 'x_46_69', 'value': '1.0'}
+{'index': '178', 'name': 'x_47_73', 'value': '1.0'}
+{'index': '181', 'name': 'x_48_74', 'value': '1.0'}
+{'index': '186', 'name': 'x_49_72', 'value': '1.0'}
+{'index': '189', 'name': 'x_50_75', 'value': '1.0'}
+{'index': '192', 'name': 'x_51_76', 'value': '1.0'}
+{'index': '197', 'name': 'x_52_102', 'value': '1.0'}
+{'index': '206', 'name': 'x_54_82', 'value': '1.0'}
+{'index': '209', 'name': 'x_55_81', 'value': '1.0'}
+{'index': '213', 'name': 'x_56_77', 'value': '1.0'}
+{'index': '219', 'name': 'x_57_79', 'value': '1.0'}
+{'index': '222', 'name': 'x_58_84', 'value': '1.0'}
+{'index': '229', 'name': 'x_59_135', 'value': '1.0'}
+{'index': '230', 'name': 'x_60_83', 'value': '1.0'}
+{'index': '234', 'name': 'x_61_85', 'value': '1.0'}
+{'index': '238', 'name': 'x_62_87', 'value': '1.0'}
+{'index': '241', 'name': 'x_63_89', 'value': '1.0'}
+{'index': '246', 'name': 'x_64_88', 'value': '1.0'}
+{'index': '259', 'name': 'x_66_142', 'value': '1.0'}
+{'index': '260', 'name': 'x_67_91', 'value': '1.0'}
+{'index': '270', 'name': 'x_69_97', 'value': '1.0'}
+{'index': '273', 'name': 'x_70_95', 'value': '1.0'}
+{'index': '279', 'name': 'x_71_94', 'value': '1.0'}
+{'index': '283', 'name': 'x_72_100', 'value': '1.0'}
+{'index': '288', 'name': 'x_73_98', 'value': '1.0'}
+{'index': '291', 'name': 'x_74_99', 'value': '1.0'}
+{'index': '297', 'name': 'x_76_101', 'value': '1.0'}
+{'index': '305', 'name': 'x_78_103', 'value': '1.0'}
+{'index': '310', 'name': 'x_79_104', 'value': '1.0'}
+{'index': '313', 'name': 'x_80_105', 'value': '1.0'}
+{'index': '318', 'name': 'x_81_106', 'value': '1.0'}
+{'index': '323', 'name': 'x_82_157', 'value': '1.0'}
+{'index': '326', 'name': 'x_83_160', 'value': '1.0'}
+{'index': '328', 'name': 'x_84_110', 'value': '1.0'}
+{'index': '333', 'name': 'x_85_158', 'value': '1.0'}
+{'index': '334', 'name': 'x_86_108', 'value': '1.0'}
+{'index': '335', 'name': 'x_86_109', 'value': '1.0'}
+{'index': '339', 'name': 'x_87_112', 'value': '1.0'}
+{'index': '342', 'name': 'x_88_113', 'value': '1.0'}
+{'index': '347', 'name': 'x_89_114', 'value': '1.0'}
+{'index': '351', 'name': 'x_90_117', 'value': '1.0'}
+{'index': '354', 'name': 'x_91_116', 'value': '1.0'}
+{'index': '357', 'name': 'x_91_165', 'value': '1.0'}
+{'index': '359', 'name': 'x_92_115', 'value': '1.0'}
+{'index': '366', 'name': 'x_93_121', 'value': '1.0'}
+{'index': '369', 'name': 'x_93_171', 'value': '1.0'}
+{'index': '370', 'name': 'x_94_119', 'value': '1.0'}
+{'index': '374', 'name': 'x_95_118', 'value': '1.0'}
+{'index': '379', 'name': 'x_96_120', 'value': '1.0'}
+{'index': '382', 'name': 'x_97_122', 'value': '1.0'}
+{'index': '386', 'name': 'x_97_173', 'value': '1.0'}
+{'index': '387', 'name': 'x_98_124', 'value': '1.0'}
+{'index': '389', 'name': 'x_98_174', 'value': '1.0'}
+{'index': '390', 'name': 'x_99_123', 'value': '1.0'}
+{'index': '391', 'name': 'x_99_147', 'value': '1.0'}
+{'index': '393', 'name': 'x_100_125', 'value': '1.0'}
+{'index': '395', 'name': 'x_101_126', 'value': '1.0'}
+{'index': '398', 'name': 'x_102_127', 'value': '1.0'}
+{'index': '403', 'name': 'x_103_128', 'value': '1.0'}
+{'index': '406', 'name': 'x_104_130', 'value': '1.0'}
+{'index': '407', 'name': 'x_104_156', 'value': '1.0'}
+{'index': '408', 'name': 'x_105_129', 'value': '1.0'}
+{'index': '411', 'name': 'x_106_131', 'value': '1.0'}
+{'index': '413', 'name': 'x_107_132', 'value': '1.0'}
+{'index': '415', 'name': 'x_108_133', 'value': '1.0'}
+{'index': '417', 'name': 'x_109_134', 'value': '1.0'}
+{'index': '422', 'name': 'x_110_136', 'value': '1.0'}
+{'index': '424', 'name': 'x_111_133', 'value': '1.0'}
+{'index': '427', 'name': 'x_112_137', 'value': '1.0'}
+{'index': '429', 'name': 'x_113_139', 'value': '1.0'}
+{'index': '432', 'name': 'x_114_138', 'value': '1.0'}
+{'index': '436', 'name': 'x_115_140', 'value': '1.0'}
+{'index': '440', 'name': 'x_116_141', 'value': '1.0'}
+{'index': '444', 'name': 'x_117_138', 'value': '1.0'}
+{'index': '447', 'name': 'x_118_144', 'value': '1.0'}
+{'index': '449', 'name': 'x_119_143', 'value': '1.0'}
+{'index': '451', 'name': 'x_120_146', 'value': '1.0'}
+{'index': '454', 'name': 'x_121_145', 'value': '1.0'}
+{'index': '458', 'name': 'x_122_148', 'value': '1.0'}
+{'index': '462', 'name': 'x_123_172', 'value': '1.0'}
+{'index': '463', 'name': 'x_124_149', 'value': '1.0'}
+{'index': '465', 'name': 'x_125_150', 'value': '1.0'}
+{'index': '466', 'name': 'x_126_151', 'value': '1.0'}
+{'index': '467', 'name': 'x_127_152', 'value': '1.0'}
+{'index': '468', 'name': 'x_128_153', 'value': '1.0'}
+{'index': '469', 'name': 'x_129_154', 'value': '1.0'}
+{'index': '472', 'name': 'x_130_155', 'value': '1.0'}
+{'index': '474', 'name': 'x_131_155', 'value': '1.0'}
+{'index': '475', 'name': 'x_132_157', 'value': '1.0'}
+{'index': '476', 'name': 'x_133_158', 'value': '1.0'}
+{'index': '477', 'name': 'x_134_160', 'value': '1.0'}
+{'index': '478', 'name': 'x_135_159', 'value': '1.0'}
+{'index': '479', 'name': 'x_136_161', 'value': '1.0'}
+{'index': '480', 'name': 'x_137_162', 'value': '1.0'}
+{'index': '481', 'name': 'x_138_162', 'value': '1.0'}
+{'index': '483', 'name': 'x_139_163', 'value': '1.0'}
+{'index': '484', 'name': 'x_140_164', 'value': '1.0'}
+{'index': '486', 'name': 'x_141_166', 'value': '1.0'}
+{'index': '487', 'name': 'x_142_167', 'value': '1.0'}
+{'index': '488', 'name': 'x_143_168', 'value': '1.0'}
+{'index': '491', 'name': 'x_144_170', 'value': '1.0'}
+{'index': '492', 'name': 'x_145_169', 'value': '1.0'}
+{'index': '494', 'name': 'x_146_169', 'value': '1.0'}
+{'index': '495', 'name': 'x_147_172', 'value': '1.0'}
+count x: 150
+expected cost= -0.4338500394175256
+
+Process finished with exit code 0

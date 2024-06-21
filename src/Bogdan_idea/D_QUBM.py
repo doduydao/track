@@ -1,15 +1,16 @@
 from data import *
-from docplex.mp.model import Model
 import json
 import matplotlib.pyplot as plt
 import neal
-from matplotlib import pyplot as plt
-from dimod.binary import BinaryQuadraticModel
-import re
 import os
+import time
+from pyqubo import Binary
+import dimod
+from dwave.system import LeapHybridSampler, DWaveSampler, EmbeddingComposite
+import dwave.inspector
 
 
-def define_variables(model, costs):
+def define_variables(costs):
     var = set()
     for cost in costs.keys():
         i_j = cost[0]
@@ -17,129 +18,93 @@ def define_variables(model, costs):
         var.add(i_j)
         var.add(j_k)
     var = sorted(var, key=lambda x: (x[0], x[1]))
-    x = model.binary_var_dict(var, name='x')
-    ob = model.continuous_var(name="ob")
-    return x, ob
+    x = dict()
+    for v in var:
+        x[v] = Binary('x_' + str(v[0]) + "_" + str(v[1]))
+    return x
 
 
-def to_qubo(ob):
-    str_ob = ob.repr_str().replace("+-", "-").replace("-", "+-")
-    elements = str_ob.split("+")
-    while "" in elements:
-        elements.remove("")
+def create_objective_function(list_hits, costs, m, alpha, beta):
+    x = define_variables(costs)
+    # for k, v in x.items():
+    #     print(k, v)
 
-    for i in range(len(elements)):
-        e = elements[i]
-        if "^2" in e:
-            match = re.search(r'^[^x]+x', e)
-            if match:
-                i_cut = match.end() - 1
-                if e[:i_cut].replace('.', '', 1).replace('-', '').isdigit() or e[:i_cut] == "-":
-                    elements[i] = e[:i_cut] + e[i_cut:-2] + "*" + e[i_cut:-2]
-                else:
-                    elements[i] = e[:-2] + "*" + e[:-2]
-            else:
-                elements[i] = e[:-2] + "*" + e[:-2]
-
-    if 'x' not in elements[-1]:
-        offset = float(elements[-1])
-    else:
-        offset = 0
-
-    qubo = dict()
-    for e in elements[:-1]:
-        es = e.replace("*", "").split("x")
-        if es[0] == "":
-            es[0] = "1"
-        coeff = float(es[0])
-        vars = es[1:]
-        if len(vars) > 1:
-            key = list()
-            for var in vars:
-                var = var.split("_")
-                i = int(var[1])
-                j = int(var[-1])
-                key.append((i, j))
-            key = tuple(key)
-
-        else:
-            var = vars[0].split("_")
-            i = int(var[1])
-            j = int(var[-1])
-            key = ((i, j), (i, j))
-
-        # if offset != 0:
-        #     coeff = coeff / offset
-
-        if key not in qubo:
-            qubo[key] = coeff
-        else:
-            qubo[key] += coeff
-
-    return qubo, offset
-
-
-def create_objective_function(hits_by_layers, list_hits, costs, m, alpha, beta):
-    # define model
-    model = Model(name="Track")
-    model.float_precision = 15
-
-    # create variables
-    x, ob = define_variables(model, costs)
-
-    # create objective function
     hit_last_layer = hits_by_layers[m]
     N = len(list_hits) - len(hit_last_layer)
     print("N =", N)
+
+    # first part
     first_part = 0
     segments = set()
     for id, cost in costs.items():
         i_j = id[0]
         j_k = id[1]
-        first_part += cost * x[i_j] * x[j_k]
+        first_part += cost * (x[i_j] * x[j_k])
         segments.add(i_j)
         segments.add(j_k)
+    # print("----" * 20)
+    # print("first_part:", first_part)
+    # print("----" * 20)
 
     sum_segments = sum([x[s] for s in segments])
-    second_part = ((sum_segments - N) ** 2)
+    second_part = (sum_segments - N) ** 2
 
-    third_part = 0
-    for k in list(x.keys()):
+    # print("----" * 20)
+    # print("second_part:", second_part)
+    # print("----" * 20)
+
+    t_1 = dict()
+    t_2 = dict()
+    for k in x.keys():
         i = k[0]
-        tmp = set()
-        for k_1 in list(x.keys()):
-            if k_1[0] == i:
-                tmp.add(k_1)
-        tmp = list(tmp)
-        for m in range(len(tmp) - 1):
-            for n in range(m + 1, len(tmp)):
-                third_part += x[tmp[m]] * x[tmp[n]]
-
-    fourth_part = 0
-    for k in list(x.keys()):
         j = k[1]
-        tmp = set()
-        for k_1 in list(x.keys()):
-            if k_1[1] == j:
-                tmp.add(k_1)
-        tmp = list(tmp)
-        for m in range(len(tmp) - 1):
-            for n in range(m + 1, len(tmp)):
-                fourth_part += x[tmp[m]] * x[tmp[n]]
+        if i not in t_1:
+            t_1[i] = {j}
+        else:
+            t_1[i].add(j)
 
-    ob = -first_part + beta * second_part + alpha * (third_part + fourth_part)
+        if j not in t_2:
+            t_2[j] = {i}
+        else:
+            t_2[j].add(i)
 
-    return ob
+    # third_part
+    third_part = 0
+    for i, v in t_1.items():
+        tmp = 0
+        for j in v:
+            tmp += x[(i, j)]
+        third_part += (1 - tmp) ** 2
+    # print("----" * 20)
+    # print("third_part:", third_part)
+    # print("----" * 20)
+
+
+    # fourth_part
+    fourth_part = 0
+    for j, v in t_2.items():
+        tmp = 0
+        for i in v:
+            tmp += x[(i, j)]
+        fourth_part += (1 - tmp) ** 2
+
+    # print("----" * 20)
+    # print("fourth_part:", fourth_part)
+    # print("----" * 20)
+    H = -first_part + gamma * second_part + alpha * (third_part + fourth_part)
+    return H
 
 
 def display(list_hits, result, out=""):
-    segments = []
+    segments = list()
     for k, v in result.items():
         if v == 1:
+            if type(k) is str:
+                k = [int(e) for e in k.split('_')[1:]]
             h_1 = list_hits[k[0]]
             h_2 = list_hits[k[1]]
             segments.append([h_1, h_2])
-
+    print("No_segments:", len(segments))
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
 
@@ -184,22 +149,19 @@ def build_segments(hits_1, hits_2, list_hits):
 def get_costs(list_hits, hits, beta_max):
     layers = list(hits.keys())
     costs = []
-    # all_segments = []
     for l in layers[1:-1]:
-        hits_l = hits[l]
+        hits_j = hits[l]
         first_part = []
         for i in range(max(layers[0], l - 3), l):
             hits_i = hits[i]
-            segs_l_i = build_segments(hits_i, hits_l, list_hits)
-            first_part.append(segs_l_i)
-            # all_segments += segs_l_i
+            segs_j_i = build_segments(hits_i, hits_j, list_hits)
+            first_part.append(segs_j_i)
 
         second_part = []
-        for i in range(l + 1, min(l + 3, layers[-1]) + 1):
-            hits_i = hits[i]
-            segs_l_i = build_segments(hits_l, hits_i, list_hits)
-            second_part.append(segs_l_i)
-            # all_segments += segs_l_i
+        for k in range(l + 1, min(l + 3, layers[-1]) + 1):
+            hits_k = hits[k]
+            segs_j_k = build_segments(hits_j, hits_k, list_hits)
+            second_part.append(segs_j_k)
 
         for f in first_part:
             for s in second_part:
@@ -210,6 +172,7 @@ def get_costs(list_hits, hits, beta_max):
                                 cost = Cost(seg_f, seg_s)
                                 cos_beta = cost.cos_beta
                                 if cos_beta >= math.cos(beta_max):
+                                    # print(cos_beta)
                                     costs.append(cost)
     all_segments = set()
     for cost in costs:
@@ -240,6 +203,7 @@ def load_costs(path):
         costs[eval(k)] = v
     return costs
 
+
 def check_path(path):
     if os.path.exists(path) == False:
         os.mkdir(path)
@@ -247,14 +211,37 @@ def check_path(path):
         print("Folder exist")
 
 
+def cal_expected_value(list_hits):
+    track = dict()
+    for hit in list_hits:
+        k = hit.particle_id / 1000
+        if k not in track:
+            track[k] = [hit]
+        else:
+            track[k].append(hit)
+    cost = 0
+    for t, hs in track.items():
+        for i in range(len(hs) - 2):
+            h_i = hs[i]
+            h_j = hs[i + 1]
+            h_k = hs[i + 2]
+
+            seg_1 = Segment(h_j, h_i)
+            seg_2 = Segment(h_j, h_k)
+            c = Cost(seg_1, seg_2)
+            cost += c.cos_beta ** 7 / c.sum_distance
+
+    print("expected cost=", cost)
+
+
 if __name__ == '__main__':
     src_path = '../../src/data_selected'
-    folder = '/6hits/known_track/'
+    folder = '/25hits/known_track/'
     out_path = '/Users/doduydao/daodd/PycharmProjects/track/src/Bogdan_idea/results'
     check_path(out_path + folder)
     data_path = src_path + folder + 'hits.csv'
     costs_path_out = out_path + folder + "costs.json"
-    figure_path_out = out_path + folder + "result_qubo.PNG"
+    figure_path_out = out_path + folder + "result_D_QUBM.PNG"
     hits_by_layers = read_hits(data_path)[9]
     list_hits = []
 
@@ -267,21 +254,32 @@ if __name__ == '__main__':
     write_costs(costs, costs_path_out, m)
     costs = load_costs(costs_path_out)
 
-    alpha = 1
-    beta = 1
-    ob_funct = create_objective_function(hits_by_layers, list_hits, costs, m, alpha, beta)
-    # print("ob_funct:", ob_funct)
-    qubo, offset = to_qubo(ob_funct)
-    # print(offset)
-    # print(qubo)
-    import time
+    gamma = 1
+    alpha = 10
+
+    H = create_objective_function(list_hits, costs, m, gamma, alpha)
+    # print("---" * 20)
+    # print("Hamiltonian:", H)
+    # print("---" * 20)
+
+    model = H.compile()
+    qubo, offset = model.to_qubo()
+    print("offset:", offset)
+    # print(len(qubo.keys()))
+    # for k, v in qubo.items():
+    #     print(k, v)
+    sampler = LeapHybridSampler()
     start = time.time()
-    sampler = neal.SimulatedAnnealingSampler()
-    response = sampler.sample_qubo(qubo)
+    response = sampler.sample_qubo(qubo, time_limit=5)
     print(response)
-    ob_value = response.first.energy
+    end = time.time()
+    print("time:", end - start)
+    ob_value = response.first.energy + offset
     result = response.first.sample
     print("ob_value:", ob_value)
-    end = time.time()
+    cal_expected_value(list_hits)
+
     display(list_hits, result, out=figure_path_out)
-    print("time:", end-start)
+    # dwave.inspector.show(response)
+
+

@@ -27,9 +27,11 @@ def calculate_all_angles(hits):
                     h_k = hits[layers[p + 2]][k - 1]
                     seg_1 = Segment(h_j, h_i)
                     seg_2 = Segment(h_j, h_k)
-                    angle = Angle(seg_1=seg_1, seg_2=seg_2).angle * (distance(h_i, h_j) + distance(h_j, h_k))
-                    # angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
+
+                    angle = Angle(seg_1=seg_1, seg_2=seg_2).angle
                     betas.append(angle)
+                    print(angle)
+
                     if min_angle > angle:
                         min_angle = angle
         angles[layers[p]] = min_angle * len(hits[layers[p]])
@@ -102,11 +104,11 @@ def create_source_sink(hits):
 
 if __name__ == '__main__':
     src_path = 'data_selected'
-    data_path = src_path + '/15hits/unknown_track/hits.csv'
+    data_path = src_path + '/2hits/known_track/hits.csv'
     hits_volume = read_hits(data_path)
     hits = hits_volume[9]
-    source, sink = create_source_sink(hits)
-    hits[0] = [source]
-    hits[16] = [sink]
+    # source, sink = create_source_sink(hits)
+    # hits[0] = [source]
+    # hits[16] = [sink]
     # out_angles_path = "angles.json"
     angles = calculate_all_angles(hits)

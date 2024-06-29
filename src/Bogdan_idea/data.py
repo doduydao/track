@@ -5,7 +5,7 @@ import pandas as pd
 
 class Hit:
     def __init__(self, hit_id, particle_id=None, x=0, y=0, z=0, volume_id=None, layer_id=None, module_id=None,
-                 selected=None):
+                 selected=None, index=None):
         self.hit_id = hit_id
         self.x = x
         self.y = y
@@ -16,9 +16,6 @@ class Hit:
         self.module_id = module_id
         self.selected = selected
         self.track = None
-        self.index = None
-
-    def set_index(self, index):
         self.index = index
 
 
@@ -65,35 +62,33 @@ class Cost:
 def read_hits(path):
     df = pd.read_csv(path)
     list_df = [row.tolist() for index, row in df.iterrows()]
-    volumes = dict()
+    hits_by_layers = dict()
 
-    for i in list_df:
+    for i in range(len(list_df)):
         hit = Hit(
-            hit_id=i[0],
-            x=i[1],
-            y=i[2],
-            z=i[3],
-            volume_id=i[4],
-            layer_id=i[5] / 2,
-            module_id=i[6],
-            particle_id=i[7]
+            hit_id=list_df[i][0],
+            x=list_df[i][1],
+            y=list_df[i][2],
+            z=list_df[i][3],
+            volume_id=list_df[i][4],
+            layer_id=list_df[i][5] / 2,
+            module_id=list_df[i][6],
+            particle_id=list_df[i][7],
+            index=i
         )
-        volume_id = int(hit.volume_id)
-        if volume_id not in volumes:
-            volumes[volume_id] = [hit]
+        layer_id = int(hit.layer_id)
+        if layer_id not in hits_by_layers:
+            hits_by_layers[layer_id] = [hit]
         else:
-            volumes[volume_id] += [hit]
-    for id, hits in volumes.items():
-        layers = dict()
-        for hit in hits:
-            layer_id = int(hit.layer_id)
-            if layer_id not in layers:
-                layers[layer_id] = [hit]
-            else:
-                layers[layer_id] += [hit]
-        volumes[id] = layers
-
-    return volumes
+            hits_by_layers[layer_id].append(hit)
+    hits = []
+    index = 0
+    for hs in hits_by_layers.values():
+        for h in hs:
+            h.index = index
+            index += 1
+        hits += hs
+    return hits_by_layers, hits
 
 
 if __name__ == '__main__':
@@ -104,32 +99,32 @@ if __name__ == '__main__':
     model_path_out = "result" + folder + "known_track/model_docplex_CQM_no_dist_no_LB.lp"
     solution_path = "result" + folder + "known_track/solution_dwave_no_dist_no_LB.json"
     out = "result" + folder + "known_track/result_dwave_no_dist_no_LB.PNG"
-    hits = read_hits(data_path)[9]
-
-    track = dict()
-    for p, hp in hits.items():
-        print(p)
-        for h in hp:
-            p_id = h.particle_id / 10000000000
-            if p_id not in track:
-                track[p_id] = [h]
-            else:
-                track[p_id] += [h]
-
-    expect_value = 0
-    for pa, hs in track.items():
-        t = []
-        ct = 0
-        m = len(hs)
-        for i in range(len(hs) - 2):
-            h_i = hs[i]
-            h_j = hs[i + 1]
-            h_k = hs[i + 2]
-            seg_1 = Segment(h_j, h_i)
-            seg_2 = Segment(h_j, h_k)
-            cost = Cost(seg_1=seg_1, seg_2=seg_2)
-            cos_beta = cost.cos_beta
-            ct += (-(cost.cos_beta ** m) / cost.sum_distance)
-        print('Track', pa, ':', ct)
-        expect_value += ct
-    print('Expect value of all track is', expect_value)
+    hits_by_layers, hits = read_hits(data_path)
+    print(hits_by_layers)
+    # track = dict()
+    # for p, hp in hits.items():
+    #     print(p)
+    #     for h in hp:
+    #         p_id = h.particle_id / 10000000000
+    #         if p_id not in track:
+    #             track[p_id] = [h]
+    #         else:
+    #             track[p_id] += [h]
+    #
+    # expect_value = 0
+    # for pa, hs in track.items():
+    #     t = []
+    #     ct = 0
+    #     m = len(hs)
+    #     for i in range(len(hs) - 2):
+    #         h_i = hs[i]
+    #         h_j = hs[i + 1]
+    #         h_k = hs[i + 2]
+    #         seg_1 = Segment(h_j, h_i)
+    #         seg_2 = Segment(h_j, h_k)
+    #         cost = Cost(seg_1=seg_1, seg_2=seg_2)
+    #         cos_beta = cost.cos_beta
+    #         ct += (-(cost.cos_beta ** m) / cost.sum_distance)
+    #     print('Track', pa, ':', ct)
+    #     expect_value += ct
+    # print('Expect value of all track is', expect_value)
